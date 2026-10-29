@@ -1327,7 +1327,8 @@ m6l4:[
 function genFor(l){if(l.final)return l.mod.lessons.filter(x=>!x.final).flatMap(x=>GEN[x.id]||[]);return GEN[l.id]||[]}
 
 /* ---------------- stato e account ---------------- */
-const CLOUD = {url:"", anonKey:""}; /* Supabase: con URL e anon key i progressi si sincronizzano tra dispositivi */
+/* Supabase (progetto "training app"): la chiave publishable è pubblica per natura, i dati sono protetti dalle regole RLS */
+const CLOUD = {url:"https://fihlarmslnphjsncfqyq.supabase.co", anonKey:"sb_publishable_3tBaPAYn1wAyHvxI10USsg_ioeNGMnS"};
 const LSK_USERS="uxenglish.users", LSK_SESSION="uxenglish.session", LSK_DATA="uxenglish.v2:", LSK_OLD="uxenglish.v1";
 const IV = [0,1,3,7,14,30];
 const RUN_LEN = 8;
@@ -1359,11 +1360,12 @@ async function localLogin(email,pass){
   if(await pwHash(pass,u.salt)!==u.hash)throw "Password errata.";
   return {uid:u.uid,name:u.name,email:k,mode:"local"};
 }
-const cloudOn=()=>!!(CLOUD.url&&CLOUD.anonKey);
+/* Il database si usa sul sito pubblico (e in locale); dentro claude.ai le connessioni esterne sono bloccate */
+const cloudOn=()=>!!(CLOUD.url&&CLOUD.anonKey)&&/(^|\.)github\.io$|^localhost$|^127\.|^$/.test(location.hostname);
 /* Stato del salvataggio nel database: ok, saving, err, offline */
 let SYNC={st:"",at:0,msg:""};
 function setSync(st,msg){SYNC={st,at:Date.now(),msg:msg||""};const el=$("#syncrow");if(el)el.outerHTML=syncRow()}
-function loadSB(){return new Promise((res,rej)=>{if(window.supabase)return res();const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js";s.onload=res;s.onerror=()=>rej("Il servizio di accesso non risponde. Controlla la connessione e riprova.");document.head.appendChild(s)})}
+function loadSB(){return new Promise((res,rej)=>{if(window.supabase)return res();const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js";s.onload=res;s.onerror=()=>rej("Il servizio di accesso non risponde. Controlla la connessione e riprova.");document.head.appendChild(s)})}
 async function sbClient(){
   if(!SB){await loadSB();SB=window.supabase.createClient(CLOUD.url,CLOUD.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
     SB.auth.onAuthStateChange(ev=>{if(ev==="PASSWORD_RECOVERY"){V.auth={mode:"newpass"};go({screen:"auth"})}})}
