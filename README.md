@@ -29,3 +29,22 @@ Tecniche: pre-test, richiamo attivo, ripetizione dilazionata, interleaving (Mix 
 - `index.html`: da aprire nel browser o pubblicare su GitHub Pages
 
 I progressi sono salvati nel browser (localStorage); dal menu si possono copiare e importare su un altro dispositivo.
+
+## Account
+All'apertura si può accedere, registrarsi o continuare senza account.
+- **Senza configurazione** gli account vivono sul dispositivo: ogni persona ha i suoi progressi, la password è salvata come hash (PBKDF2). Non è una protezione forte: chi usa lo stesso browser può accedere ai dati locali.
+- **Sincronizzazione tra dispositivi (opzionale, Supabase gratuito):** crea un progetto su supabase.com, esegui questo SQL e incolla URL e *anon key* in `CLOUD` dentro `src/corso.html`, poi `./scripts/build.sh`.
+
+```sql
+create table progress (
+  user_id uuid primary key references auth.users on delete cascade,
+  data jsonb not null,
+  updated_at timestamptz default now()
+);
+alter table progress enable row level security;
+create policy "own progress" on progress for all
+  using (auth.uid() = user_id) with check (auth.uid() = user_id);
+```
+
+## Frasi sempre nuove
+Ogni lezione usa prima gli esercizi scritti a mano, poi dei generatori (soggetti, verbi, oggetti e tempi del lavoro di un designer) che producono migliaia di varianti. Ogni esercizio visto viene segnato: rifacendo o ricominciando una lezione arrivano solo esercizi nuovi.
