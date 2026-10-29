@@ -1,4 +1,4 @@
-# UX English
+# Ai Learning
 
 Corso di inglese per UX/UI designer, come web app ottimizzata per iPhone (stile Apple, tema scuro e chiaro).
 Basato sulla *Activity Guide for Teaching English as a Foreign Language* (TEFL Full Circle) e sul metodo dei "trick" con formula a colori.
