@@ -486,6 +486,7 @@ details.tk .formula{margin:12px -14px 0;padding:0 14px}
 .field input::placeholder{color:var(--label3)}
 .field:focus-within{box-shadow:inset 0 0 0 2px var(--blue)}
 .auth-err{color:var(--bad);font-size:15px;padding:0 4px}
+.auth-info{color:var(--good);font-size:15px;padding:0 4px}
 .auth-guest{display:block;margin:16px auto 0;color:var(--blue);font-size:16px;font-weight:600;padding:8px 12px;border-radius:10px}
 .auth-guest:hover{background:var(--glass)}
 
@@ -1359,41 +1360,115 @@ async function localLogin(email,pass){
   return {uid:u.uid,name:u.name,email:k,mode:"local"};
 }
 const cloudOn=()=>!!(CLOUD.url&&CLOUD.anonKey);
-function loadSB(){return new Promise((res,rej)=>{if(window.supabase)return res();const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js";s.onload=res;s.onerror=()=>rej("Il servizio di accesso non risponde. Riprova tra poco.");document.head.appendChild(s)})}
-async function sbClient(){if(!SB){await loadSB();SB=window.supabase.createClient(CLOUD.url,CLOUD.anonKey)}return SB}
-function itErr(m){m=String(m||"");if(/invalid login/i.test(m))return "Email o password errate.";if(/already registered/i.test(m))return "Esiste già un account con questa email: accedi.";if(/password/i.test(m))return "La password deve avere almeno 6 caratteri.";return m}
-async function cloudRegister(name,email,pass){const sb=await sbClient();const {data,error}=await sb.auth.signUp({email,password:pass,options:{data:{name}}});if(error)throw itErr(error.message);if(!data.session)throw "Ti abbiamo mandato un'email: conferma l'account e poi accedi.";return {uid:data.user.id,name,email,mode:"cloud"}}
-async function cloudLogin(email,pass){const sb=await sbClient();const {data,error}=await sb.auth.signInWithPassword({email,password:pass});if(error)throw itErr(error.message);return {uid:data.user.id,name:(data.user.user_metadata||{}).name||email.split("@")[0],email,mode:"cloud"}}
-function cloudPush(){if(!USER||USER.mode!=="cloud"||!SB)return;clearTimeout(pushT);pushT=setTimeout(async()=>{try{await SB.from("progress").upsert({user_id:USER.uid,data:S,updated_at:new Date().toISOString()})}catch(e){}},1500)}
-async function cloudPull(){try{const {data}=await SB.from("progress").select("data").eq("user_id",USER.uid).maybeSingle();if(data&&data.data&&(data.data._t||0)>(S._t||0)){S=Object.assign(blank(),data.data);lsSet(LSK_DATA+USER.uid,S)}}catch(e){}}
+/* Stato del salvataggio nel database: ok, saving, err, offline */
+let SYNC={st:"",at:0,msg:""};
+function setSync(st,msg){SYNC={st,at:Date.now(),msg:msg||""};const el=$("#syncrow");if(el)el.outerHTML=syncRow()}
+function loadSB(){return new Promise((res,rej)=>{if(window.supabase)return res();const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js";s.onload=res;s.onerror=()=>rej("Il servizio di accesso non risponde. Controlla la connessione e riprova.");document.head.appendChild(s)})}
+async function sbClient(){
+  if(!SB){await loadSB();SB=window.supabase.createClient(CLOUD.url,CLOUD.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+    SB.auth.onAuthStateChange(ev=>{if(ev==="PASSWORD_RECOVERY"){V.auth={mode:"newpass"};go({screen:"auth"})}})}
+  return SB;
+}
+function itErr(m){m=String(m||"");
+  if(/invalid login/i.test(m))return "Email o password errate.";
+  if(/already registered|already been registered/i.test(m))return "Esiste già un account con questa email: accedi.";
+  if(/email not confirmed/i.test(m))return "Prima conferma l'email: apri il link che ti abbiamo mandato.";
+  if(/rate limit|too many/i.test(m))return "Troppi tentativi. Aspetta un minuto e riprova.";
+  if(/failed to fetch|network/i.test(m))return "Nessuna connessione. Controlla internet e riprova.";
+  if(/password/i.test(m))return "La password deve avere almeno 6 caratteri.";
+  return m}
+const nameOf=(user,email)=>((user&&user.user_metadata)||{}).name||email.split("@")[0];
+async function cloudRegister(name,email,pass){
+  const sb=await sbClient();
+  const {data,error}=await sb.auth.signUp({email,password:pass,options:{data:{name},emailRedirectTo:location.origin+location.pathname}});
+  if(error)throw itErr(error.message);
+  if(data.user&&Array.isArray(data.user.identities)&&!data.user.identities.length)throw "Esiste già un account con questa email: accedi.";
+  if(!data.session){V.auth={mode:"login",email,info:"Ti abbiamo mandato un'email di conferma. Aprila, poi accedi qui."};render();throw null}
+  return {uid:data.user.id,name,email,mode:"cloud"};
+}
+async function cloudLogin(email,pass){
+  const sb=await sbClient();const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error)throw itErr(error.message);
+  return {uid:data.user.id,name:nameOf(data.user,email),email,mode:"cloud"};
+}
+async function cloudForgot(email){
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))throw "Scrivi prima la tua email qui sopra.";
+  const sb=await sbClient();const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+  if(error)throw itErr(error.message);
+}
+async function cloudNewPass(pass){
+  const sb=await sbClient();const {data,error}=await sb.auth.updateUser({password:pass});if(error)throw itErr(error.message);
+  const email=data.user.email;return {uid:data.user.id,name:nameOf(data.user,email),email,mode:"cloud"};
+}
+/* Profilo e progressi vivono in due tabelle: profiles (chi sei) e progress (tutti i dati del corso) */
+async function cloudWrite(){
+  if(!USER||USER.mode!=="cloud"||!SB)return;
+  if(!navigator.onLine){setSync("offline");return}
+  setSync("saving");
+  try{
+    const {error}=await SB.from("progress").upsert({user_id:USER.uid,data:S,xp:S.xp,best_streak:S.best,lessons_done:Object.values(S.les).filter(x=>x.runs>0).length,updated_at:new Date().toISOString()});
+    if(error)throw error;setSync("ok");
+  }catch(e){setSync("err",String(e.message||e))}
+}
+function cloudPush(){if(!USER||USER.mode!=="cloud"||!SB)return;clearTimeout(pushT);pushT=setTimeout(cloudWrite,1200)}
+function cloudFlush(){if(pushT){clearTimeout(pushT);pushT=null;cloudWrite()}}
+async function cloudProfile(){
+  try{await SB.from("profiles").upsert({id:USER.uid,name:USER.name,email:USER.email,updated_at:new Date().toISOString()})}catch(e){}
+}
+async function cloudPull(){
+  setSync("saving");
+  try{
+    const {data,error}=await SB.from("progress").select("data").eq("user_id",USER.uid).maybeSingle();
+    if(error)throw error;
+    if(data&&data.data&&(data.data._t||0)>(S._t||0)){S=Object.assign(blank(),data.data);S.stats=S.stats||{ok:0,n:0};lsSet(LSK_DATA+USER.uid,S);setSync("ok")}
+    else await cloudWrite();
+  }catch(e){setSync("err",String(e.message||e))}
+}
 async function signIn(u,isNew){
   const prev=USER&&USER.mode==="guest"?lsGet(LSK_DATA+"guest"):null;
   USER=u;lsSet(LSK_SESSION,u);loadUser();
-  if(isNew&&prev){S=Object.assign(blank(),prev);save()}
-  if(u.mode==="cloud")await cloudPull();
+  if(prev&&(isNew||u.mode==="cloud")&&!(S._t>0)){S=Object.assign(blank(),prev);S._t=Date.now();lsSet(LSK_DATA+u.uid,S)}
+  if(u.mode==="cloud"){await cloudProfile();await cloudPull()}
   applyFreezes();V.auth=null;go({screen:"home",tab:"mods"});
   if(u.mode!=="guest")toast(isNew?`Benvenuto, ${u.name}`:`Bentornato, ${u.name}`);
 }
-async function signOut(){if(USER&&USER.mode==="cloud"&&SB){try{await SB.auth.signOut()}catch(e){}}USER=null;lsDel(LSK_SESSION);S=blank();RUN=null;V.auth={mode:"login"};go({screen:"auth"})}
+async function signOut(){cloudFlush();if(USER&&USER.mode==="cloud"&&SB){try{await SB.auth.signOut()}catch(e){}}USER=null;lsDel(LSK_SESSION);S=blank();RUN=null;V.auth={mode:"login"};go({screen:"auth"})}
 async function boot(){
+  if(cloudOn()){
+    try{
+      const sb=await sbClient();const {data}=await sb.auth.getSession();
+      if(/type=recovery/.test(location.hash)){V.auth={mode:"newpass"};V.screen="auth";render();return}
+      if(data.session){const u=data.session.user;const s=lsGet(LSK_SESSION)||{};USER={uid:u.id,name:s.uid===u.id&&s.name?s.name:nameOf(u,u.email),email:u.email,mode:"cloud"};lsSet(LSK_SESSION,USER);
+        if(location.hash)history.replaceState(null,"",location.pathname);
+        loadUser();V.screen="home";render();await cloudPull();applyFreezes();render();return}
+    }catch(e){V.auth={mode:"login",err:typeof e==="string"?e:""};V.screen="auth";render();return}
+    const s=lsGet(LSK_SESSION);if(s&&s.mode==="guest"){USER=s;loadUser();applyFreezes();V.screen="home";render();return}
+    V.auth={mode:"login"};V.screen="auth";render();return;
+  }
   const s=lsGet(LSK_SESSION);
-  if(s&&s.uid){
-    if(s.mode==="cloud"){try{if(!cloudOn())throw 0;const sb=await sbClient();const {data}=await sb.auth.getSession();if(!data.session)throw 0}catch(e){V.auth={mode:"login",email:s.email};V.screen="auth";render();return}}
-    USER=s;loadUser();if(s.mode==="cloud")await cloudPull();applyFreezes();V.screen="home";render();
-  } else {V.auth={mode:lsGet(LSK_USERS)?"login":"register"};V.screen="auth";render()}
+  if(s&&s.uid&&s.mode!=="cloud"){USER=s;loadUser();applyFreezes();V.screen="home";render()}
+  else {V.auth={mode:lsGet(LSK_USERS)?"login":"register"};V.screen="auth";render()}
 }
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")cloudFlush()});
+window.addEventListener("online",()=>{if(USER&&USER.mode==="cloud")cloudWrite()});
 async function submitAuth(){
   const A=V.auth;const name=($("#au-name")||{}).value||"",email=(($("#au-email")||{}).value||"").trim(),pass=($("#au-pass")||{}).value||"";
-  A.name=name;A.email=email;
+  A.name=name;A.email=email;A.info="";
   if(A.mode==="register"&&!name.trim()){A.err="Scrivi il tuo nome.";render();return}
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){A.err="Controlla l'email: manca qualcosa.";render();return}
+  if(A.mode!=="newpass"&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){A.err="Controlla l'email: manca qualcosa.";render();return}
   if(pass.length<6){A.err="La password deve avere almeno 6 caratteri.";render();return}
   A.err="";A.busy=true;render();
   try{
-    const reg=A.mode==="register";
-    const u=cloudOn()?(reg?await cloudRegister(name.trim(),email,pass):await cloudLogin(email,pass)):(reg?await localRegister(name.trim(),email,pass):await localLogin(email,pass));
+    const reg=A.mode==="register";let u;
+    if(A.mode==="newpass")u=await cloudNewPass(pass);
+    else u=cloudOn()?(reg?await cloudRegister(name.trim(),email,pass):await cloudLogin(email,pass)):(reg?await localRegister(name.trim(),email,pass):await localLogin(email,pass));
     A.busy=false;await signIn(u,reg);
-  }catch(err){A.busy=false;A.err=typeof err==="string"?err:"Qualcosa non ha funzionato. Riprova.";render()}
+  }catch(err){if(err===null){V.auth.busy=false;render();return}A.busy=false;A.err=typeof err==="string"?err:"Qualcosa non ha funzionato. Riprova.";render()}
+}
+async function forgot(){
+  const A=V.auth;const email=(($("#au-email")||{}).value||"").trim();A.email=email;A.err="";A.info="";
+  try{await cloudForgot(email);A.info="Ti abbiamo mandato un link per scegliere una nuova password."}catch(e){A.err=typeof e==="string"?e:"Non è stato possibile inviare l'email."}
+  render();
 }
 
 const LES = {};
@@ -1619,25 +1694,34 @@ function renderSheet(){
 
 /* ---------- ACCESSO ---------- */
 function renderAuth(){
-  const A=V.auth||(V.auth={mode:"login"});const reg=A.mode==="register";
+  const A=V.auth||(V.auth={mode:"login"});const reg=A.mode==="register",np=A.mode==="newpass";
+  const cloud=cloudOn();
   return `<div class="auth"><div class="auth-card">
     <div class="auth-logo">${IC.chat}</div>
     <h1>UX English</h1>
-    <p class="lead">L'inglese per chi progetta interfacce: trick brevi, tanti esercizi e frasi sempre nuove.</p>
-    <div class="seg" role="group" aria-label="Accedi o registrati">
+    <p class="lead">${np?"Scegli una nuova password per il tuo account.":"L'inglese per chi progetta interfacce: trick brevi, tanti esercizi e frasi sempre nuove."}</p>
+    ${np?"":`<div class="seg" role="group" aria-label="Accedi o registrati">
       <button type="button" data-authmode="login" aria-pressed="${!reg}">Accedi</button>
       <button type="button" data-authmode="register" aria-pressed="${reg}">Registrati</button>
-    </div>
+    </div>`}
     <form id="authform" novalidate>
       ${reg?`<label class="field"><span>Nome</span><input id="au-name" autocomplete="given-name" value="${esc(A.name||"")}" placeholder="Come ti chiami"></label>`:""}
-      <label class="field"><span>Email</span><input id="au-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" value="${esc(A.email||"")}" placeholder="nome@studio.it"></label>
-      <label class="field"><span>Password</span><input id="au-pass" type="password" autocomplete="${reg?"new-password":"current-password"}" placeholder="${reg?"Almeno 6 caratteri":"La tua password"}"></label>
+      ${np?"":`<label class="field"><span>Email</span><input id="au-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" value="${esc(A.email||"")}" placeholder="nome@studio.it"></label>`}
+      <label class="field"><span>${np?"Nuova password":"Password"}</span><input id="au-pass" type="password" autocomplete="${reg||np?"new-password":"current-password"}" placeholder="${reg||np?"Almeno 6 caratteri":"La tua password"}"></label>
       ${A.err?`<p class="auth-err" role="alert">${esc(A.err)}</p>`:""}
-      <button class="btn" type="submit" ${A.busy?"disabled":""}>${A.busy?"Un attimo…":reg?"Crea l'account":"Accedi"}</button>
+      ${A.info?`<p class="auth-info" role="status">${esc(A.info)}</p>`:""}
+      <button class="btn" type="submit" ${A.busy?"disabled":""}>${A.busy?"Un attimo…":np?"Salva la password":reg?"Crea l'account":"Accedi"}</button>
     </form>
-    <button class="auth-guest" data-act="guest">Continua senza account</button>
-    <p class="secf" style="text-align:center">${cloudOn()?"Con l'account i progressi si sincronizzano su tutti i tuoi dispositivi.":"Account e progressi restano salvati su questo dispositivo."}</p>
+    ${cloud&&A.mode==="login"?`<button class="auth-guest" data-act="forgot">Password dimenticata?</button>`:""}
+    ${cloud?"":`<button class="auth-guest" data-act="guest">Continua senza account</button>`}
+    <p class="secf" style="text-align:center">${cloud?"Account e progressi sono salvati nel database: li ritrovi su ogni dispositivo.":"Account e progressi restano salvati su questo dispositivo."}</p>
   </div></div>`;
+}
+function syncRow(){
+  if(!USER||USER.mode!=="cloud")return `<div id="syncrow"></div>`;
+  const m={ok:["Salvato nel database",IC.check,"var(--good)"],saving:["Salvataggio in corso…",IC.refresh,"var(--blue)"],err:["Non salvato: riprovo al prossimo esercizio",IC.x,"var(--bad)"],offline:["Sei offline: salvo quando torni online",IC.wave,"var(--warn)"]}[SYNC.st]||["Sincronizzato",IC.check,"var(--good)"];
+  const t=SYNC.at?new Date(SYNC.at).toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"}):"";
+  return `<div class="row" id="syncrow"><span class="num" style="background:${m[2]}">${m[1]}</span><span><span class="rt">${m[0]}</span><span class="rs">${t?"Ultimo aggiornamento alle "+t:"I progressi si salvano da soli dopo ogni esercizio"}</span></span><span></span></div>`;
 }
 
 /* ---------- HOME ---------- */
@@ -1947,7 +2031,8 @@ function renderMethod(){
   <div class="group">
     ${guest?`<button class="row" data-act="toregister"><span class="num" style="background:var(--blue)">${IC.check}</span><span><span class="rt">Crea un account</span><span class="rs">I progressi che hai fatto finora passano nel nuovo account</span></span>${IC.chevR}</button>
       <button class="row" data-act="tologin"><span class="num" style="background:var(--indigo)">${IC.chat}</span><span class="rt">Accedi</span>${IC.chevR}</button>`
-    :`<div class="row"><span class="num" style="background:var(--blue)">${IC.chat}</span><span><span class="rt">${esc(USER.name)}</span><span class="rs">${USER.mode==="cloud"?"Sincronizzato su tutti i dispositivi":"Account salvato su questo dispositivo"}</span></span><span></span></div>
+    :`<div class="row"><span class="num" style="background:var(--blue)">${IC.chat}</span><span><span class="rt">${esc(USER.name)}</span><span class="rs">${USER.mode==="cloud"?"Account nel database · "+esc(USER.email):"Account salvato su questo dispositivo"}</span></span><span></span></div>
+      ${syncRow()}
       <button class="row" data-act="logout"><span class="num" style="background:var(--gray)">${IC.chevL}</span><span class="rt" style="color:var(--bad)">Esci</span>${IC.chevR}</button>`}
   </div>
   <p class="sech">I tuoi progressi</p>
@@ -2006,7 +2091,7 @@ document.addEventListener("click",e=>{
   if(d.say!==undefined&&!d.act){speak(d.say,d.rate?+d.rate:undefined);if(V.screen==="run"&&sel)sel.heard=true;if(!d.setrate)return}
   if(d.setrate){S.rate=+d.rate;save();render();return}
   if(d.voice){S.voice=d.voice;save();render();speak(d.voice==="en-GB"?"Hello, this is the British voice.":"Hi, this is the American voice.");return}
-  if(d.authmode){V.auth={mode:d.authmode,email:($("#au-email")||{}).value||V.auth.email};render();return}
+  if(d.authmode){V.auth={mode:d.authmode,email:($("#au-email")||{}).value||(V.auth&&V.auth.email)};render();return}
   if(d.tab){if(V.screen==="home"&&V.tab===d.tab){window.scrollTo({top:0,behavior:"smooth"});return}go({screen:"home",tab:d.tab});return}
   if(d.goal){S.goal=+d.goal;save();render();return}
   if(d.mod){go({screen:"module",mod:d.mod});return}
@@ -2021,6 +2106,7 @@ document.addEventListener("click",e=>{
     if(q&&d.mr!==undefined){const r=+d.mr;const owner=Object.keys(sel.map).find(x=>sel.map[x]===r);if(owner!=null)delete sel.map[owner];if(sel.L!=null){sel.map[sel.L]=r;const nxt=q.pairs.findIndex((p,k)=>sel.map[k]==null);sel.L=nxt>=0?nxt:null}render();return}
   }
   switch(d.act){
+    case "forgot":forgot();break;
     case "guest":signIn({uid:"guest",name:"",email:"",mode:"guest"},false);break;
     case "toregister":V.auth={mode:"register"};go({screen:"auth"});break;
     case "tologin":V.auth={mode:"login"};go({screen:"auth"});break;

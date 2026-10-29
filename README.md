@@ -30,21 +30,18 @@ Tecniche: pre-test, richiamo attivo, ripetizione dilazionata, interleaving (Mix 
 
 I progressi sono salvati nel browser (localStorage); dal menu si possono copiare e importare su un altro dispositivo.
 
-## Account
-All'apertura si può accedere, registrarsi o continuare senza account.
-- **Senza configurazione** gli account vivono sul dispositivo: ogni persona ha i suoi progressi, la password è salvata come hash (PBKDF2). Non è una protezione forte: chi usa lo stesso browser può accedere ai dati locali.
-- **Sincronizzazione tra dispositivi (opzionale, Supabase gratuito):** crea un progetto su supabase.com, esegui questo SQL e incolla URL e *anon key* in `CLOUD` dentro `src/corso.html`, poi `./scripts/build.sh`.
+## Account e database (Supabase)
+Login, registrazione e progressi vivono su Supabase (Postgres + Auth):
+- tabella `profiles`: nome ed email di ogni account;
+- tabella `progress`: tutti i dati del corso (lezioni, esercizi visti, ripasso, XP, serie, impostazioni) più le colonne `xp`, `best_streak`, `lessons_done` per consultarli facilmente.
+Ognuno vede solo i propri dati (Row Level Security). I progressi si salvano da soli dopo ogni esercizio, restano in cache sul dispositivo se si è offline e vengono inviati al ritorno della connessione.
 
-```sql
-create table progress (
-  user_id uuid primary key references auth.users on delete cascade,
-  data jsonb not null,
-  updated_at timestamptz default now()
-);
-alter table progress enable row level security;
-create policy "own progress" on progress for all
-  using (auth.uid() = user_id) with check (auth.uid() = user_id);
-```
+Attivazione:
+1. Supabase › SQL Editor: esegui `supabase/schema.sql`.
+2. Authentication › URL Configuration: *Site URL* `https://andreagalanti91.github.io/corsoinglese/` (serve per i link di conferma e di recupero password).
+3. In `src/corso.html` inserisci *Project URL* e *anon public key* in `CLOUD`, poi `./scripts/build.sh` e push.
+
+Senza configurazione l'app usa account salvati solo sul dispositivo.
 
 ## Frasi sempre nuove
 Ogni lezione usa prima gli esercizi scritti a mano, poi dei generatori (soggetti, verbi, oggetti e tempi del lavoro di un designer) che producono migliaia di varianti. Ogni esercizio visto viene segnato: rifacendo o ricominciando una lezione arrivano solo esercizi nuovi.
