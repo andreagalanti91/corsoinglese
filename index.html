@@ -485,6 +485,38 @@ details.tk .formula{margin:12px -14px 0;padding:0 14px}
 .tb-in button[aria-pressed="true"] .i3{transform:translateY(-1px) scale(1.08);filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))}
 .streakline .i3{width:22px;height:22px}
 
+/* ---------- TEORIA ---------- */
+.th-why{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:w}
+.th-why li{counter-increment:w;position:relative;padding:11px 12px 11px 44px;border-radius:14px;font-size:15px;line-height:1.45;background:color-mix(in srgb,var(--c) 9%,var(--glass));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 18%,transparent)}
+.th-why li::before{content:counter(w);position:absolute;left:12px;top:11px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff;background:var(--c)}
+.th-h{font-size:12px;font-weight:750;text-transform:uppercase;letter-spacing:.06em;color:var(--label2);margin-top:18px}
+.th-use{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.th-use li{position:relative;padding:9px 12px 9px 30px;border-radius:12px;background:var(--glass);font-size:15px;line-height:1.4}
+.th-use li::before{content:"";position:absolute;left:12px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--c)}
+.th-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:3px;border-radius:12px;background:var(--glass2);margin-top:8px}
+.th-seg button{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 4px;border-radius:9px;font-size:14px;font-weight:600;color:var(--label2)}
+.th-seg button b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:14px;background:var(--glass2);color:var(--label)}
+.th-seg button[aria-pressed="true"]{background:var(--card-solid);color:var(--label);box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.th-seg button[aria-pressed="true"] b{background:var(--c);color:#fff}
+.th-form .formula{margin-top:12px!important}
+.th-short{margin-top:10px;font-size:15px;color:var(--label);padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--c) 12%,transparent)}
+.th-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.th-chip{padding:6px 11px;border-radius:999px;font-size:14px;font-weight:600;color:var(--c);background:color-mix(in srgb,var(--c) 13%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 30%,transparent)}
+.extra{margin-top:8px!important}
+.thbtn{flex:none;display:inline-flex;align-items:center;gap:5px;padding:5px 11px 5px 7px;border-radius:999px;font-size:13px;font-weight:700;color:var(--label);background:var(--glass2);box-shadow:inset 0 0 0 1px var(--stroke2)}
+.thbtn .i3{width:18px;height:18px}
+.pmeta .combo{margin-left:auto}
+.pmeta .combo + .thbtn{margin-left:6px}
+.pmeta > span:first-child + .thbtn{margin-left:auto}
+.tsheet-bg{align-items:flex-end}
+.tsheet{width:100%;max-width:640px;max-height:88vh;display:flex;flex-direction:column;background:var(--bg);border-radius:26px 26px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.4),inset 0 1px 0 var(--stroke2);animation:sup .3s cubic-bezier(.2,.9,.3,1);margin-bottom:calc(-10px - env(safe-area-inset-bottom,0px))}
+.tsheet-h{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 18px 10px}
+.tsheet-h .grab{position:absolute;top:7px;left:50%;width:38px;height:5px;margin-left:-19px;border-radius:3px;background:var(--label3)}
+.tsheet-t{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.tsheet-b{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 18px calc(24px + env(safe-area-inset-bottom,0px))}
+.tsheet-b .trick{margin-top:6px}
+.gloss .vrow b{font-size:15px}
+
 /* ---------- LIQUID GLASS ---------- */
 :root{--lg-bg:rgba(30,34,50,.52);--lg-hi:rgba(255,255,255,.26);--lg-lo:rgba(0,0,0,.35);--lg-edge:rgba(255,255,255,.12);--lg-lens:rgba(255,255,255,.14);--lg-tint:#FFFFFF;--lg-shadow:0 16px 44px rgba(0,0,0,.5)}
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--lg-bg:rgba(255,255,255,.55);--lg-hi:rgba(255,255,255,.95);--lg-lo:rgba(20,30,60,.08);--lg-edge:rgba(20,30,60,.08);--lg-lens:rgba(20,30,60,.07);--lg-tint:#0B1020;--lg-shadow:0 16px 44px rgba(30,50,100,.2)}}
@@ -1120,8 +1152,8 @@ const pick=a=>a[Math.floor(Math.random()*a.length)];
 const rint=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const words=s=>s.split(" ");
-const P3=["our PM","the developer","my manager","Laura","Marco","the researcher","the team","the lead designer","the copywriter","the QA engineer","Giulia","the product owner"];
-const PPL=["we","they","the devs","I","you","the designers","Sara and Luca"];
+const P3=["the art director","Paolo","Chiara","the frontend developer","the UX writer","the data analyst","our CTO","our PM","the developer","my manager","Laura","Marco","the researcher","the team","the lead designer","the copywriter","the QA engineer","Giulia","the product owner"];
+const PPL=["we","they","the devs","I","you","the designers","Sara and Luca","the stakeholders","Marco and Giulia"];
 const PEOPLE=[...P3,...PPL];
 const NOTI=PEOPLE.filter(x=>x!=="I");
 const isPl=s=>PPL.includes(s);
@@ -1161,7 +1193,30 @@ const VB=[
  ["simplify","simplifies","simplified","simplified","simplifying",0,["the form","the menu","the sign-up flow"]],
  ["read","reads","read","read","reading",1,["the feedback","the brief","the survey results"]],
  ["give","gives","gave","given","giving",1,["feedback","a demo","a talk"]],
- ["see","sees","saw","seen","seeing",1,["the issue","the new mockups","the problem"]]
+ ["see","sees","saw","seen","seeing",1,["the issue","the new mockups","the problem"]],
+ ["deliver","delivers","delivered","delivered","delivering",0,["the final files","the mockups","the new version"]],
+ ["refine","refines","refined","refined","refining",0,["the copy","the interactions","the icons"]],
+ ["validate","validates","validated","validated","validating",0,["the idea","the concept","the hypothesis"]],
+ ["map","maps","mapped","mapped","mapping",0,["the user journey","the current flow","the pain points"]],
+ ["interview","interviews","interviewed","interviewed","interviewing",0,["five users","the stakeholders","new customers"]],
+ ["analyze","analyzes","analyzed","analyzed","analyzing",0,["the data","the survey","the funnel"]],
+ ["export","exports","exported","exported","exporting",0,["the assets","the icons","the specs"]],
+ ["organize","organizes","organized","organized","organizing",0,["the workshop","the files","the components"]],
+ ["publish","publishes","published","published","publishing",0,["the library","the case study","the update"]],
+ ["record","records","recorded","recorded","recording",0,["the session","a demo video","the interview"]],
+ ["upload","uploads","uploaded","uploaded","uploading",0,["the files","the video","the screenshots"]],
+ ["schedule","schedules","scheduled","scheduled","scheduling",0,["the review","the interviews","the release"]],
+ ["launch","launches","launched","launched","launching",0,["the beta","the new site","the campaign"]],
+ ["break","breaks","broke","broken","breaking",1,["the layout","the build","the grid"]],
+ ["buy","buys","bought","bought","buying",1,["new licenses","a new monitor","the fonts"]],
+ ["pay","pays","paid","paid","paying",1,["the invoice","the subscription","the freelancer"]],
+ ["teach","teaches","taught","taught","teaching",1,["the workshop","a UX course","the new hires"]],
+ ["forget","forgets","forgot","forgotten","forgetting",1,["the password","the deadline","the meeting"]],
+ ["lose","loses","lost","lost","losing",1,["the file","the link","the notes"]],
+ ["hold","holds","held","held","holding",1,["the workshop","a review","the kickoff"]],
+ ["begin","begins","began","begun","beginning",1,["the research","the redesign","the sprint"]],
+ ["meet","meets","met","met","meeting",1,["the client","the new PM","the stakeholders"]],
+ ["sell","sells","sold","sold","selling",1,["the idea","the concept","the new plan"]]
 ];
 const mkv=v=>({b:v[0],s:v[1],p:v[2],pp:v[3],ing:v[4],irr:!!v[5],o:pick(v[6])});
 const verb=()=>mkv(pick(VB));
@@ -1173,7 +1228,7 @@ const NOW=["now","right now","at the moment","this week","this sprint","today"];
 const PAST=["yesterday","last week","last month","on Monday","two days ago","last sprint","this morning"];
 const FUT=["next week","tomorrow","next sprint","on Friday","after lunch"];
 const DAYS=["Monday","Tuesday","Wednesday","Thursday","Friday"];
-const BECOMP=["ready","in a meeting","happy with the result","on holiday","in the office","busy","online","late","at the workshop","free after lunch","sure about the colors","on a call","in Milan"];
+const BECOMP=["ready","in a meeting","happy with the result","on holiday","in the office","busy","online","late","at the workshop","free after lunch","sure about the colors","on a call","in Milan","back from holiday","in the design review","stuck on the onboarding","excited about the launch","worried about the deadline","on the same page","in charge of the project","available on Friday"];
 function mc(p,right,wrong,x,extra){const set=[...new Set([right,...wrong])];if(set.length<2)return null;const o=rshuffle(set);return Object.assign({t:"choice",p,o,a:o.indexOf(right),x},extra||{})}
 
 const DUR=[["work","works","worked","worked","working"," on the app"],["use","uses","used","used","using"," Figma"],["lead","leads","led","led","leading"," the team"],["teach","teaches","taught","taught","teaching"," UX design"],["live","lives","lived","lived","living"," in Florence"],["manage","manages","managed","managed","managing"," the design system"],["know","knows","knew","known","",""+" the client"]];
@@ -1182,11 +1237,11 @@ const DL=["Friday","the end of the sprint","Q3","next Monday","the demo","June",
 const CONS=["we'll iterate","we'll ship it","we'll call the client","we'll update the roadmap","we'll test it again","we'll start the handoff","we'll tell the team"];
 const MODAL=["should","could","might","must","can"];
 const UIC=[["toggle","toggle"],["checkbox","checkbox"],["radio","radio buttons"],["toast","toast"],["dropdown","dropdown"],["breadcrumb","breadcrumb"],["modal","modal"],["tooltip","tooltip"],["tabbar","tab bar"],["slider","slider"],["segmented","segmented control"],["search","search bar"],["badge","badge"],["progress","progress bar"],["stepper","stepper"],["chip","chips"],["accordion","accordion"],["avatar","avatars"],["pagination","pagination"]];
-const UIVOC=[["toggle","interruttore on/off"],["dropdown","menu a tendina"],["tooltip","fumetto di aiuto"],["placeholder","testo d'esempio nel campo"],["hamburger menu","icona a tre linee del menu"],["breadcrumb","percorso di navigazione"],["modal","finestra che blocca la pagina"],["toast","messaggio breve che sparisce"],["empty state","schermata senza contenuti"],["skeleton screen","sagome grigie durante il caricamento"],["call to action","bottone dell'azione principale"],["carousel","contenuti che scorrono di lato"],["sidebar","colonna laterale"],["footer","fondo della pagina"],["header","testata della pagina"],["spinner","rotellina di caricamento"],["badge","bollino con un numero"],["avatar","immagine del profilo"],["stepper","indicatore dei passaggi"],["accordion","sezioni che si aprono e chiudono"],["search bar","barra di ricerca"],["slider","cursore da trascinare"],["checkbox","casella di spunta"],["radio button","scelta singola tra opzioni"],["chip","etichetta selezionabile"],["pagination","numeri di pagina"],["progress bar","barra di avanzamento"],["bottom sheet","pannello che sale dal basso"],["navigation drawer","menu che scorre di lato"],["text field","campo di testo"]];
+const UIVOC=[["toggle","interruttore on/off"],["dropdown","menu a tendina"],["tooltip","fumetto di aiuto"],["placeholder","testo d'esempio nel campo"],["hamburger menu","icona a tre linee del menu"],["breadcrumb","percorso di navigazione"],["modal","finestra che blocca la pagina"],["toast","messaggio breve che sparisce"],["empty state","schermata senza contenuti"],["skeleton screen","sagome grigie durante il caricamento"],["call to action","bottone dell'azione principale"],["carousel","contenuti che scorrono di lato"],["sidebar","colonna laterale"],["footer","fondo della pagina"],["header","testata della pagina"],["spinner","rotellina di caricamento"],["badge","bollino con un numero"],["avatar","immagine del profilo"],["stepper","indicatore dei passaggi"],["accordion","sezioni che si aprono e chiudono"],["search bar","barra di ricerca"],["slider","cursore da trascinare"],["checkbox","casella di spunta"],["radio button","scelta singola tra opzioni"],["chip","etichetta selezionabile"],["pagination","numeri di pagina"],["progress bar","barra di avanzamento"],["bottom sheet","pannello che sale dal basso"],["navigation drawer","menu che scorre di lato"],["text field","campo di testo"],["snackbar","messaggio in basso con un'azione"],["floating action button","bottone tondo che galleggia"],["segmented control","selettore a segmenti"],["date picker","selettore di data"],["color picker","selettore di colore"],["combobox","campo con suggerimenti"],["side sheet","pannello laterale"],["banner","striscia di avviso in alto"],["divider","linea di separazione"],["icon button","bottone con sola icona"],["ghost button","bottone senza riempimento"],["primary button","bottone principale"],["thumbnail","miniatura"],["lightbox","immagine ingrandita sopra la pagina"],["infinite scroll","caricamento continuo scorrendo"],["pull to refresh","tirare giù per aggiornare"],["splash screen","schermata di avvio"],["rating","valutazione a stelle"],["tag","etichetta"],["dialog","finestra di dialogo"]];
 const VERBUI=[["___ the button.","tap"],["___ the switch to turn it on.","toggle"],["___ the box to accept.","check"],["___ the card to the left.","swipe"],["___ the slider to the right.","drag"],["___ the link with the mouse.","click"],["___ your email in the field.","type"],["___ down to see more.","scroll"],["___ with two fingers to zoom.","pinch"],["___ and hold the icon to move it.","press"]];
-const PHRG=[["We'll roll ___ the new navigation next month.",["out"]],["Can you set ___ a call with the devs?",["up"]],["I'll follow ___ with an email.",["up"]],["We need to come up ___ a better name.",["with"]],["I can't figure it ___.",["out"]],["The client has to sign ___ on the budget.",["off"]],["Let's go ___ the feedback together.",["over","through"]],["We had to put ___ the launch until May.",["off"]],["Let's break the flow ___ into smaller steps.",["down"]],["Please fill ___ the form.",["in","out"]],["I'll look ___ the bug this afternoon.",["into","at"]],["We ran ___ of time.",["out"]],["Can you point ___ the problem on the screen?",["out"]],["Let's narrow ___ the options to two.",["down"]],["We should back ___ the files before the update.",["up"]],["They turned ___ our proposal.",["down"]],["Let's catch ___ tomorrow morning.",["up"]],["Let me walk you ___ the prototype.",["through"]],["The app keeps logging me ___.",["out"]],["Can you send ___ the slides after the call?",["over","out"]]];
-const PHRDEF=[["go over","rivedere insieme"],["put off","rimandare"],["break down","scomporre"],["look into","analizzare, indagare"],["run out of","esaurire, finire"],["point out","far notare"],["narrow down","restringere"],["turn down","rifiutare"],["catch up","aggiornarsi"],["walk through","mostrare passo passo"],["roll out","rilasciare gradualmente"],["figure out","capire, risolvere"],["set up","organizzare"],["follow up","dare seguito"],["come up with","proporre un'idea"],["sign off on","approvare"],["back up","fare una copia di sicurezza"]];
-const FF=[["“Attualmente usiamo Figma”","Currently we use Figma.","Actually we use Figma.","*Actually* = in realtà. *Attualmente* = *currently*."],["“Se serve, lo testiamo”","We'll test it if needed.","Eventually we test it.","*Eventually* = alla fine."],["“Abbiamo realizzato il prototipo”","We built the prototype.","We realized the prototype.","*Realize* = rendersi conto."],["“Controlla il contrasto”","Check the contrast.","Control the contrast.","*Control* = comandare."],["“Ho partecipato al workshop”","I attended the workshop.","I assisted the workshop.","*Attend* = partecipare."],["“Sono dati sensibili”","This is sensitive data.","This is sensible data.","*Sensible* = sensato."],["“L'argomento della call”","The topic of the call","The argument of the call","*Argument* = litigio."],["“Una libreria (negozio)”","a bookshop","a library","*Library* = biblioteca."],["“Il cliente pretende troppo”","The client expects too much.","The client pretends too much.","*Pretend* = fingere."],["“Ricordami di inviarlo”","Remind me to send it.","Remember me to send it.","*Remind* = ricordare a qualcuno."],["“Ho fatto un errore”","I made a mistake.","I did a mistake.","Un errore si *make*."],["“Fare una domanda”","Ask a question.","Make a question.","Una domanda si *ask*."],["“Facciamo una pausa”","Let's take a break.","Let's make a break.","Una pausa si *take*."],["“Dipende dal cliente”","It depends on the client.","It depends from the client.","*depend on*."],["“Spiegami il flusso”","Explain the flow to me.","Explain me the flow.","*explain something to someone*."],["“Ti chiamo dopo”","I'll call you later.","I call you after.","*later* = più tardi."],["“Lavoro qui da 3 anni”","I've worked here for 3 years.","I work here since 3 years.","Durata → *have worked … for*."],["“Una brava designer”","a good designer","a brave designer","*Brave* = coraggioso."],["“La lettura del report”","reading the report","the lecture of the report","*Lecture* = lezione universitaria."],["“Discutiamo il design”","Let's discuss the design.","Let's discuss about the design.","*discuss* non vuole *about*."]];
+const PHRG=[["We'll roll ___ the new navigation next month.",["out"]],["Can you set ___ a call with the devs?",["up"]],["I'll follow ___ with an email.",["up"]],["We need to come up ___ a better name.",["with"]],["I can't figure it ___.",["out"]],["The client has to sign ___ on the budget.",["off"]],["Let's go ___ the feedback together.",["over","through"]],["We had to put ___ the launch until May.",["off"]],["Let's break the flow ___ into smaller steps.",["down"]],["Please fill ___ the form.",["in","out"]],["I'll look ___ the bug this afternoon.",["into","at"]],["We ran ___ of time.",["out"]],["Can you point ___ the problem on the screen?",["out"]],["Let's narrow ___ the options to two.",["down"]],["We should back ___ the files before the update.",["up"]],["They turned ___ our proposal.",["down"]],["Let's catch ___ tomorrow morning.",["up"]],["Let me walk you ___ the prototype.",["through"]],["The app keeps logging me ___.",["out"]],["Can you send ___ the slides after the call?",["over","out"]],["Many users drop ___ at the payment step.",["off"]],["Please sign ___ to save your progress.",["up","in"]],["Let's sort ___ the naming before the handoff.",["out"]],["Go ___ and share your screen.",["ahead"]],["I'll hand ___ the files on Friday.",["over"]],["We're falling ___ schedule.",["behind"]],["It's hard to keep up ___ all the feedback.",["with"]],["Let's think ___ the edge cases.",["through"]],["Check ___ the new prototype!",["out"]],["We need to work ___ a better flow.",["out"]]];
+const PHRDEF=[["go over","rivedere insieme"],["put off","rimandare"],["break down","scomporre"],["look into","analizzare, indagare"],["run out of","esaurire, finire"],["point out","far notare"],["narrow down","restringere"],["turn down","rifiutare"],["catch up","aggiornarsi"],["walk through","mostrare passo passo"],["roll out","rilasciare gradualmente"],["figure out","capire, risolvere"],["set up","organizzare"],["follow up","dare seguito"],["come up with","proporre un'idea"],["sign off on","approvare"],["back up","fare una copia di sicurezza"],["sign up","registrarsi"],["log in","accedere"],["check out","dare un'occhiata"],["drop off","abbandonare a metà"],["scale up","far crescere"],["sort out","sistemare"],["think through","ragionare a fondo"],["go ahead","procedere"],["hand over","consegnare"],["work out","trovare una soluzione"],["fall behind","restare indietro"],["keep up with","stare al passo con"]];
+const FF=[["“Attualmente usiamo Figma”","Currently we use Figma.","Actually we use Figma.","*Actually* = in realtà. *Attualmente* = *currently*."],["“Se serve, lo testiamo”","We'll test it if needed.","Eventually we test it.","*Eventually* = alla fine."],["“Abbiamo realizzato il prototipo”","We built the prototype.","We realized the prototype.","*Realize* = rendersi conto."],["“Controlla il contrasto”","Check the contrast.","Control the contrast.","*Control* = comandare."],["“Ho partecipato al workshop”","I attended the workshop.","I assisted the workshop.","*Attend* = partecipare."],["“Sono dati sensibili”","This is sensitive data.","This is sensible data.","*Sensible* = sensato."],["“L'argomento della call”","The topic of the call","The argument of the call","*Argument* = litigio."],["“Una libreria (negozio)”","a bookshop","a library","*Library* = biblioteca."],["“Il cliente pretende troppo”","The client expects too much.","The client pretends too much.","*Pretend* = fingere."],["“Ricordami di inviarlo”","Remind me to send it.","Remember me to send it.","*Remind* = ricordare a qualcuno."],["“Ho fatto un errore”","I made a mistake.","I did a mistake.","Un errore si *make*."],["“Fare una domanda”","Ask a question.","Make a question.","Una domanda si *ask*."],["“Facciamo una pausa”","Let's take a break.","Let's make a break.","Una pausa si *take*."],["“Dipende dal cliente”","It depends on the client.","It depends from the client.","*depend on*."],["“Spiegami il flusso”","Explain the flow to me.","Explain me the flow.","*explain something to someone*."],["“Ti chiamo dopo”","I'll call you later.","I call you after.","*later* = più tardi."],["“Lavoro qui da 3 anni”","I've worked here for 3 years.","I work here since 3 years.","Durata → *have worked … for*."],["“Una brava designer”","a good designer","a brave designer","*Brave* = coraggioso."],["“La lettura del report”","reading the report","the lecture of the report","*Lecture* = lezione universitaria."],["“Discutiamo il design”","Let's discuss the design.","Let's discuss about the design.","*discuss* non vuole *about*."],["“Una piccola modifica”","a small change","a small modify","*modify* è un verbo; il nome è *change*."],["“Mi serve un feedback”","I need some feedback.","I need a feedback.","*feedback* non si conta: niente *a*."],["“Mi dai qualche informazione?”","Can you give me some information?","Can you give me some informations?","*information* non ha plurale."],["“Ottimi consigli”","great advice","great advices","*advice* non ha plurale."],["“Ho una domanda”","I have a question.","I have a demand.","*Demand* = pretesa, richiesta forte."],["“Il programma della giornata”","the schedule for the day","the program of the day","Per gli orari: *schedule* o *agenda*."],["“Sono in ritardo”","I'm late.","I'm in delay.","Si dice *I'm late*."],["“Stiamo valutando l'idea”","We're evaluating the idea.","We're valuating the idea.","*evaluate* = valutare."]];
 const ADJ=[["clean","cleaner","cleanest"],["clear","clearer","clearest"],["simple","simpler","simplest"],["bold","bolder","boldest"],["fast","faster","fastest"],["easy","easier","easiest"],["busy","busier","busiest"],["light","lighter","lightest"],["intuitive","more intuitive","most intuitive"],["consistent","more consistent","most consistent"],["accessible","more accessible","most accessible"],["readable","more readable","most readable"],["modern","more modern","most modern"],["elegant","more elegant","most elegant"],["good","better","best"],["bad","worse","worst"]];
 const CPAIR=[["Option B","option A"],["The new flow","the old one"],["Version 2","version 1"],["This layout","the previous one"],["The dark theme","the light one"],["The second icon","the first one"]];
 const ANT=[["clean","cluttered"],["consistent","inconsistent"],["bold","subtle"],["readable","hard to read"],["intuitive","confusing"],["modern","dated"],["light","heavy"],["simple","complex"]];
@@ -1212,6 +1267,8 @@ const MORE_PAIRS=[["sheep","cheap"],["sleep","slip"],["leave","leaf"],["live","l
 MPAIRS.push(...MORE_PAIRS);
 const THING=["landing page","app","prototype","design system","icon set","website","dashboard","checkout flow"];
 const EVENT=["workshop","conference","design sprint","kickoff meeting","webinar","demo day"];
+const GLOSS=[["affordance","indizio visivo di come si usa un elemento"],["wireframe","schema a blocchi della pagina"],["mockup","bozza grafica statica"],["prototype","modello interattivo da testare"],["user persona","profilo dell'utente tipo"],["pain point","punto di frizione per l'utente"],["user journey","percorso dell'utente nel tempo"],["user flow","sequenza di schermate per un compito"],["sitemap","mappa delle pagine"],["information architecture","organizzazione dei contenuti"],["card sorting","test per raggruppare i contenuti"],["usability testing","test con utenti reali"],["heuristic evaluation","analisi con regole di usabilità"],["accessibility","accessibilità"],["contrast ratio","rapporto di contrasto"],["visual hierarchy","gerarchia visiva"],["white space","spazio bianco"],["grid","griglia"],["gutter","spazio tra le colonne"],["kerning","spazio tra due lettere"],["leading","interlinea"],["baseline","linea di base del testo"],["breakpoint","larghezza in cui cambia il layout"],["responsive","che si adatta allo schermo"],["design token","variabile di stile condivisa"],["component","elemento riutilizzabile"],["variant","variante di un componente"],["auto layout","impaginazione automatica in Figma"],["padding","spazio interno"],["margin","spazio esterno"],["alignment","allineamento"],["legibility","leggibilità delle lettere"],["readability","facilità di lettura del testo"],["microcopy","piccoli testi dell'interfaccia"],["tone of voice","stile di comunicazione"],["dark pattern","trucco che inganna l'utente"],["error state","schermata di errore"],["loading state","stato di caricamento"],["edge case","caso limite"],["happy path","percorso senza errori"],["friction","attrito, difficoltà"],["conversion rate","tasso di conversione"],["retention","fidelizzazione"],["churn","abbandono dei clienti"],["funnel","imbuto di conversione"],["insight","scoperta utile"],["benchmark","termine di paragone"],["KPI","indicatore di risultato"],["MVP","prodotto minimo funzionante"],["scope","perimetro del progetto"],["deliverable","materiale da consegnare"],["stakeholder","persona coinvolta nel progetto"],["roadmap","piano dei rilasci"],["backlog","lista delle attività da fare"],["sprint","ciclo di lavoro di 1-2 settimane"],["retrospective","riunione per migliorare il processo"],["kickoff","riunione di avvio"],["brief","documento con gli obiettivi"],["handoff","passaggio agli sviluppatori"],["feedback loop","ciclo di riscontri"],["iteration","nuova versione migliorata"],["trade-off","compromesso"]];
+SPLAT.push(...GLOSS.filter(g=>!SPLAT.some(x=>x[0]===g[0])).slice(0,40));
 const GEN={
 m1l1:[
  ()=>{const s=pick(PEOPLE.concat(["the app","the file","the prototype"]));const c=pick(BECOMP);const neg=Math.random()<.4;const f=s==="I"?"am":["the app","the file","the prototype"].includes(s)?"is":BE(s);
@@ -1293,6 +1350,9 @@ m3l4:[
 m4l1:[
  ()=>{const c=pick(UIC);const o=rshuffle([c[1],...rshuffle(UIC.filter(x=>x!==c)).slice(0,2).map(x=>x[1])]);return {t:"ui",k:c[0],p:pick(["Come si chiama questo componente?","Riconosci il componente:","In inglese questo è un…"]),o,a:o.indexOf(c[1]),x:`*${c[1]}*.`}},
  ()=>{const c=pick(UIVOC);return mc(`Come si dice in inglese: “${c[1]}”?`,c[0],rshuffle(UIVOC.filter(x=>x!==c)).slice(0,2).map(x=>x[0]),`*${c[0]}* = ${c[1]}.`)},
+ ()=>{const c=pick(GLOSS);return mc(`Come si dice in inglese: “${c[1]}”?`,c[0],rshuffle(GLOSS.filter(x=>x!==c)).slice(0,2).map(x=>x[0]),`*${c[0]}* = ${c[1]}.`)},
+ ()=>{const c=pick(GLOSS);return mc(`Cosa significa *${c[0]}*?`,c[1],rshuffle(GLOSS.filter(x=>x!==c)).slice(0,2).map(x=>x[1]),`*${c[0]}* = ${c[1]}.`)},
+ ()=>{const vs=rshuffle(GLOSS).slice(0,4);return {t:"match",p:"Abbina il termine al significato.",pairs:vs.map(x=>[x[0],x[1]]),x:"Il lessico che senti in ogni team di prodotto."}},
  ()=>{const c=pick(VERBUI);return mc(c[0],c[1],rshuffle(VERBUI.filter(x=>x[1]!==c[1])).slice(0,2).map(x=>x[1]),`Il verbo giusto: *${c[1]}*.`)}],
 m4l2:[
  ()=>{const c=pick(PHRG);return {t:"gap",p:c[0],a:c[1],x:`Phrasal verb: la particella è *${c[1][0]}*.`}},
@@ -1522,6 +1582,103 @@ async function forgot(){
   render();
 }
 
+
+/* Teoria strutturata: quando si usa, come si forma (affermativa, negativa, domanda), risposte brevi, parole spia */
+const TH={
+m1l1:{use:["Chi sei e che ruolo hai: *I'm a designer*","Età, stati e sensazioni: *I'm 40, I'm tired, You're right*","Dove si trova qualcosa: *The file is in Drive*"],
+ aff:{f:[["Chi","blue"],["am / is / are","orange"],["Resto","green"]],r:[["I","'m","a designer."],["She","'s","in a meeting."],["We","'re","ready."]]},
+ neg:{f:[["Chi","blue"],["am / is / are + not","purple"],["Resto","green"]],r:[["I","'m not","late."],["It","isn't","ready."],["They","aren't","online."]]},
+ q:{f:[["Am / Is / Are","orange"],["Chi","blue"],["Resto","green"]],r:[["Are","you","free?"],["Is","the prototype","ready?"],["Am","I","late?"]]},
+ short:"Risposte brevi: *Yes, I am · Yes, it is · No, I'm not · No, it isn't.*"},
+m1l2:{use:["Abitudini e routine: *I test every week*","Fatti sempre veri: *The app works offline*","Orari e programmi fissi: *The demo starts at 3*"],
+ aff:{f:[["Chi","blue"],["verbo (+S con he/she/it)","orange"],["Resto","green"]],r:[["I / you / we / they","work","from home."],["He / she / it","works","from home."],["The team","ships","every Friday."]]},
+ neg:{f:[["Chi","blue"],["don't / doesn't","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["I","don't","use","Sketch."],["She","doesn't","work","on Mondays."],["The app","doesn't","crash","anymore."]]},
+ q:{f:[["Do / Does","purple"],["Chi","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["Do","you","use","Figma?"],["Does","he","work","remotely?"],["Does","the app","support","dark mode?"]]},
+ short:"Risposte brevi: *Yes, I do · No, she doesn't.*",signal:["always","usually","often","sometimes","never","every day","on Mondays","twice a week"]},
+m1l3:{use:["Domande aperte con *what, where, when, why, how often…*","Negare un'abitudine o un fatto","Rispondere in breve senza ripetere il verbo"],
+ aff:{f:[["Chi","blue"],["verbo","orange"],["Resto","green"]],r:[["Users","read","the headlines."],["She","tests","on mobile."]]},
+ neg:{f:[["Chi","blue"],["don't / doesn't","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["Users","don't","read","long text."],["The button","doesn't","work","on Safari."]]},
+ q:{f:[["Q","indigo"],["do / does","purple"],["Chi","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["What tools","do","you","use?","—"],["How often","does","she","test?","—"],["Why","do","users","leave","here?"]]},
+ short:"Risposte brevi: *Yes, they do · No, it doesn't.*",signal:["what","where","when","why","who","how","how often","how many","how much","which"]},
+m1l4:{use:["Azione in corso adesso: *I'm sharing my screen*","Lavoro di questo periodo: *We're redesigning the app*","Appuntamenti già fissati: *I'm meeting the client on Friday*"],
+ aff:{f:[["Chi","blue"],["am / is / are","orange"],["verbo-ing","pink"],["Resto","green"]],r:[["I","'m","working","on it."],["She","'s","testing","the flow."],["We","'re","redesigning","the app."]]},
+ neg:{f:[["Chi","blue"],["am / is / are + not","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["I","'m not","using","Figma today."],["He","isn't","listening.","—"],["They","aren't","working","this week."]]},
+ q:{f:[["Am / Is / Are","orange"],["Chi","blue"],["verbo-ing","pink"],["Resto","green"]],r:[["Are","you","sharing","your screen?"],["Is","she","working","today?"],["Are","they","testing","it now?"]]},
+ short:"Risposte brevi: *Yes, I am · No, she isn't.*",signal:["now","right now","at the moment","today","this week","this sprint","currently","Look!"]},
+m2l1:{use:["Azioni finite in un momento preciso del passato","Raccontare un progetto passo dopo passo","Con *yesterday, last week, in 2023, two days ago*"],
+ aff:{f:[["Chi","blue"],["verbo-ed / irregolare","orange"],["Resto","green"]],r:[["We","launched","the app in May."],["I","ran","five interviews."],["She","wrote","the brief yesterday."]]},
+ neg:{f:[["Chi","blue"],["didn't","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["We","didn't","change","the logo."],["I","didn't","see","the bug."]]},
+ q:{f:[["Did","purple"],["Chi","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["Did","you","test","it on mobile?"],["Did","the client","like","it?"]]},
+ short:"Risposte brevi: *Yes, I did · No, they didn't.*",signal:["yesterday","last week","last month","in 2023","two days ago","on Monday","this morning"]},
+m2l2:{use:["Domande al passato: *Did you…? When did…?*","Negative al passato: *didn't* + verbo nudo","Il passato si mette una volta sola, dentro *did*"],
+ aff:{f:[["Chi","blue"],["verbo al passato","orange"],["Resto","green"]],r:[["The client","approved","the design."],["Users","found","the filter."]]},
+ neg:{f:[["Chi","blue"],["didn't","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["The client","didn't","approve","the first draft."],["Users","didn't","find","the filter."]]},
+ q:{f:[["Q","indigo"],["did","purple"],["Chi","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["When","did","you","start","the project?"],["Why","did","users","leave?","—"],["What","did","the client","say?","—"]]},
+ short:"Risposte brevi: *Yes, I did · No, she didn't.*",signal:["yesterday","last week","ago","in 2024","when…?"]},
+m2l3:{use:["Azione in corso in un momento del passato","Lo sfondo di una storia interrotta da un'azione breve","Richieste gentili: *I was wondering if…*"],
+ aff:{f:[["Chi","blue"],["was / were","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["I","was","presenting","when it crashed."],["We","were","testing","at 3 pm."]]},
+ neg:{f:[["Chi","blue"],["wasn't / weren't","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["I","wasn't","listening.","—"],["They","weren't","working","on it."]]},
+ q:{f:[["Was / Were","purple"],["Chi","blue"],["verbo-ing","pink"],["Resto","green"]],r:[["Were","you","working","at 6?"],["Was","she","presenting","when it crashed?"]]},
+ short:"Risposte brevi: *Yes, I was · No, they weren't.*",signal:["when","while","at 6 pm yesterday","all morning"]},
+m2l4:{use:["Esperienze senza data: *I've worked with banks*","Da quando, da quanto: *since 2013, for 10 years*","Risultati che contano adesso: *We've finished the prototype*"],
+ aff:{f:[["Chi","blue"],["have / has","purple"],["participio","orange"],["Resto","green"]],r:[["I","'ve","worked","here since 2013."],["She","'s","led","the team for two years."]]},
+ neg:{f:[["Chi","blue"],["haven't / hasn't","purple"],["participio","orange"],["Resto","green"]],r:[["We","haven't","finished","yet."],["He","hasn't","seen","the mockups."]]},
+ q:{f:[["Have / Has","purple"],["Chi","blue"],["participio","orange"],["Resto","green"]],r:[["Have","you","ever used","Framer?"],["Has","she","sent","the file yet?"]]},
+ short:"Risposte brevi: *Yes, I have · No, she hasn't.*",signal:["for","since","ever","never","already","yet","just","so far"]},
+m3l1:{use:["*will*: decisioni prese ora, promesse, previsioni","*going to*: piani già decisi","*BE + -ing*: appuntamenti in calendario"],
+ aff:{f:[["Chi","blue"],["will / am going to","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["I","'ll","send","the link."],["We","'re going to","test","it next week."]]},
+ neg:{f:[["Chi","blue"],["won't / not going to","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["It","won't","take","long."],["We","aren't going to","change","the logo."]]},
+ q:{f:[["Will / Are","purple"],["Chi (+ going to)","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["Will","you","join","the call?"],["Are","you going to","test","it?"]]},
+ short:"Risposte brevi: *Yes, I will · No, I won't.*",signal:["tomorrow","next week","next sprint","soon","probably","in two days"]},
+m3l2:{use:["*will have + participio*: finito entro una scadenza","*will be + -ing*: in corso in un momento futuro"],
+ aff:{f:[["By…","indigo"],["Chi","blue"],["will have","purple"],["participio","orange"],["Resto","green"]],r:[["By Friday,","I","'ll have","finished","the wireframes."]]},
+ neg:{f:[["By…","indigo"],["Chi","blue"],["won't have","purple"],["participio","orange"],["Resto","green"]],r:[["By Monday,","we","won't have","fixed","all the bugs."]]},
+ q:{f:[["Will","purple"],["Chi","blue"],["have","purple"],["participio","orange"],["Resto","green"]],r:[["Will","you","have","finished","by Friday?"]]},
+ short:"Risposte brevi: *Yes, I will · No, I won't.*",signal:["by Friday","by the end of the sprint","by Q3","this time tomorrow"]},
+m3l3:{use:["Condizioni reali sul futuro: *if* + presente, poi *will*","Dopo *when, as soon as, before, after*: presente","Ipotesi poco probabili: *if* + passato, poi *would*"],
+ aff:{f:[["If / When","indigo"],["presente","orange"],["will + verbo","purple"]],r:[["If","the test fails,","we'll iterate."],["When","I finish,","I'll call you."]]},
+ neg:{f:[["If / When","indigo"],["presente negativo","orange"],["won't + verbo","purple"]],r:[["If","users don't like it,","we won't ship it."],["If","the client doesn't reply,","we won't start."]]},
+ q:{f:[["Domanda con will","purple"],["if / when + presente","orange"]],r:[["What will we do","if the test fails?"],["Will you call me","when you finish?"]]},
+ short:"Mai *will* dopo *if* o *when*.",signal:["if","when","as soon as","before","after","unless"]},
+m3l4:{use:["*can*: capacità e permesso","*should*: consiglio","*could / might*: possibilità e proposte","*must / have to*: obbligo"],
+ aff:{f:[["Chi","blue"],["modale","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["We","should","simplify","the form."],["It","might","confuse","users."]]},
+ neg:{f:[["Chi","blue"],["modale + not","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["You","shouldn't","use","red here."],["We","can't","ship","today."],["You","don't have to","come.","—"]]},
+ q:{f:[["Modale","purple"],["Chi","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["Can","you","share","your screen?"],["Should","we","test","it again?"]]},
+ short:"Risposte brevi: *Yes, you can · No, we shouldn't.*",signal:["maybe","probably","I suggest…","what about…?"]},
+m5l1:{use:["Dare un'opinione: *I think, I believe, In my opinion*","Opinione negativa: si nega *think*","Chiedere un parere: *What do you think…?*"],
+ aff:{f:[["Apertura","purple"],["frase","blue"]],r:[["I think","the hierarchy works."],["In my opinion,","it's too busy."]]},
+ neg:{f:[["I don't think","purple"],["frase affermativa","blue"]],r:[["I don't think","the icon is clear."],["I don't believe","we need it."]]},
+ q:{f:[["Domanda","purple"],["argomento","blue"]],r:[["What do you think","about the new flow?"],["Do you think","it's clear enough?"]]},
+ short:"Ammorbidisci: *maybe, a bit, I wonder if…*",signal:["I think","I believe","in my opinion","from a user's point of view","my concern is"]}
+};
+
+/* Il perché delle regole: la logica dietro ogni struttura */
+const WHY={
+m1l1:["In inglese il soggetto non si sottintende mai: l'italiano dice *sono stanco*, l'inglese vuole sempre *I am*, *it is*.","*BE* ha tre forme al presente (*am, is, are*) e non usa *do* nelle domande: è già un ausiliare, quindi basta invertirlo con il soggetto (*Are you…?*).","*Avere anni, fame, ragione* in inglese descrive uno stato, non un possesso: per questo si usa *be* (*I'm 40, I'm right*)."],
+m1l2:["La S della terza persona è l'ultima desinenza rimasta dall'inglese antico: non c'è una logica da capire, è un'abitudine da allenare.","Con *he, she, it* il verbo prende la S; con tutte le altre persone resta uguale.","*The team, the app, my manager* sono una cosa sola, quindi equivalgono a *it/he/she* e vogliono la S."],
+m1l3:["Perché *do*? I verbi normali non si possono invertire con il soggetto (*Work you?* non esiste): serve un aiutante, *do*, che va davanti e porta tempo e persona.","Per questo con *does* il verbo torna nudo: la S l'ha già presa *does*. *Does she work?*, mai *Does she works?*","Con *be* e con i modali (*can, will, should*) *do* non serve: sono già ausiliari e si invertono da soli (*Is it…? Can you…?*).","Nelle negative vale lo stesso: *not* ha bisogno di appoggiarsi a un ausiliare, quindi *don't / doesn't* + verbo nudo."],
+m1l4:["L'inglese separa ciò che è abituale (*I work*) da ciò che succede ora o in questo periodo (*I'm working*); l'italiano usa spesso il presente per tutti e due.","*BE + -ing* descrive un'azione in corso, come il nostro *sto facendo*.","I verbi di stato (*know, like, want, need, understand*) indicano condizioni, non azioni con una durata: per questo non prendono *-ing*."],
+m2l1:["Il passato semplice inglese copre sia il nostro passato prossimo sia il remoto: *I sent* = ho mandato, mandai.","Si usa per azioni finite in un momento preciso, ed è per questo che va con *yesterday, last week, in 2020*.","Gli irregolari sono i verbi più antichi e più usati: pochi, ma ovunque. Conviene impararli a memoria, come parole nuove."],
+m2l2:["Come al presente, i verbi normali non si invertono: serve l'aiutante *do*, che al passato diventa *did*.","*did* porta già il passato, quindi il verbo torna nudo: *Did you send…?*, *I didn't send…*. Il passato si segna una volta sola.","Con *was / were* *did* non serve: sono già ausiliari (*Were you there? I wasn't ready.*)."],
+m2l3:["Il passato progressivo è un fermo immagine: cosa stava succedendo in quel momento.","Per questo si combina con il passato semplice: l'azione lunga fa da sfondo (*was working*), quella breve la interrompe (*called*).","*I was wondering if…* suona più gentile di *I wonder* perché il passato crea distanza: la richiesta diventa meno diretta."],
+m2l4:["Il present perfect collega passato e presente: qualcosa è successo prima, ma conta adesso.","Per questo non va con una data precisa: con *in 2020* l'azione è chiusa nel passato e serve il passato semplice.","*since* indica il punto di partenza, *for* la durata. L'italiano usa il presente (*lavoro qui dal 2013*); l'inglese no, perché l'azione parte dal passato e arriva a oggi."],
+m3l1:["L'inglese non ha un solo futuro: sceglie la forma in base a quanto la cosa è già decisa.","*will* = decisione presa ora, promessa, previsione. *going to* = intenzione decisa prima. *BE + -ing* = appuntamento fissato con altri.","*will* è un modale: dopo vuole il verbo nudo, senza *to* e senza S."],
+m3l2:["*will have + participio* guarda indietro da un punto futuro: a quella data l'azione sarà già conclusa.","*will be + -ing* fotografa un momento futuro: in quell'istante l'azione sarà in corso.","Sono le forme delle scadenze e delle stime: perfette per roadmap e pianificazione."],
+m3l3:["Dopo *if* e *when* si usa il presente perché la condizione è vista come già reale: il futuro sta solo nella conseguenza.","Mettere *will* in entrambe le parti è l'errore tipico degli italiani, perché diciamo *se finirò*.","Con *if* + passato + *would* l'ipotesi diventa poco probabile: il passato allontana dalla realtà."],
+m3l4:["I modali sono ausiliari speciali: non prendono la S, non vogliono *to* dopo e non usano *do* nelle domande.","Ognuno esprime un grado diverso di certezza o di obbligo: dal più sicuro (*will, must*) al più aperto (*might, could*).","*must* = obbligo che senti tu; *have to* = obbligo che arriva da fuori. *don't have to* = non serve; *mustn't* = è vietato."],
+m4l1:["I team internazionali chiamano i componenti con nomi precisi: usarli evita ambiguità nell'handoff.","Associare parola e immagine del componente (*dual coding*) la fa ricordare molto meglio di una traduzione."],
+m4l2:["Un phrasal verb è verbo + particella, e la particella cambia il significato: *roll* (rotolare) + *out* = rilasciare.","Il significato spesso non si deduce dalle parti: va imparato come una parola nuova, dentro una frase.","Con un pronome (*it, them*) la particella va dopo: *figure it out*, perché il pronome corto si infila in mezzo."],
+m4l3:["I falsi amici sono parole latine entrate nelle due lingue in momenti diversi, che hanno preso significati diversi.","Sono pericolosi proprio perché sembrano facili: cambiano il senso di una frase senza che nessuno se ne accorga."],
+m4l4:["Gli aggettivi corti prendono *-er / -est*; quelli lunghi usano *more / most*, perché aggiungere sillabe li renderebbe difficili da pronunciare.","*than* introduce il secondo termine del paragone: in italiano diciamo *di*, ma *of* qui è sbagliato.","Nel feedback i comparativi rendono la critica concreta: *clearer than, more consistent than*."],
+m5l1:["Si nega il verbo di opinione (*I don't think it's clear*) perché suona più morbido che negare il fatto (*I think it isn't clear*).","Gli ammorbidenti (*maybe, a bit, I wonder if*) sono tipici della cultura di lavoro anglosassone: una critica diretta può sembrare aggressiva."],
+m5l2:["Le formule pronte si imparano come blocchi unici: in una call non c'è tempo di costruire la frase parola per parola.","*Could* è più cortese di *can*: la forma al passato crea distanza, quindi gentilezza."],
+m5l3:["*agree* è un verbo, non un aggettivo: *I agree*, come *I like*. Per questo *I'm agree* è sbagliato.","Lo schema riconosci → *but* → motivo mantiene buona la relazione e sposta la discussione sui dati."],
+m5l4:["Chiudere con riassunto, prossimi passi e responsabili evita malintesi dopo la call.","*by* = entro una scadenza; *until* = per tutto il tempo fino a un momento; *within* va con una durata (*within two days*), non con un giorno."],
+m6l1:["In inglese le sillabe senza accento si riducono quasi a un suono neutro: con l'accento sbagliato la parola diventa difficile da riconoscere.","Molte parole hanno l'accento su una sillaba diversa dall'italiano (*PROtotype, deVELoper*): conviene impararle ascoltando."],
+m6l2:["L'italiano ha 7 suoni vocalici, l'inglese circa 12: per questo *ship / sheep* ci sembrano uguali.","Allenare l'orecchio aiuta anche la pronuncia: si produce bene solo ciò che si sente bene."],
+m6l3:["Nel parlato le parole piccole (*to, the, and, can*) si riducono a forme deboli: il dettato insegna a riconoscerle.","Scrivere ciò che senti obbliga a fare attenzione a ogni parola, non solo al senso generale."],
+m6l4:["Nell'ascolto reale non serve capire tutto: cerca le informazioni chiave (chi, cosa, quando).","Leggere la domanda prima di ascoltare dice al cervello cosa cercare: è il *pre-listening*."]
+};
 const LES = {};
 MODS.forEach(m=>m.lessons.forEach((l,i)=>{l.mod=m;l.n=i+1;LES[l.id]=l}));
 
@@ -1720,6 +1877,7 @@ function render(){
   else if(V.screen==="method")app.innerHTML=renderMethod();
   else if(V.screen==="splat")app.innerHTML=renderSplat();
   if(V.sheet==="reset")app.insertAdjacentHTML("beforeend",renderSheet());
+  if(V.sheet==="theory")app.insertAdjacentHTML("beforeend",renderTheorySheet());
   syncTabbar();
   const inp=$("#ans");if(inp&&!FB&&sel){inp.value=sel.text;setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(e){}},60)}
 }
@@ -1859,14 +2017,15 @@ function renderReviewTab(){
 function renderTricksTab(){
   const q=(V.tq||"").toLowerCase();
   const html=MODS.map(m=>{
-    const items=m.lessons.filter(l=>!l.final).filter(l=>!q||(l.h+" "+plain(l.tip)+" "+(l.extra||"")+" "+(l.vocab||[]).flat().join(" ")).toLowerCase().includes(q));
+    const items=m.lessons.filter(l=>!l.final).filter(l=>!q||(l.h+" "+plain(l.tip)+" "+(l.extra||"")+" "+(l.vocab||[]).flat().join(" ")+" "+(WHY[l.id]||[]).join(" ")+" "+JSON.stringify(TH[l.id]||"")).toLowerCase().includes(q));
     if(!items.length)return "";
     return `<p class="sech">${esc(m.title)} · ${esc(m.tag)}</p>`+items.map(l=>`<details class="tk" style="--c:${cv(m)}">
       <summary><span class="num">${l.n}</span><span class="rt" style="font-weight:600">${esc(l.h)}</span>${IC.chevR}</summary>
       <div class="tkb">${trickBody(l)}</div></details>`).join("");
   }).join("");
-  return `<label class="search">${IC.search}<input id="tq" type="search" placeholder="Cerca nella teoria (es. since, will, agree)" value="${esc(V.tq||"")}" autocomplete="off"></label>
-  <div id="tklist">${html||`<p class="empty">Nessun argomento trovato.</p>`}</div>`;
+  const gl=renderGlossary(q);
+  return `<label class="search">${IC.search}<input id="tq" type="search" placeholder="Cerca nella teoria o nel vocabolario" value="${esc(V.tq||"")}" autocomplete="off"></label>
+  <div id="tklist">${html+gl||`<p class="empty">Nessun risultato.</p>`}</div>`;
 }
 
 /* ---------- MODULE ---------- */
@@ -1893,26 +2052,54 @@ function navBar({title="",right=""}){
 }
 
 /* ---------- TRICK ---------- */
-function formulaGrid(l){
-  if(!l.formula)return "";
-  const n=l.formula.length;
-  const head=l.formula.map(([t,c])=>`<span class="fchip" style="background:${COLORS[c]}">${esc(t)}</span>`).join("");
-  const say=l.mod.id!=="m6";const rows=(l.rows||[]).map(r=>{const sentence=r.filter(x=>x!=="—"&&x!=="→").join(" ").replace(/ '/g,"'");
-    return r.map((x,i)=>`<span class="fcell ${x==="—"?"dash":""}" style="color:${x==="—"||!l.formula[i]?"":COLORS[l.formula[i][1]]}${say?"":";cursor:default"}" ${say?`data-say="${esc(sentence)}"`:""}>${esc(x)}</span>`).join("")}).join("");
-  return `<div class="formula"><div class="fgrid" style="grid-template-columns:repeat(${n},auto)">${head}${rows}</div></div>`;
+function fgrid(f,rows,say){
+  const n=f.length;
+  const head=f.map(([t,c])=>`<span class="fchip" style="background:${COLORS[c]}">${esc(t)}</span>`).join("");
+  const body=(rows||[]).map(r=>{const sentence=r.filter(x=>x!=="—"&&x!=="→").join(" ").replace(/ '/g,"'");
+    return r.map((x,i)=>`<span class="fcell ${x==="—"?"dash":""}" style="color:${x==="—"||!f[i]?"":COLORS[f[i][1]]}${say?"":";cursor:default"}" ${say?`data-say="${esc(sentence)}"`:""}>${esc(x)}</span>`).join("")}).join("");
+  return `<div class="formula"><div class="fgrid" style="grid-template-columns:repeat(${n},auto)">${head}${body}</div></div>`;
 }
+function formulaGrid(l){return l.formula?fgrid(l.formula,l.rows,l.mod.id!=="m6"):""}
 function vocabList(l){
   if(!l.vocab)return "";
   return `<div class="vocab">${l.vocab.map(([en,it])=>`<button class="vrow" data-say="${esc(en.replace(/·/g,"").split(" / ")[0].toLowerCase())}"><span><b>${esc(en)}</b><span>${esc(it)}</span></span><span class="spk">${IC.spk}</span></button>`).join("")}</div>`;
 }
+const THF=[["aff","+","Affermativa"],["neg","−","Negativa"],["q","?","Domanda"]];
+function thForm(th,k){const x=th[k];return fgrid(x.f,x.r,true)}
 function trickBody(l){
-  return `<div class="trick" style="--c:${cv(l.mod)}">
+  const th=TH[l.id];const k=V.thf||"aff";
+  return `<div class="trick" style="--c:${cv(l.mod)}" data-lid="${l.id}">
     <p class="eyebrow">${IC.bulb}Il trick</p>
     <p class="tipbig">${fmt(l.tip)}</p>
-    ${formulaGrid(l)}${vocabList(l)}
-    ${l.extra?`<p class="extra">${fmt(l.extra)}</p>`:""}
+    ${WHY[l.id]?`<p class="th-h">Perché funziona così</p><ol class="th-why">${WHY[l.id].map(w=>`<li>${fmt(w)}</li>`).join("")}</ol>`:""}
+    ${th?`<p class="th-h">Quando si usa</p><ul class="th-use">${th.use.map(u=>`<li>${fmt(u)}</li>`).join("")}</ul>
+      <p class="th-h">Come si forma</p>
+      <div class="th-seg" role="tablist">${THF.map(([id,sym,lab])=>`<button type="button" role="tab" data-thf="${id}" aria-pressed="${k===id}"><b>${sym}</b>${lab}</button>`).join("")}</div>
+      <div class="th-form">${thForm(th,k)}</div>
+      ${th.short?`<p class="th-short">${fmt(th.short)}</p>`:""}
+      ${th.signal?`<p class="th-h">Parole spia</p><div class="th-chips">${th.signal.map(w=>`<button class="th-chip" data-say="${esc(w)}">${esc(w)}</button>`).join("")}</div>`:""}`
+    :formulaGrid(l)}
+    ${vocabList(l)}
+    ${l.extra?`<p class="th-h">Da sapere</p><p class="extra">${fmt(l.extra)}</p>`:""}
     ${l.trap?`<div class="trap"><span class="ti">${IC.x}</span><span><span class="tk">Trappola per italiani</span><br><span class="wrong">${esc(l.trap[0])}</span><span class="arrow">→</span><span class="right">${esc(l.trap[1])}</span></span></div>`:""}
   </div>`;
+}
+function theoryLessons(){
+  const it=RUN&&curItem();const l=it?LES[it.lid]:RUN&&RUN.id?LES[RUN.id]:null;if(!l)return [];
+  return l.final?l.mod.lessons.filter(x=>!x.final):[l];
+}
+function renderTheorySheet(){
+  const ls=theoryLessons();
+  const body=ls.length===1?trickBody(ls[0]):ls.map(l=>`<details class="tk" style="--c:${cv(l.mod)}"><summary><span class="num">${l.n}</span><span class="rt" style="font-weight:600">${esc(l.h)}</span>${IC.chevR}</summary><div class="tkb">${trickBody(l)}</div></details>`).join("");
+  return `<div class="sheet-bg tsheet-bg" data-act="closesheet"><div class="tsheet" role="dialog" aria-label="Teoria">
+    <div class="tsheet-h"><span class="grab"></span><div><p class="eyebrow" style="color:var(--blue)">Teoria</p><p class="tsheet-t">${esc(ls.length===1?ls[0].h:ls[0]?ls[0].mod.title:"")}</p></div><button class="circ" data-act="closesheet" aria-label="Chiudi">${IC.x}</button></div>
+    <div class="tsheet-b">${body}</div></div></div>`;
+}
+function renderGlossary(q){
+  const all=[...GLOSS,...UIVOC,...PHRDEF].filter((x,i,a)=>a.findIndex(y=>y[0]===x[0])===i).sort((a,b)=>a[0].localeCompare(b[0]));
+  const list=all.filter(x=>!q||(x[0]+" "+x[1]).toLowerCase().includes(q));
+  if(!list.length)return "";
+  return `<p class="sech">Vocabolario · ${list.length} parole</p><div class="vocab gloss">${list.map(([en,it])=>`<button class="vrow" data-say="${esc(en)}"><span><b>${esc(en)}</b><span>${esc(it)}</span></span><span class="spk">${IC.spk}</span></button>`).join("")}</div>`;
 }
 
 /* ---------- RUN ---------- */
@@ -1932,7 +2119,7 @@ function renderRun(){
   } else if(st.k==="q"){const r=renderQ(st);body=r.body;dock=r.dock}
   else {body=renderSum();dock=""}
   const head=`<div class="lhead"><button class="circ" data-act="back" aria-label="Chiudi">${IC.x}</button><div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct*100)}"><i class="${pct>0?"has":""}" style="width:${Math.round(pct*100)}%"></i></div><button class="circ" data-act="askreset" aria-label="Ricomincia da capo">${IC.refresh}</button></div>`;
-  const meta=st.k==="q"?`<div class="pmeta"><span>${esc(title)} · ${qi} di ${nq}</span>${RUN.combo>=2?`<span class="combo">${IC.bolt}Combo ×${RUN.combo}</span>`:""}</div>`:"";
+  const meta=st.k==="q"?`<div class="pmeta"><span>${esc(title)} · ${qi} di ${nq}</span>${RUN.combo>=2?`<span class="combo">${IC.bolt}Combo ×${RUN.combo}</span>`:""}<button class="thbtn" data-act="theory">${i3("tab_tricks")}Teoria</button></div>`:"";
   return `<div style="--c:${RUN.c};padding-bottom:${FB?190:40}px">${head}${meta}${body}</div>
   ${dock?`<div class="dock ${FB?(FB.ok?"ok":"ko"):""}" style="--c:${RUN.c}"><div class="dock-in">${dock}</div></div>`:""}`;
 }
@@ -1992,7 +2179,7 @@ function renderQ(st){
     let sol="";
     if(!FB.ok&&q.t!=="shadow")sol=`<p class="fsol">Soluzione: ${textual&&FB.given?diffMark(FB.correct,FB.given):`<strong>${esc(FB.correct)}</strong>`}</p>`;
     const sayTxt=sayFor(q);
-    const links=`${sayTxt?`<button class="pill" data-say="${esc(plain(sayTxt))}">${IC.spk}Ascolta</button>`:""}${!FB.ok&&textual&&q.t!=="gap"?`<button class="pill" data-act="override">${IC.check}Era giusta</button>`:""}`;
+    const links=`${sayTxt?`<button class="pill" data-say="${esc(plain(sayTxt))}">${IC.spk}Ascolta</button>`:""}${!FB.ok&&textual&&q.t!=="gap"?`<button class="pill" data-act="override">${IC.check}Era giusta</button>`:""}${!FB.ok&&theoryLessons().length?`<button class="pill" data-act="theory">${IC.bulb}Rivedi la teoria</button>`:""}`;
     const xx=FB.pre&&!FB.ok?"Ora il trick ti spiega perché. "+(FB.x?plain(FB.x):""):FB.x;
     dock=`<div class="fb"><span class="fi">${FB.ok?IC.check:IC.x}</span><div><p class="ft">${title}${FB.xp?`<span class="xpchip">${IC.bolt}+${FB.xp} XP</span>`:""}</p>${sol}${xx?`<p class="fx">${fmt(xx)}</p>`:""}${links?`<div class="flinks">${links}</div>`:""}</div></div>
       <button class="btn" data-act="next">Continua</button>`;
@@ -2138,6 +2325,8 @@ function renderSplat(){
 /* ===================================================================== EVENTI */
 document.addEventListener("click",e=>{
   if(e.target.closest(".sheet")&&!e.target.closest("button"))return;
+  if(e.target.closest(".tsheet")&&!e.target.closest("button,[data-say],summary"))return;
+  {const tb=e.target.closest("[data-thf]");if(tb){const card=tb.closest(".trick");V.thf=tb.dataset.thf;const th=TH[card.dataset.lid];card.querySelector(".th-form").innerHTML=thForm(th,V.thf);card.querySelectorAll("[data-thf]").forEach(x=>x.setAttribute("aria-pressed",x===tb));return}}
   const b=e.target.closest("button,[data-say],summary,[data-act]");if(!b)return;
   const d=b.dataset;
   if(d.say!==undefined&&!d.act){speak(d.say,d.rate?+d.rate:undefined);if(V.screen==="run"&&sel)sel.heard=true;if(!d.setrate)return}
@@ -2169,6 +2358,7 @@ document.addEventListener("click",e=>{
       else if(V.screen==="splat")go({screen:"home",tab:"rev"});
       else go({screen:"home"});break;
     case "askreset":V.sheet="reset";render();break;
+    case "theory":V.sheet="theory";render();break;
     case "closesheet":V.sheet=null;render();break;
     case "doresetrun":V.sheet=null;if(RUN.kind==="lesson")startLesson(RUN.id,true);else if(RUN.kind==="review")startReview();else startMix();break;
     case "trick-ok":S.les[RUN.id].run.trick=true;save();advance();break;
