@@ -486,6 +486,26 @@ details.tk .formula{margin:12px -14px 0;padding:0 14px}
 .streakline .i3{width:22px;height:22px}
 
 /* ---------- TEORIA ---------- */
+.dp{margin-top:10px;border-radius:16px;padding:12px 14px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--stroke)}
+.dp-h{font-weight:700;font-size:16px;letter-spacing:-.01em}
+.dp-p{font-size:15px;line-height:1.5;margin-top:8px;color:var(--label)}
+.dp-t{overflow-x:auto;margin:8px -14px 0;padding:0 14px}
+.dp-t table{border-collapse:collapse;width:100%;font-size:14px;min-width:max-content}
+.dp-t th{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--label2);text-align:left;padding:6px 14px 6px 0;white-space:nowrap}
+.dp-t td{padding:8px 14px 8px 0;border-top:1px solid var(--sep);vertical-align:top;line-height:1.35}
+.dp-t td.dp-k{font-weight:650;color:var(--c);white-space:nowrap}
+.dp .th-chips{margin-top:8px}
+@media (max-width:600px){
+  .dp-t{overflow:visible;margin:6px 0 0;padding:0}
+  .dp-t table{min-width:0}
+  .dp-t thead{display:none}
+  .dp-t table,.dp-t tbody,.dp-t tr,.dp-t td{display:block;width:100%}
+  .dp-t tr{padding:9px 0;border-top:1px solid var(--sep)}
+  .dp-t tr:first-child{border-top:0;padding-top:4px}
+  .dp-t td{border:0;padding:2px 0}
+  .dp-t td.dp-k{white-space:normal;font-size:15px}
+  .dp-t td[data-l]:not([data-l=""])::before{content:attr(data-l);display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--label3);margin-top:3px}
+}
 .th-why{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:w}
 .th-why li{counter-increment:w;position:relative;padding:11px 12px 11px 44px;border-radius:14px;font-size:15px;line-height:1.45;background:color-mix(in srgb,var(--c) 9%,var(--glass));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 18%,transparent)}
 .th-why li::before{content:counter(w);position:absolute;left:12px;top:11px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff;background:var(--c)}
@@ -1295,7 +1315,10 @@ m1l4:[
  ()=>{const s=pick(PEOPLE),v=verb(),now=Math.random()<.5,t=now?pick(NOW):pick(HAB);return {t:"choice",p:`${S0(s)} ___ ${v.o} ${t}.`,o:[PRES(s,v),`${BE(s)} ${v.ing}`],a:now?1:0,x:now?`*${t}* → BE + -ing.`:`*${t}* = abitudine → presente semplice.`}},
  ()=>{const s=pick(PEOPLE),v=verb(),f=pick(["always","usually","often","never"]);return {t:"fix",p:`${S0(s)} ${PRES(s,v)} ${f} ${v.o}.`,a:[`${S0(s)} ${f} ${PRES(s,v)} ${v.o}.`],x:"L'avverbio va prima del verbo."}},
  ()=>{const s=pick(PEOPLE);return {t:"order",p:"Metti in ordine la frase.",w:words(`${S0(s)} ${BE(s)} ${pick(["always","usually","often","never"])} ${pick(BECOMP)}.`),x:"Con BE l'avverbio va dopo."}},
- ()=>{const s=pick(PEOPLE),v=verb();return {t:"dict",say:`${S0(s)} ${BE(s)} ${v.ing} ${v.o} ${pick(NOW)}.`}}],
+ ()=>{const s=pick(PEOPLE),v=verb();return {t:"dict",say:`${S0(s)} ${BE(s)} ${v.ing} ${v.o} ${pick(NOW)}.`}},
+ ()=>{const F=[["always","100%"],["usually","90%"],["often","70%"],["sometimes","50%"],["rarely","10%"],["never","0%"]];const c=pick(F);return mc(`Quale avverbio significa circa ${c[1]}?`,c[0],rshuffle(F.filter(x=>x!==c)).slice(0,2).map(x=>x[0]),`*${c[0]}* ≈ ${c[1]}.`)},
+ ()=>{const s=pick(PEOPLE),v=verb(),f=pick(["usually","often","always","never"]);return {t:"order",p:"Metti in ordine (avverbio tra ausiliare e verbo).",w:words(`${S0(s)} ${DO(s)}n't ${f} ${v.b} ${v.o}.`),x:"Con l'ausiliare l'avverbio va tra ausiliare e verbo."}},
+ ()=>{const v=pick(VB.filter(x=>/[^aeiou][aeiou][ptnbgm]$/.test(x[0])||(x[0].endsWith("e")&&!x[0].endsWith("ee"))));const m=mkv(v);return {t:"gap",p:`-ing di *${m.b}*: ___`,a:[m.ing],x:m.b.endsWith("e")?"La e finale cade.":"Raddoppio della consonante dopo vocale breve accentata."}}],
 m2l1:[
  ()=>{const s=pick(PEOPLE),v=verb();return {t:"gap",p:`${S0(s)} ___ (${v.b}) ${v.o} ${pick(PAST)}.`,a:[v.p],x:v.irr?`Irregolare: *${v.b} → ${v.p}*.`:"Regolare: +ed."}},
  ()=>{const s=pick(PEOPLE),v=verbIrr();return mc(`${S0(s)} ___ ${v.o} ${pick(PAST)}.`,v.p,[regPast(v),v.b],`*${v.b} → ${v.p}*.`)},
@@ -1679,6 +1702,109 @@ m6l2:["L'italiano ha 7 suoni vocalici, l'inglese circa 12: per questo *ship / sh
 m6l3:["Nel parlato le parole piccole (*to, the, and, can*) si riducono a forme deboli: il dettato insegna a riconoscerle.","Scrivere ciò che senti obbliga a fare attenzione a ogni parola, non solo al senso generale."],
 m6l4:["Nell'ascolto reale non serve capire tutto: cerca le informazioni chiave (chi, cosa, quando).","Leggere la domanda prima di ascoltare dice al cervello cosa cercare: è il *pre-listening*."]
 };
+/* Approfondimento: elenchi completi, ortografia, pronuncia, casi particolari */
+const DEEP={
+m1l1:[
+ {h:"Le forme di BE al presente",t:[["Chi","Forma piena","Contratta","Negativa"],["I","am","I'm","I'm not"],["you / we / they","are","you're / we're / they're","aren't"],["he / she / it","is","he's / she's / it's","isn't"]]},
+ {h:"BE in inglese, AVERE in italiano",t:[["Italiano","Inglese"],["avere 40 anni","be 40 (years old)"],["avere fame / sete","be hungry / thirsty"],["avere freddo / caldo","be cold / hot"],["avere ragione / torto","be right / wrong"],["avere paura","be afraid"],["avere fretta","be in a hurry"],["avere sonno","be sleepy"]]},
+ {h:"There is / There are",p:"Per dire che qualcosa esiste: *There ==is== a bug* (singolare), *There ==are== two bugs* (plurale). Domanda: *==Is there== a dark mode?* Negativa: *There ==isn't== any feedback.*"},
+ {h:"A o AN davanti al ruolo",p:"Conta il **suono**, non la lettera: *==a== designer, ==a== UX designer* (si legge *iu*), *==an== art director, ==an== hour* (la h è muta)."},
+ {h:"Risposte brevi",p:"Nelle risposte brevi affermative non si contrae: *Yes, I ==am==* (mai *Yes, I'm*). Nelle negative sì: *No, I'm not · No, it isn't.*"}],
+m1l2:[
+ {h:"Come si aggiunge la S",t:[["Regola","Esempi"],["+ s (regola generale)","work → works · design → designs"],["+ es dopo s, ss, sh, ch, x, z, o","fix → fixes · push → pushes · go → goes · do → does"],["consonante + y → ies","study → studies · apply → applies"],["vocale + y → s","play → plays · buy → buys"],["irregolare","have → has"]]},
+ {h:"Come si pronuncia la S",t:[["Suono","Quando","Esempi"],["/s/","dopo p, t, k, f","ships, tests, works"],["/z/","dopo suoni sonori e vocali","designs, plays, goes"],["/ɪz/ (una sillaba in più)","dopo s, sh, ch, x, z","fixes, pushes, uses"]]},
+ {h:"Chi vuole la S",p:"*he, she, it*, un nome singolare (*the client, Laura*), i nomi collettivi (*the team, the company*) e *everyone, everybody, nobody, someone*: *==Everyone uses== Figma.*"},
+ {h:"Quando si usa il presente semplice",t:[["Uso","Esempio"],["Routine e abitudini","We review the designs every Monday."],["Fatti sempre veri","The app saves your work automatically."],["Orari e programmi","The sprint starts on Tuesday."],["Istruzioni e demo","You tap here and the menu opens."]]}],
+m1l3:[
+ {h:"Le parole interrogative",t:[["Inglese","Italiano","Esempio"],["what","cosa, quale","What do you think?"],["which","quale (tra opzioni)","Which version do you prefer?"],["who","chi","Who do you work with?"],["whose","di chi","Whose file is this?"],["where","dove","Where do you work?"],["when","quando","When does the sprint start?"],["why","perché","Why do users leave?"],["how","come","How do you test it?"],["how often","quanto spesso","How often do you ship?"],["how long","quanto tempo","How long does it take?"],["how much","quanto (non numerabile)","How much time do we have?"],["how many","quanti (numerabile)","How many users do you have?"],["what time","a che ora","What time does it start?"]]},
+ {h:"Quando DO non serve",p:"Se la parola interrogativa è il **soggetto**, niente *do*: *==Who uses== Figma?* (chi usa…?) ma *Who ==do you== work with?* (con chi lavori?). Anche *What happens next?*, *Which option works better?*"},
+ {h:"La preposizione va in fondo",p:"*Who are you working ==with==? What are you talking ==about==? Where is it ==from==?* In italiano la preposizione va all'inizio (*con chi…*), in inglese alla fine."},
+ {h:"Contrazioni",p:"*do not → ==don't==*, *does not → ==doesn't==*. Nel parlato e nelle chat si usano sempre le forme contratte."}],
+m1l4:[
+ {h:"Gli avverbi di frequenza",t:[["Avverbio","Quanto spesso","Esempio"],["always","100% · sempre","I always test on mobile."],["usually / normally","90% · di solito","We usually ship on Fridays."],["often / frequently","70% · spesso","She often works from home."],["sometimes","50% · a volte","I sometimes use Framer."],["occasionally","30% · ogni tanto","We occasionally run workshops."],["rarely / seldom","10% · raramente","Users rarely read the footer."],["hardly ever","5% · quasi mai","I hardly ever print."],["never","0% · mai","We never skip testing."]]},
+ {h:"Dove si mettono",t:[["Regola","Esempio"],["prima del verbo principale","I ==always== check the contrast."],["dopo BE","She's ==often== late."],["tra ausiliare e verbo","I don't ==usually== work on Fridays. I've ==never== used it."],["sometimes, usually, often anche a inizio frase","==Sometimes== we work late."],["le espressioni lunghe vanno in fondo","We meet ==every Monday / twice a week / once a month==."]]},
+ {h:"Come si forma il -ING",t:[["Regola","Esempi"],["+ ing","work → working · test → testing"],["la e finale cade","make → making · share → sharing"],["raddoppio dopo vocale breve accentata","run → running · plan → planning · ship → shipping"],["ie → ying","lie → lying · die → dying"],["ee resta","see → seeing · agree → agreeing"]]},
+ {h:"Verbi che non prendono -ING (verbi di stato)",c:["know","understand","believe","mean","want","need","prefer","like","love","hate","seem","belong","own","cost","remember","agree"],p:"Indicano stati, non azioni: *I ==know==, I ==need== it, It ==costs== €20*. Eccezione utile: *I'm ==thinking== about it* (= sto valutando) va bene, *I ==think== it's good* (= credo) no -ing."},
+ {h:"Stesso verbo, significato diverso",t:[["Presente semplice","Presente progressivo"],["I work from home. (sempre)","I'm working from home this week. (per ora)"],["We use Sketch. (abitudine)","We're using Figma for this project. (in questo periodo)"],["The app crashes a lot. (è un difetto)","The app is crashing right now. (sta succedendo)"]]}],
+m2l1:[
+ {h:"Come si aggiunge -ED",t:[["Regola","Esempi"],["+ ed","work → worked · test → tested"],["finisce in e: + d","share → shared · update → updated"],["consonante + y → ied","study → studied · apply → applied"],["raddoppio dopo vocale breve accentata","plan → planned · ship → shipped · stop → stopped"]]},
+ {h:"Come si pronuncia -ED",t:[["Suono","Quando","Esempi"],["/t/","dopo p, k, s, sh, ch, f, x","worked, fixed, pushed"],["/d/","dopo suoni sonori e vocali","designed, played, called"],["/ɪd/ (sillaba in più)","solo dopo t e d","tested, added, updated"]]},
+ {h:"I 24 irregolari da sapere",t:[["Base","Passato","Participio"],["be","was / were","been"],["have","had","had"],["do","did","done"],["go","went","gone"],["make","made","made"],["take","took","taken"],["get","got","got / gotten"],["give","gave","given"],["see","saw","seen"],["say","said","said"],["tell","told","told"],["think","thought","thought"],["find","found","found"],["send","sent","sent"],["build","built","built"],["write","wrote","written"],["run","ran","run"],["choose","chose","chosen"],["meet","met","met"],["lead","led","led"],["begin","began","begun"],["buy","bought","bought"],["teach","taught","taught"],["forget","forgot","forgotten"]]},
+ {h:"Le espressioni di tempo",c:["yesterday","last week","last month","last year","two days ago","in 2023","on Monday","at 9","this morning"],p:"*ago* va **dopo** la durata: *two days ==ago==* = due giorni fa. *last week* senza *the*."}],
+m2l2:[
+ {h:"Le tre forme al passato",t:[["","Verbi normali","BE"],["Affermativa","I sent it.","I was ready."],["Negativa","I didn't send it.","I wasn't ready."],["Domanda","Did you send it?","Were you ready?"]]},
+ {h:"Domande sul soggetto: niente DID",p:"*==Who designed== this?* (chi l'ha progettato?) ma *Who ==did you== call?* (chi hai chiamato?). Anche *What happened? Which version won?*"},
+ {h:"Gli errori più comuni",t:[["Sbagliato","Giusto"],["Did you sent it?","Did you send it?"],["I didn't went.","I didn't go."],["When you started?","When did you start?"],["Did you were there?","Were you there?"]]},
+ {h:"Altre negative al passato",p:"*can → ==couldn't==* (non potevo/riuscivo), *have to → ==didn't have to==* (non dovevo), *be → ==wasn't / weren't==*."}],
+m2l3:[
+ {h:"Le forme",t:[["Chi","Affermativa","Negativa"],["I / he / she / it","was working","wasn't working"],["you / we / they","were working","weren't working"]]},
+ {h:"WHEN o WHILE",t:[["Parola","Va con","Esempio"],["when","l'azione breve (passato semplice)","I was presenting ==when== the Wi-Fi died."],["while","l'azione lunga (-ing)","==While== I was presenting, the Wi-Fi died."],["while + while","due azioni lunghe in parallelo","I was designing ==while== she was writing."]]},
+ {h:"Sequenza o sfondo",p:"*When the client called, I ==answered==* = prima ha chiamato, poi ho risposto (sequenza). *When the client called, I ==was answering== emails* = stavo già rispondendo alle email (sfondo)."},
+ {h:"Formule gentili",c:["I was wondering if you could…","I was hoping we could…","I was thinking we might…"],p:"Il passato progressivo rende una richiesta più morbida e meno diretta."}],
+m2l4:[
+ {h:"Le parole spia e dove vanno",t:[["Parola","Significato","Esempio"],["ever","mai (nelle domande)","Have you ==ever== used Framer?"],["never","mai","I've ==never== worked with banks."],["already","già","I've ==already== sent it."],["yet","ancora / già (fine frase)","Have you finished ==yet==? We haven't started ==yet==."],["just","appena","I've ==just== finished."],["so far","finora","We've tested 5 users ==so far==."]]},
+ {h:"FOR o SINCE",t:[["for + durata","since + punto di partenza"],["for two years","since 2019"],["for six months","since March"],["for a long time","since Monday"],["for ages","since I joined the team"]]},
+ {h:"Present perfect o passato semplice",t:[["Present perfect (conta ora)","Passato semplice (finito)"],["I've lost the file. (non ce l'ho)","I lost the file yesterday."],["We've launched the app. (è online)","We launched the app in 2022."],["Have you seen the mockups?","Did you see the mockups on Monday?"]]},
+ {h:"BEEN o GONE",p:"*She's ==been== to London* = c'è stata ed è tornata. *She's ==gone== to London* = è andata ed è ancora lì."},
+ {h:"Per la durata: have been + -ing",p:"*I've ==been working== on this all day. How long ==have you been learning== English?* Sottolinea un'attività continua fino ad adesso."}],
+m3l1:[
+ {h:"Quale futuro usare",t:[["Situazione","Forma","Esempio"],["Decisione presa ora","will","OK, I'll send it now."],["Promessa o offerta","will","I'll help you with the specs."],["Previsione (opinione)","will","I think users will love it."],["Previsione con prove","going to","Look at the data: conversion is going to drop."],["Piano già deciso","going to","We're going to redesign the app."],["Appuntamento fissato","BE + -ing","I'm meeting the client on Friday."],["Orario ufficiale","presente semplice","The release goes live at 9."]]},
+ {h:"Contrazioni e offerte",p:"*I will → ==I'll==, it will → ==it'll==, will not → ==won't==.* Per offrire aiuto (inglese britannico): *==Shall I== share my screen?*"},
+ {h:"Espressioni di tempo",c:["tomorrow","next week","next sprint","in two days","soon","later","tonight","this afternoon"],p:"*in two days* = tra due giorni (si usa *in*, non *between*). *next week* senza *the*."}],
+m3l2:[
+ {h:"Le due forme a confronto",t:[["Forma","Cosa dice","Esempio"],["will be + -ing","in corso in un momento futuro","At 10 tomorrow I'll be presenting."],["will have + participio","finito prima di una scadenza","By 10 tomorrow I'll have finished the slides."]]},
+ {h:"BY e BY THE TIME",p:"*==by== Friday* = entro venerdì. *==By the time== you arrive, we'll have started* (dopo *by the time* il presente, come dopo *when*)."},
+ {h:"Domande cortesi sui piani",p:"*==Will you be joining== the call?* è più gentile di *Will you join…?*: chiede dei piani senza fare pressione."}],
+m3l3:[
+ {h:"I tipi di periodo ipotetico",t:[["Tipo","Struttura","Esempio"],["Zero: sempre vero","if + presente, presente","If users can't find it, they leave."],["Primo: possibile","if + presente, will","If the test fails, we'll iterate."],["Secondo: improbabile","if + passato, would","If we had more time, we'd test more."],["Terzo: passato irreale","if + had + participio, would have","If we had tested it, we would have found the bug."]]},
+ {h:"Le parole delle condizioni",t:[["Parola","Significato","Esempio"],["if","se (possibile)","If you approve it, we'll start."],["when","quando (certo)","When you approve it, we'll start."],["unless","a meno che non","Unless the client approves, we can't start."],["as soon as","appena","As soon as it's ready, I'll send it."],["in case","nel caso","Take notes in case we forget."]]},
+ {h:"Consigli con IF I WERE YOU",p:"*==If I were you, I'd== simplify the form.* Qui *were* vale per tutte le persone."},
+ {h:"La virgola",p:"Se la frase inizia con *if*, metti la virgola: *If it fails==,== we'll iterate.* Se *if* è in mezzo, niente virgola: *We'll iterate if it fails.*"}],
+m3l4:[
+ {h:"I modali per significato",t:[["Funzione","Modali","Esempio"],["Capacità","can · could (passato)","I can code a bit. I could draw at 5."],["Permesso","can · could · may","Can I share my screen?"],["Richiesta","can · could · would","Could you send it? Would you mind sending it?"],["Consiglio","should · ought to","You should test it on mobile."],["Obbligo","must · have to","We have to follow the guidelines."],["Non necessario","don't have to · needn't","You don't have to come."],["Divieto","mustn't · can't","You mustn't share the password."],["Possibilità","may · might · could","It might rain. It could work."],["Deduzione","must (sicuro) · can't (impossibile)","That must be the new logo. It can't be ready yet."]]},
+ {h:"Il passato dei modali",p:"*can → ==could==*, *must / have to → ==had to==* (*must* non ha passato). Per un rimpianto: *We ==should have tested== it* (avremmo dovuto testarlo)."},
+ {h:"Scala di cortesia",c:["Can you…?","Could you…?","Would you…?","Would you mind + -ing?"],p:"Da sinistra a destra le richieste diventano più gentili."}],
+m4l1:[
+ {h:"I verbi dell'interazione",t:[["Verbo","Gesto"],["tap / double-tap","toccare / toccare due volte"],["long press","tenere premuto"],["swipe","scorrere di lato"],["drag (and drop)","trascinare (e rilasciare)"],["pinch to zoom","pizzicare per ingrandire"],["scroll","scorrere"],["hover","passare sopra col mouse"],["click / right-click","cliccare / tasto destro"],["type","digitare"],["expand / collapse","aprire / chiudere una sezione"],["dismiss","chiudere un avviso"]]},
+ {h:"Gli stati dei componenti",c:["default","hover","pressed","focused","selected","disabled","loading","error","empty","success"]},
+ {h:"Le parti di un campo",t:[["Parte","Cos'è"],["label","etichetta sopra il campo"],["placeholder","testo grigio dentro"],["helper text","suggerimento sotto il campo"],["error message","messaggio d'errore"],["icon","icona"],["caption","didascalia"]]}],
+m4l2:[
+ {h:"Tre tipi di phrasal verbs",t:[["Tipo","Regola","Esempio"],["Separabili","l'oggetto può stare in mezzo; un pronome deve","set up the call / set it up"],["Inseparabili","l'oggetto va sempre dopo","look into the bug / look into it"],["Senza oggetto","non vogliono complemento","Users drop off. Let's catch up."]]},
+ {h:"Cosa aggiunge la particella",t:[["Particella","Idea","Esempi"],["up","completare, aumentare","set up, back up, scale up, follow up"],["out","fuori, risolvere, rilasciare","figure out, roll out, point out, sort out"],["down","ridurre, rifiutare","narrow down, break down, turn down"],["off","separare, rinviare","put off, sign off, drop off"],["over","passare, rivedere","go over, hand over"],["through","dall'inizio alla fine","walk through, think through"]]}],
+m4l3:[
+ {h:"I falsi amici più frequenti",t:[["Inglese","Significa","Per dire…","usa"],["actually","in realtà","attualmente","currently"],["eventually","alla fine","eventualmente","if needed"],["realize","rendersi conto","realizzare","build, make"],["sensible","sensato","sensibile","sensitive"],["argument","litigio","argomento","topic"],["library","biblioteca","libreria","bookshop"],["lecture","lezione universitaria","lettura","reading"],["attend","partecipare","assistere (aiutare)","help, assist"],["pretend","fingere","pretendere","expect"],["control","comandare","controllare","check"],["consistent","coerente","consistente","solid"],["morbid","macabro","morbido","soft"]]},
+ {h:"Nomi che non hanno plurale",c:["feedback","information","advice","software","equipment","research","knowledge","news"],p:"Non vogliono *a* né la S: *some feedback, a piece of advice, two pieces of information*."},
+ {h:"Make o Do",t:[["make (creare, produrre)","do (svolgere, attività)"],["make a mistake","do a task"],["make a decision","do research"],["make a prototype","do a review"],["make changes","do your best"]]}],
+m4l4:[
+ {h:"Come si forma il comparativo",t:[["Aggettivo","Regola","Esempi"],["1 sillaba","+ er / + est","clean → cleaner → the cleanest"],["1 sillaba con vocale breve","raddoppio","big → bigger · thin → thinner"],["finisce in -y","y → ier / iest","easy → easier · busy → busier"],["2+ sillabe","more / most","more intuitive · the most accessible"],["irregolari","—","good → better → best · bad → worse → worst · far → further · little → less"]]},
+ {h:"Uguaglianza e sfumature",t:[["Struttura","Esempio"],["as … as (uguale)","B is as clear as A."],["not as … as (meno)","A isn't as clear as B."],["much / a lot / far + comparativo","much clearer, far more intuitive"],["slightly / a bit + comparativo","slightly bigger, a bit lighter"],["the …, the …","The simpler, the better."]]},
+ {h:"Aggettivi per il feedback e i loro contrari",t:[["Positivo","Negativo"],["clean","cluttered, busy"],["consistent","inconsistent"],["clear","confusing"],["readable","hard to read"],["intuitive","counterintuitive"],["modern","dated"],["balanced","unbalanced"],["accessible","inaccessible"]]}],
+m5l1:[
+ {h:"Quanto forte è la tua opinione",t:[["Forza","Espressioni"],["Forte","I'm convinced that… · I strongly believe…"],["Neutra","I think… · In my opinion… · I'd say…"],["Morbida","I feel that… · It seems to me… · I'm not sure, but…"]]},
+ {h:"Chiedere un parere",c:["What do you think about…?","What's your take on…?","How do you feel about…?","Any thoughts on…?"]},
+ {h:"Il feedback a panino",p:"1. Un punto positivo: *I really like the hierarchy.* 2. Il suggerimento: *I wonder if the CTA could be bigger.* 3. Chiudi in positivo: *Overall, it's a big step forward.*"},
+ {h:"Proporre invece di criticare",c:["What if we…?","Have you considered…?","Maybe we could try…","How about…?"]}],
+m5l2:[
+ {h:"Le formule per ogni momento",t:[["Momento","Formule"],["Interrompere","Sorry to interrupt, but… · Could I stop you there? · Can I jump in?"],["Chiarire","Just to clarify… · What do you mean by…? · So you're saying…?"],["Far ripetere","Sorry, I didn't catch that. · Could you say that again?"],["Rallentare","Could you slow down a bit?"],["Riprendere la parola","As I was saying… · Going back to…"],["Lasciar parlare","Sorry, go ahead. · After you."]]}],
+m5l3:[
+ {h:"La scala dell'accordo",t:[["Livello","Espressioni"],["Pieno accordo","Absolutely. · Exactly. · I couldn't agree more."],["Accordo parziale","I agree up to a point. · You have a point, but…"],["Disaccordo gentile","I see it a bit differently. · I'm not sure about that."],["Disaccordo deciso","I'm afraid I disagree. · I don't think that will work."]]},
+ {h:"Da evitare",t:[["Troppo diretto","Meglio"],["You're wrong.","I see it differently."],["That's a bad idea.","I'm not sure that would work for users."],["No.","I understand, but…"]]}],
+m5l4:[
+ {h:"Chiudere una riunione",t:[["Momento","Formule"],["Riassumere","To sum up… · So, to recap… · In summary…"],["Azioni","The action items are… · Who's going to…?"],["Scadenze","by Friday · by EOD (end of day) · by EOW (end of week) · ASAP"],["Rinviare","Let's take this offline. · Let's park this for now."],["Salutare","Thanks, everyone. · Let's wrap up. · I'll send the notes."]]},
+ {h:"BY, UNTIL, WITHIN",t:[["Parola","Significato","Esempio"],["by","entro (scadenza)","I'll send it by Friday."],["until","fino a (durata)","I'm off until Friday."],["within","entro (una durata)","I'll reply within two days."]]}],
+m6l1:[
+ {h:"Le regole dell'accento",t:[["Regola","Esempi"],["Nomi di 2 sillabe: sulla prima","PROduct, DEADline, CONtent"],["Verbi di 2 sillabe: sulla seconda","deSIGN, preSENT, reCORD"],["-tion, -sion, -ic: sulla sillaba prima","inforMAtion, deCIsion, autoMAtic"],["-ity, -logy, -graphy: sulla terzultima","usaBIlity, techNOlogy, tyPOgraphy"],["Parole composte: sulla prima","DASHboard, WIREframe, PASSword"]]}],
+m6l2:[
+ {h:"Le vocali che confondono",t:[["Suono","Come si fa","Esempi"],["/ɪ/ i breve","rilassata e corta","ship, live, fill"],["/iː/ i lunga","sorridi e allunga","sheep, leave, feel"],["/æ/","tra a ed e, bocca aperta","bag, cat, map"],["/ʌ/","a breve e chiusa","bug, cut, fun"],["/ʊ/ u breve","corta","full, pull, book"],["/uː/ u lunga","labbra in avanti","fool, pool, food"]]},
+ {h:"Le consonanti difficili",t:[["Suono","Esempi"],["th sorda /θ/","think, three, thank"],["th sonora /ð/","this, that, the"],["h aspirata","hair, hold, heat"],["w vs v","west / vest, wine / vine"],["r vs l","right / light, read / lead"]]}],
+m6l3:[
+ {h:"Le forme deboli",t:[["Parola","Si sente come","Esempio"],["to","tə","I need tə go."],["for","fə","It's fə you."],["and","ən","you ən me"],["can","kən","I kən help."],["was","wəz","It wəz fine."],["of","əv","a lot əv work"],["the / a","ðə / ə","ðə file, ə bug"]]},
+ {h:"Il parlato veloce",t:[["Scritto","Parlato"],["want to","wanna"],["going to","gonna"],["got to","gotta"],["let me","lemme"],["did you","didja"],["don't know","dunno"]]}],
+m6l4:[
+ {h:"I segnali del discorso",t:[["Funzione","Parole"],["Ordine","first, then, after that, finally"],["Contrasto","but, however, although"],["Causa e effetto","because, so, that's why"],["Aggiunta","also, plus, on top of that"]]},
+ {h:"Numeri che confondono",t:[["Numero","Accento"],["13 · 30","thirTEEN · THIRty"],["14 · 40","fourTEEN · FORty"],["15 · 50","fifTEEN · FIFty"],["18 · 80","eighTEEN · EIGHty"]],p:"Nelle percentuali: *forty percent*; nelle date: *the third of March* o *March third*."}]
+};
+
 const LES = {};
 MODS.forEach(m=>m.lessons.forEach((l,i)=>{l.mod=m;l.n=i+1;LES[l.id]=l}));
 
@@ -2017,7 +2143,7 @@ function renderReviewTab(){
 function renderTricksTab(){
   const q=(V.tq||"").toLowerCase();
   const html=MODS.map(m=>{
-    const items=m.lessons.filter(l=>!l.final).filter(l=>!q||(l.h+" "+plain(l.tip)+" "+(l.extra||"")+" "+(l.vocab||[]).flat().join(" ")+" "+(WHY[l.id]||[]).join(" ")+" "+JSON.stringify(TH[l.id]||"")).toLowerCase().includes(q));
+    const items=m.lessons.filter(l=>!l.final).filter(l=>!q||(l.h+" "+plain(l.tip)+" "+(l.extra||"")+" "+(l.vocab||[]).flat().join(" ")+" "+(WHY[l.id]||[]).join(" ")+" "+JSON.stringify(TH[l.id]||"")+" "+JSON.stringify(DEEP[l.id]||"")).toLowerCase().includes(q));
     if(!items.length)return "";
     return `<p class="sech">${esc(m.title)} · ${esc(m.tag)}</p>`+items.map(l=>`<details class="tk" style="--c:${cv(m)}">
       <summary><span class="num">${l.n}</span><span class="rt" style="font-weight:600">${esc(l.h)}</span>${IC.chevR}</summary>
@@ -2064,6 +2190,11 @@ function vocabList(l){
   if(!l.vocab)return "";
   return `<div class="vocab">${l.vocab.map(([en,it])=>`<button class="vrow" data-say="${esc(en.replace(/·/g,"").split(" / ")[0].toLowerCase())}"><span><b>${esc(en)}</b><span>${esc(it)}</span></span><span class="spk">${IC.spk}</span></button>`).join("")}</div>`;
 }
+function deepBlock(b){
+  const tbl=b.t?`<div class="dp-t"><table><thead><tr>${b.t[0].map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${b.t.slice(1).map(r=>`<tr>${r.map((c,i)=>`<td ${i===0?'class="dp-k"':`data-l="${esc(b.t[0][i]||"")}"`}>${fmt(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`:"";
+  const ch=b.c?`<div class="th-chips">${b.c.map(w=>`<button class="th-chip" data-say="${esc(w)}">${esc(w)}</button>`).join("")}</div>`:"";
+  return `<div class="dp"><p class="dp-h">${esc(b.h)}</p>${tbl}${ch}${b.p?`<p class="dp-p">${fmt(b.p)}</p>`:""}</div>`;
+}
 const THF=[["aff","+","Affermativa"],["neg","−","Negativa"],["q","?","Domanda"]];
 function thForm(th,k){const x=th[k];return fgrid(x.f,x.r,true)}
 function trickBody(l){
@@ -2080,6 +2211,7 @@ function trickBody(l){
       ${th.signal?`<p class="th-h">Parole spia</p><div class="th-chips">${th.signal.map(w=>`<button class="th-chip" data-say="${esc(w)}">${esc(w)}</button>`).join("")}</div>`:""}`
     :formulaGrid(l)}
     ${vocabList(l)}
+    ${DEEP[l.id]?`<p class="th-h">Approfondimento</p>${DEEP[l.id].map(deepBlock).join("")}`:""}
     ${l.extra?`<p class="th-h">Da sapere</p><p class="extra">${fmt(l.extra)}</p>`:""}
     ${l.trap?`<div class="trap"><span class="ti">${IC.x}</span><span><span class="tk">Trappola per italiani</span><br><span class="wrong">${esc(l.trap[0])}</span><span class="arrow">→</span><span class="right">${esc(l.trap[1])}</span></span></div>`:""}
   </div>`;
