@@ -660,7 +660,7 @@ const MODS = [
     {t:"choice",p:"“Lavoro come product designer”",o:["I work like a product designer.","I work as a product designer.","I work how a product designer."],a:1,x:"Ruolo → *as*."},
     {t:"order",p:"Il cliente è contento del redesign?",w:["Is","the","client","happy","with","the","redesign?"],x:"Domanda con BE: *Is* va in testa."},
     {t:"fix",p:"You have right, the contrast is too low.",a:["You're right, the contrast is too low."],x:"*Avere ragione* = *be right*."},
-    {t:"shadow",say:"Hi, I'm a UX and UI designer, and I'm based in Florence.",it:"Ciao, sono UX/UI designer e lavoro a Firenze."}]},
+    {t:"trans",p:"Ciao, sono UX/UI designer e lavoro a Firenze.",a:["Hi, I'm a UX/UI designer and I work in Florence.","Hi, I'm a UX/UI designer and I'm based in Florence.","Hi, I'm a UX and UI designer and I work in Florence."]}]},
   { id:"m1l2", h:"La S di he / she / it", min:8,
     tip:"Al presente il verbo resta uguale, tranne con **he / she / it**: aggiungi una **S**. Una persona sola, una S. Vale anche per *the team*, *the app*, *our PM*.",
     formula:[["He / She / It","blue"],["verbo + S","orange"],["Resto","green"]],
@@ -675,7 +675,7 @@ const MODS = [
     {t:"choice",p:"We ___ a usability test every month.",o:["run","runs"],a:0,x:"Con *we* niente S."},
     {t:"order",p:"Il mio team usa Figma e Jira.",w:["My","team","uses","Figma","and","Jira."],x:"*my team* = it → *uses*."},
     {t:"fix",p:"She manage the design team.",a:["She manages the design team."],x:"*she* → +S."},
-    {t:"dict",say:"The app works offline.",x:"Senti la S finale di *works*?"}]},
+    {t:"choice",p:"The app ___ offline.",o:["work","works","working"],a:1,x:"*the app* = it → *works*."}]},
   { id:"m1l3", h:"Domande: DO e l'ordine Q-A-S-V", min:10,
     tip:"Per domande e negative non toccare il verbo: metti **do / does** davanti. Ordine fisso: **Q**uestion word · **A**usiliare · **S**oggetto · **V**erbo.",
     formula:[["Q","indigo"],["do / does","purple"],["Chi","blue"],["Verbo nudo","orange"],["Resto","green"]],
@@ -705,7 +705,7 @@ const MODS = [
     {t:"choice",p:"I ___ what you mean.",o:["understand","am understanding"],a:0,x:"*understand* non prende -ing."},
     {t:"order",p:"Di solito sono in ufficio il lunedì.",w:["I'm","usually","in","the","office","on","Mondays."],x:"Con BE l'avverbio va dopo."},
     {t:"fix",p:"She never is late for the stand-up.",a:["She is never late for the stand-up."],x:"Con BE l'avverbio va dopo: *is never*."},
-    {t:"dict",say:"We're testing the new onboarding this week.",x:"Ascolta *we're*: è *we are* contratto."}]},
+    {t:"order",p:"Questa settimana testiamo il nuovo onboarding.",w:["We're","testing","the","new","onboarding","this","week."],x:"BE + -ing per il periodo in corso."}]},
   { id:"m1l5", h:"Sfida: presentati al tutor", min:10, final:true,
     tip:"Sei frasi da costruire da zero, in inglese, senza aiuti. Più accettiamo le varianti corrette: se la tua è giusta ma diversa, toccala come giusta.",
     q:[
@@ -754,7 +754,7 @@ const MODS = [
     {t:"order",p:"Hai parlato con gli utenti?",w:["Did","you","talk","to","the","users?"],x:"*Did* → chi → verbo nudo."},
     {t:"choice",p:"Qual è corretta?",o:["When did you started the project?","When did you start the project?","When you started the project?"],a:1,x:"*did* + verbo nudo."},
     {t:"fix",p:"We didn't found any bugs.",a:["We didn't find any bugs."],x:"Il passato una volta sola: *didn't find*."},
-    {t:"dict",say:"Why did users leave the checkout page?",x:"*did* si sente appena: è debole."}]},
+    {t:"fix",p:"Why users left the checkout page?",a:["Why did users leave the checkout page?"],x:"Domanda al passato: *did* + verbo nudo."}]},
   { id:"m2l3", h:"Mentre succedeva: WAS + ING", min:10,
     tip:"Azione **in corso nel passato**, spesso interrotta: **was / were + -ing**. L'azione breve che interrompe va al passato semplice. Bonus: *I was wondering if…* è la richiesta più gentile che esista.",
     formula:[["Chi","blue"],["was / were","purple"],["verbo-ing","pink"],["when + passato","indigo"]],
@@ -817,8 +817,8 @@ const MODS = [
     {t:"gap",p:"Don't worry, it ___ take long. (negativa)",a:["won't","will not"],x:"*will not* → *won't*."},
     {t:"order",p:"Testeremo il prototipo la settimana prossima.",w:["We","are","going","to","test","the","prototype","next","week."],x:"Piano: *are going to* + verbo nudo."},
     {t:"fix",p:"I will to update the file tonight.",a:["I'll update the file tonight."],x:"Dopo *will* niente *to*."},
-    {t:"dict",say:"I'll send you the Figma link after the call.",x:"*I'll* suona quasi come *all*."},
-    {t:"shadow",say:"We're going to launch the beta in two weeks.",it:"Lanceremo la beta tra due settimane."}]},
+    {t:"trans",p:"Ti mando il link di Figma dopo la call.",a:["I'll send you the Figma link after the call.","I'll send the Figma link to you after the call."],x:"Decisione presa ora → *will*."},
+    {t:"order",p:"Lanceremo la beta tra due settimane.",w:["We're","going","to","launch","the","beta","in","two","weeks."],x:"Piano: *going to*; *tra due settimane* = *in two weeks*."}]},
   { id:"m3l2", h:"Entro la scadenza: WILL HAVE", min:8,
     tip:"Una cosa che sarà **finita entro** una scadenza: **will have + participio**. Una cosa che sarà **in corso** in un momento futuro: **will be + -ing**. Perfetti per roadmap e stime.",
     formula:[["By + scadenza","indigo"],["Chi","blue"],["will have","purple"],["participio","orange"],["Resto","green"]],
@@ -861,7 +861,7 @@ const MODS = [
     {t:"choice",p:"Qual è corretta?",o:["Do you can share your screen?","Can you share your screen?","Can you to share your screen?"],a:1,x:"Niente *do*, niente *to*."},
     {t:"order",p:"Potremmo provare un bottom sheet.",w:["We","could","try","a","bottom","sheet."],x:"*could* + verbo nudo."},
     {t:"fix",p:"She cans join the review.",a:["She can join the review."],x:"I modali non prendono la S."},
-    {t:"shadow",say:"We could try a bottom sheet here. It might work better on mobile.",it:"Qui potremmo provare un bottom sheet. Potrebbe funzionare meglio su mobile."}]},
+    {t:"trans",p:"Qui potremmo provare un bottom sheet.",a:["We could try a bottom sheet here.","Here we could try a bottom sheet."],x:"*could* + verbo nudo."}]},
   { id:"m3l5", h:"Sfida: presenta la roadmap", min:10, final:true,
     tip:"Sei frasi da roadmap: piani, scadenze, condizioni e proposte.",
     q:[
@@ -972,7 +972,7 @@ const MODS = [
     {t:"order",p:"Dal punto di vista dell'utente, è confuso.",w:["From","a","user's","point","of","view,","it's","confusing."],x:"Apertura da UX: *From a user's point of view*."},
     {t:"order",p:"La mia preoccupazione è che sia troppo lungo.",w:["My","concern","is","that","it's","too","long."],x:"*My concern is that…*"},
     {t:"fix",p:"In my opinion is too dark.",a:["In my opinion, it's too dark."],x:"Il soggetto non si omette mai: *it's*."},
-    {t:"shadow",say:"I really like the layout, but I wonder if the button could be a bit bigger.",it:"Il layout mi piace molto, ma mi chiedo se il bottone potrebbe essere un po' più grande."}]},
+    {t:"choice",p:"Il feedback più gentile:",o:["The button is too small.","I really like the layout, but I wonder if the button could be a bit bigger.","Make the button bigger."],a:1,x:"Positivo → *I wonder if* → *a bit*."}]},
   { id:"m5l2", h:"Interrompere e chiarire", min:8,
     tip:"Interrompere con educazione è una skill: usa una **formula pronta** + la tua domanda. Non costruire la frase da zero: impara il blocco intero.",
     formula:[["Formula pronta","purple"],["la tua domanda","green"]],
@@ -987,7 +987,7 @@ const MODS = [
     {t:"choice",p:"Parla troppo veloce:",o:["Could you slow down a bit?","Could you go more slow?","Can you speak more piano?"],a:0,x:"*slow down* = rallentare."},
     {t:"order",p:"Posso fermarti un attimo?",w:["Could","I","stop","you","there?"],x:"Formula pronta per interrompere."},
     {t:"fix",p:"Can you repeat me the last part?",a:["Can you repeat the last part?","Could you repeat the last part?"],x:"*repeat* non vuole *me*."},
-    {t:"dict",say:"Sorry, could you say that again, please?",x:"Formula da imparare a memoria."}]},
+    {t:"order",p:"Scusa, puoi ripetere per favore?",w:["Sorry,","could","you","say","that","again,","please?"],x:"Formula da imparare intera."}]},
   { id:"m5l3", h:"D'accordo e non d'accordo", min:8,
     tip:"**Agree** è un verbo: *I agree*, mai *I'm agree*. Per non essere d'accordo senza scontri: prima **riconosci** il punto dell'altro, poi **but** e la tua motivazione.",
     formula:[["Riconosci","green"],["but","orange"],["la tua idea","blue"]],
@@ -1016,7 +1016,7 @@ const MODS = [
     {t:"order",p:"Il prossimo passo è un prototipo veloce.",w:["The","next","step","is","a","quick","prototype."],x:"*The next step is…*"},
     {t:"choice",ctx:"**PM:** “So, who's doing what?”",p:"Rispondi in modo chiaro:",o:["I'll update the flow and share it by Thursday.","I update the flow and I share within Thursday.","The flow will be updated maybe."],a:0,x:"Chi + *will* + cosa + *by* + quando."},
     {t:"fix",p:"We meet again the next week.",a:["We'll meet again next week.","Let's meet again next week.","We meet again next week."],x:"*next week* senza *the*."},
-    {t:"shadow",say:"To sum up, we keep version B. I'll update the prototype and share it by Friday.",it:"Riassumendo, teniamo la versione B. Aggiorno il prototipo e lo condivido entro venerdì."}]},
+    {t:"order",block:true,p:"Metti in ordine la chiusura della call.",w:["To sum up, we keep version B.","I'll update the prototype.","I'll share it by Friday.","Thanks, everyone!"],x:"Riassunto → azione → scadenza → saluto."}]},
   { id:"m5l5", h:"Sfida: la design review", min:10, final:true,
     tip:"Sei frasi da design review: opinione, interruzione, disaccordo e chiusura.",
     q:[
@@ -1034,7 +1034,7 @@ const MODS = [
     {t:"trans",p:"Ti mando le note entro venerdì.",a:["I'll send you the notes by Friday.","I'll send the notes by Friday.","I'll send the notes to you by Friday."]}]} ] },
 
 /* ---------------- MODULO 6 ---------------- */
-{ id:"m6", color:"blue", icon:"wave", title:"Pronuncia e ascolto", tag:"Phonology", sub:"Accento delle parole, coppie minime, dettati e uno stand-up vero.",
+{ id:"m6", color:"blue", icon:"wave", title:"Pronuncia e parlato", tag:"Phonology", sub:"Accento delle parole, suoni che si confondono, parlato veloce e uno stand-up da leggere.",
   lessons:[
   { id:"m6l1", h:"L'accento delle parole", min:8,
     tip:"In inglese **una sillaba per parola è forte**, le altre quasi spariscono. Sbagliare l'accento confonde più che sbagliare un suono. Qui ci sono le parole del design che gli italiani sbagliano di più.",
@@ -1051,61 +1051,60 @@ const MODS = [
     {t:"stress",say:"accessible",s:["ac","ces","si","ble"],a:1,x:"*ac-CES-si-ble*."},
     {t:"choice",p:"*to present* (verbo, presentare): dov'è l'accento?",o:["PRE-sent","pre-SENT"],a:1,x:"Verbo → accento sulla seconda."}]},
   { id:"m6l2", h:"Coppie minime", min:8,
-    tip:"Due parole che cambiano per **un solo suono**: *ship / sheep*, *live / leave*. Ascolta, scegli, ripeti a voce alta. È l'attività di fonetica che la guida consiglia di più.",
-    vocab:[["ship · sheep","i corta · i lunga"],["live · leave","vivere · andare via"],["fill · feel","riempire · sentire"],["full · fool","pieno · sciocco"],["work · walk","lavorare · camminare"],["bug · bag","bug · borsa"],["test · taste","test · gusto"]],
+    tip:"Due parole che cambiano per **un solo suono**: *ship / sheep*, *live / leave*. Sbagliare la vocale cambia il senso della frase. Scegli la parola giusta in base al significato, poi leggila ad alta voce allungando o accorciando la vocale.",
+    vocab:[["ship · sheep","nave · pecora"],["live · leave","vivere · andare via"],["fill · feel","riempire · sentire"],["full · fool","pieno · sciocco"],["work · walk","lavorare · camminare"],["bug · bag","difetto · borsa"],["test · taste","test · gusto"]],
     extra:"La *i* corta (*ship, live, fill*) è rilassata e breve. La *ee* lunga (*sheep, leave, feel*) si fa sorridendo e tenendo il suono.",
     trap:["We need to fix this bag.","We need to fix this bug."],
     q:[
-    {t:"listen",say:"leave",o:["live","leave"],a:1,x:"*leave* = i lunga."},
-    {t:"listen",say:"ship",o:["ship","sheep"],a:0,x:"*ship* = i corta."},
-    {t:"listen",say:"walk",o:["work","walk"],a:1,x:"*walk*: la l non si sente."},
-    {t:"listen",say:"bug",o:["bug","bag"],a:0,x:"*bug*: suono breve e chiuso."},
-    {t:"listen",say:"full",o:["full","fool"],a:0,x:"*full* = u corta."},
-    {t:"listen",say:"taste",o:["test","taste"],a:1,x:"*taste* = suono *ei*."},
-    {t:"listen",say:"feel",o:["fill","feel"],a:1,x:"*feel* = i lunga."},
-    {t:"listen",say:"seat",o:["sit","seat"],a:1,x:"*seat* = i lunga."}]},
-  { id:"m6l3", h:"Dettato da riunione", min:10,
-    tip:"Il dettato allena orecchio e scrittura insieme. Ascolta **una volta per il senso**, la seconda **per le parole**. Le parole piccole (*to, the, a, of*) quasi spariscono: sono le prime da cercare.",
-    formula:[["1° ascolto","blue"],["2° ascolto","purple"],["Controlla","green"]],
-    rows:[["il senso","le parole","le parole piccole"]],
-    extra:"Forme deboli: *to* suona *tə*, *and* suona *n*, *can* suona *kən*. Nel parlato veloce *want to* diventa *wanna* e *going to* diventa *gonna*.",
+    {t:"choice",p:"We need to fix this ___. (difetto nel codice)",o:["bug","bag"],a:0,x:"*bug* = difetto; *bag* = borsa."},
+    {t:"choice",p:"I have to ___ at 6. (andare via)",o:["live","leave"],a:1,x:"*leave* = andare via, i lunga; *live* = vivere, i corta."},
+    {t:"choice",p:"We ___ from home on Fridays. (lavoriamo)",o:["work","walk"],a:0,x:"*work* = lavorare; *walk* = camminare."},
+    {t:"choice",p:"Please ___ in the form. (compila)",o:["fill","feel"],a:0,x:"*fill* = riempire, i corta; *feel* = sentire, i lunga."},
+    {t:"choice",p:"My calendar is ___ this week. (pieno)",o:["full","fool"],a:0,x:"*full* = pieno; *fool* = sciocco."},
+    {t:"choice",p:"Let's ___ the new version with users. (testare)",o:["test","taste"],a:0,x:"*test* = testare; *taste* = assaggiare."},
+    {t:"choice",p:"Quale parola ha la i lunga /iː/?",o:["ship","sheep","sit"],a:1,x:"*sheep*: i lunga, si fa sorridendo."},
+    {t:"match",p:"Abbina la parola al significato.",pairs:[["ship","nave, spedire"],["sheep","pecora"],["live","vivere"],["leave","andare via"]],x:"Una vocale cambia tutto."}]},
+  { id:"m6l3", h:"Il parlato veloce", min:8,
+    tip:"Nel parlato le parole si accorciano: *going to* diventa *gonna*, *want to* diventa *wanna*. **Riconoscerle** ti fa capire i colleghi madrelingua; **scriverle** nelle email di lavoro invece non si fa.",
+    formula:[["Scritto","blue"],["Parlato","pink"]],
+    rows:[["going to","gonna"],["want to","wanna"],["have got to","gotta"],["let me","lemme"],["don't know","dunno"]],
+    extra:"Forme deboli: *to* suona *tə*, *and* suona *ən*, *can* suona *kən*, *of* suona *əv*. Le parole piccole quasi spariscono: per questo nel parlato sembrano mancare.",
     trap:["I wanna to share my screen.","I want to share my screen."],
     q:[
-    {t:"dict",say:"Can you see my screen?",x:"La domanda che fai in ogni call."},
-    {t:"dict",say:"Let's start with the user flow.",x:"*Let's* = *let us*."},
-    {t:"dict",say:"The button is too small on mobile.",x:"*too* = troppo."},
-    {t:"dict",say:"We need to fix the contrast.",x:"*need to* + verbo."},
-    {t:"dict",say:"I'm going to share the prototype.",x:"*going to* si pronuncia quasi *gonna*."},
-    {t:"dict",say:"What do you think about the colors?",a:["What do you think about the colors?","What do you think about the colours?"],x:"*colors* (US) o *colours* (UK)."},
-    {t:"dict",say:"Could you send me the Figma file?",x:"*Could you* suona *coul-djiu*."}]},
-  { id:"m6l4", h:"Ascolto: lo stand-up", min:10,
-    tip:"Nell'ascolto vero non capisci tutto, ed è normale. Cerca **chi, cosa, quando**. Leggi la domanda **prima** di ascoltare (il *pre-listening* della guida).",
+    {t:"choice",p:"*I'm gonna share my screen* significa:",o:["I'm going to share my screen.","I'm gone to share my screen.","I'm gonna to share my screen."],a:0,x:"*gonna* = *going to*."},
+    {t:"fix",p:"I wanna show you the new flow. (email di lavoro)",a:["I want to show you the new flow.","I'd like to show you the new flow."],x:"In un'email scrivi *want to*, o meglio *I'd like to*."},
+    {t:"choice",p:"*Lemme check* significa:",o:["Let me check.","Leave me check.","Lend me check."],a:0,x:"*lemme* = *let me*."},
+    {t:"choice",p:"*I dunno* significa:",o:["I don't know.","I do now.","I don't now."],a:0,x:"*dunno* = *don't know*."},
+    {t:"gap",p:"*We gotta fix it* = We ___ to fix it.",a:["have got","'ve got","have"],x:"*gotta* = *have got to* = *have to*."},
+    {t:"choice",p:"Nel parlato *to* in *I need to go* suona come:",o:["tə","tu","to"],a:0,x:"Forma debole: *tə*."},
+    {t:"fix",p:"Can u send me the file?",a:["Can you send me the file?","Could you send me the file?"],x:"*u* va bene in chat tra amici, non al lavoro."}]},
+  { id:"m6l4", h:"Lettura: lo stand-up", min:10,
+    tip:"Negli aggiornamenti di lavoro non serve capire ogni parola: cerca **chi, cosa, quando**. Leggi **prima la domanda**, poi il testo: è la tecnica del *pre-reading* della guida.",
     vocab:[["stand-up","riunione breve quotidiana"],["blocker","ciò che ti blocca"],["handoff","passaggio del design agli sviluppatori"],["out of","su (four out of five = quattro su cinque)"]],
     extra:"Lo schema di ogni stand-up: *Yesterday I… · Today I'm going to… · My blocker is…*",
     trap:["Yesterday I finish the icons.","Yesterday I finished the icons."],
     q:[
-    {t:"choice",ctxSay:"Hi everyone. Yesterday I finished the new onboarding screens. Today I'm going to prepare the handoff for the developers. My only blocker is the copy: I'm still waiting for the final texts from marketing.",p:"Cosa ha finito ieri?",o:["The onboarding screens","The handoff","The final texts"],a:0,x:"*Yesterday I finished the new onboarding screens.*"},
-    {t:"choice",ctxSay:"Hi everyone. Yesterday I finished the new onboarding screens. Today I'm going to prepare the handoff for the developers. My only blocker is the copy: I'm still waiting for the final texts from marketing.",p:"Cosa farà oggi?",o:["Write the copy","Prepare the handoff","Test the onboarding"],a:1,x:"*Today I'm going to prepare the handoff.*"},
-    {t:"choice",ctxSay:"Hi everyone. Yesterday I finished the new onboarding screens. Today I'm going to prepare the handoff for the developers. My only blocker is the copy: I'm still waiting for the final texts from marketing.",p:"Vero o falso: il suo blocco sono gli sviluppatori.",o:["Vero","Falso"],a:1,x:"Il blocco è il copy: aspetta i testi dal marketing."},
-    {t:"choice",ctxSay:"Quick update from me. The usability test went well: four out of five users completed the checkout. But nobody found the promo code field. So next week we're going to move it above the total.",p:"Quanti utenti hanno completato il checkout?",o:["Five out of five","Four out of five","Two out of five"],a:1,x:"*four out of five* = quattro su cinque."},
-    {t:"choice",ctxSay:"Quick update from me. The usability test went well: four out of five users completed the checkout. But nobody found the promo code field. So next week we're going to move it above the total.",p:"Quale problema è emerso?",o:["The total was wrong","Nobody found the promo code field","The checkout was too slow"],a:1,x:"*Nobody found the promo code field.*"},
-    {t:"choice",ctxSay:"Quick update from me. The usability test went well: four out of five users completed the checkout. But nobody found the promo code field. So next week we're going to move it above the total.",p:"Cosa faranno la settimana prossima?",o:["Remove the promo code","Move the field above the total","Run another test"],a:1,x:"*We're going to move it above the total.*"},
-    {t:"shadow",say:"Yesterday I finished the onboarding. Today I'm going to prepare the handoff. No blockers.",it:"Ieri ho finito l'onboarding. Oggi preparo l'handoff. Nessun blocco."}]},
+    {t:"choice",ctx:"**Stand-up:** “Hi everyone. Yesterday I finished the new onboarding screens. Today I'm going to prepare the handoff for the developers. My only blocker is the copy: I'm still waiting for the final texts from marketing.”",p:"Cosa ha finito ieri?",o:["The onboarding screens","The handoff","The final texts"],a:0,x:"*Yesterday I finished the new onboarding screens.*"},
+    {t:"choice",ctx:"**Stand-up:** “Hi everyone. Yesterday I finished the new onboarding screens. Today I'm going to prepare the handoff for the developers. My only blocker is the copy: I'm still waiting for the final texts from marketing.”",p:"Cosa farà oggi?",o:["Write the copy","Prepare the handoff","Test the onboarding"],a:1,x:"*Today I'm going to prepare the handoff.*"},
+    {t:"choice",ctx:"**Stand-up:** “Hi everyone. Yesterday I finished the new onboarding screens. Today I'm going to prepare the handoff for the developers. My only blocker is the copy: I'm still waiting for the final texts from marketing.”",p:"Vero o falso: il suo blocco sono gli sviluppatori.",o:["Vero","Falso"],a:1,x:"Il blocco è il copy: aspetta i testi dal marketing."},
+    {t:"choice",ctx:"**Stand-up:** “Quick update from me. The usability test went well: four out of five users completed the checkout. But nobody found the promo code field. So next week we're going to move it above the total.”",p:"Quanti utenti hanno completato il checkout?",o:["Five out of five","Four out of five","Two out of five"],a:1,x:"*four out of five* = quattro su cinque."},
+    {t:"choice",ctx:"**Stand-up:** “Quick update from me. The usability test went well: four out of five users completed the checkout. But nobody found the promo code field. So next week we're going to move it above the total.”",p:"Quale problema è emerso?",o:["The total was wrong","Nobody found the promo code field","The checkout was too slow"],a:1,x:"*Nobody found the promo code field.*"},
+    {t:"choice",ctx:"**Stand-up:** “Quick update from me. The usability test went well: four out of five users completed the checkout. But nobody found the promo code field. So next week we're going to move it above the total.”",p:"Cosa faranno la settimana prossima?",o:["Remove the promo code","Move the field above the total","Run another test"],a:1,x:"*We're going to move it above the total.*"},
+    {t:"order",block:true,p:"Metti in ordine il tuo stand-up.",w:["Hi everyone, quick update from me.","Yesterday I finished the wireframes.","Today I'm going to test them with two users.","No blockers on my side."],x:"Saluto → ieri → oggi → blocchi."}]},
   { id:"m6l5", h:"Sfida: il tuo stand-up", min:10, final:true,
-    tip:"Ascolta, scrivi e poi prepara il tuo stand-up ad alta voce.",
+    tip:"Leggi, scrivi e prepara il tuo stand-up.",
     q:[
-    {t:"dict",say:"Could you send me the final version by Friday?"},
-    {t:"dict",say:"Nobody found the promo code field."},
+    {t:"trans",p:"Puoi mandarmi la versione finale entro venerdì?",a:["Could you send me the final version by Friday?","Can you send me the final version by Friday?"]},
+    {t:"trans",p:"Nessuno ha trovato il campo del codice promo.",a:["Nobody found the promo code field.","No one found the promo code field."]},
     {t:"trans",p:"Ieri ho finito i wireframe.",a:["Yesterday I finished the wireframes.","I finished the wireframes yesterday."]},
     {t:"trans",p:"Nessun blocco da parte mia.",a:["No blockers from me.","No blockers on my side.","I have no blockers."]},
-    {t:"listen",say:"sheep",o:["ship","sheep"],a:1},
+    {t:"choice",p:"Quale parola significa “pecora”?",o:["ship","sheep"],a:1},
     {t:"stress",say:"component",s:["com","po","nent"],a:1},
-    {t:"dict",say:"We're going to move the field above the total."},
-    {t:"listen",say:"leave",o:["live","leave"],a:1},
-    {t:"dict",say:"Four out of five users completed the checkout."},
+    {t:"fix",p:"I'm gonna move the field above the total. (email di lavoro)",a:["I'm going to move the field above the total.","I'll move the field above the total."]},
+    {t:"choice",p:"Quale parola significa “andare via”?",o:["live","leave"],a:1},
+    {t:"trans",p:"Quattro utenti su cinque hanno completato il checkout.",a:["Four out of five users completed the checkout.","4 out of 5 users completed the checkout."]},
     {t:"trans",p:"Il mio unico blocco è il copy.",a:["My only blocker is the copy."]},
-    {t:"trans",p:"Oggi preparo l'handoff per gli sviluppatori.",a:["Today I'm going to prepare the handoff for the developers.","Today I'm preparing the handoff for the developers.","Today I'll prepare the handoff for the developers.","Today I'm going to prepare the handoff for the devs.","Today I'm preparing the handoff for the devs."]},
-    {t:"shadow",say:"Hi everyone, quick update from me. Yesterday I finished the wireframes. Today I'm going to test them with two users.",it:"Ciao a tutti, aggiornamento veloce. Ieri ho finito i wireframe. Oggi li testo con due utenti."}]} ] }
+    {t:"trans",p:"Oggi preparo l'handoff per gli sviluppatori.",a:["Today I'm going to prepare the handoff for the developers.","Today I'm preparing the handoff for the developers.","Today I'll prepare the handoff for the developers.","Today I'm going to prepare the handoff for the devs.","Today I'm preparing the handoff for the devs."]}]} ] }
 ];
 
 /* Splat! (gioco della guida): significato italiano → tocca la parola inglese giusta */
@@ -1273,6 +1272,9 @@ const NV=[["present","verbo: presentare",1],["present","nome: regalo",0],["recor
 const NV2={present:["pre","sent"],record:["re","cord"],object:["ob","ject"],project:["pro","ject"],contrast:["con","trast"],export:["ex","port"],import:["im","port"],increase:["in","crease"],update:["up","date"],upgrade:["up","grade"],conduct:["con","duct"],progress:["pro","gress"]};
 const MORE_PAIRS=[["sheep","cheap"],["sleep","slip"],["leave","leaf"],["live","life"],["seat","sit"],["peel","pill"],["feet","fit"],["eat","it"],["fool","full"],["luck","lock"],["duck","dock"],["cut","cot"],["hut","hot"],["walk","work"],["word","ward"],["bird","bored"],["shirt","short"],["first","forced"],["wait","wet"],["late","let"],["main","men"],["sail","sell"],["back","bag"],["cap","cab"],["right","ride"],["white","wide"],["price","prize"],["race","raise"],["ice","eyes"],["place","plays"],["rice","rise"],["bus","buzz"],["thank","tank"],["thought","taught"],["path","pass"],["mouth","mouse"],["year","ear"],["wheel","will"],["west","vest"],["wet","vet"],["hair","air"],["hold","old"],["heat","eat"],["hate","eight"],["sun","son"]];
 MPAIRS.push(...MORE_PAIRS);
+const MPM=[["ship","nave, spedire","sheep","pecora","We ___ the update every Friday. (rilasciamo)"],["live","vivere","leave","andare via","I have to ___ at 6 today. (andare via)"],["fill","riempire","feel","sentire","Please ___ in the form. (compila)"],["full","pieno","fool","sciocco","My calendar is ___ this week. (pieno)"],["work","lavorare","walk","camminare","We ___ from home on Fridays. (lavoriamo)"],["bug","difetto nel codice","bag","borsa","We need to fix this ___. (difetto)"],["test","test, testare","taste","gusto, assaggiare","Let's ___ the prototype with users. (testare)"],["sit","sedersi","seat","posto a sedere","Is this ___ free? (posto)"],["hit","colpire","heat","calore","The ___ map shows where users click. (calore)"],["chip","chip, patatina","cheap","economico","This plan is too ___. (economico)"],["pull","tirare","pool","piscina, gruppo","___ to refresh the page. (tira)"],["cat","gatto","cut","tagliare","Can we ___ this section? (tagliare)"],["bed","letto","bad","cattivo, brutto","That's not a ___ idea. (cattiva)"],["pen","penna","pan","padella","Can I borrow a ___? (penna)"],["cap","berretto, limite","cup","tazza","There's a ___ of 50 characters. (limite)"],["light","luce, chiaro","right","giusto, destra","Switch to the ___ theme. (chiaro)"],["lock","serratura, bloccare","rock","roccia","___ the layer in Figma. (blocca)"],["three","tre","tree","albero","We have ___ options. (tre)"],["think","pensare","sink","lavandino, affondare","What do you ___? (pensi)"],["very","molto","berry","bacca",""],["hair","capelli","air","aria",""],["mouth","bocca","mouse","topo, mouse","Click with the ___. (mouse)"],["thought","pensato","taught","insegnato","I ___ UX for two years. (insegnato)"],["wet","bagnato","vet","veterinario",""],["sheet","foglio","seat","posto","Share the Google ___. (foglio)"]];
+const SLANG=[["gonna","going to"],["wanna","want to"],["gotta","have got to"],["lemme","let me"],["dunno","don't know"],["gimme","give me"],["kinda","kind of"],["sorta","sort of"],["outta","out of"],["y'all","you all"],["ya","you"],["'cause","because"]];
+const WEAK=[["to","I need to go","tə",["tu","to"]],["for","It's for you","fə",["for","four"]],["and","you and me","ən",["and","end"]],["can","I can help","kən",["ken","can"]],["of","a lot of work","əv",["of","off"]],["was","It was fine","wəz",["was","wos"]],["the","the file","ðə",["dee","the"]]];
 const THING=["landing page","app","prototype","design system","icon set","website","dashboard","checkout flow"];
 const EVENT=["workshop","conference","design sprint","kickoff meeting","webinar","demo day"];
 const GLOSS=[["affordance","indizio visivo di come si usa un elemento"],["wireframe","schema a blocchi della pagina"],["mockup","bozza grafica statica"],["prototype","modello interattivo da testare"],["user persona","profilo dell'utente tipo"],["pain point","punto di frizione per l'utente"],["user journey","percorso dell'utente nel tempo"],["user flow","sequenza di schermate per un compito"],["sitemap","mappa delle pagine"],["information architecture","organizzazione dei contenuti"],["card sorting","test per raggruppare i contenuti"],["usability testing","test con utenti reali"],["heuristic evaluation","analisi con regole di usabilità"],["accessibility","accessibilità"],["contrast ratio","rapporto di contrasto"],["visual hierarchy","gerarchia visiva"],["white space","spazio bianco"],["grid","griglia"],["gutter","spazio tra le colonne"],["kerning","spazio tra due lettere"],["leading","interlinea"],["baseline","linea di base del testo"],["breakpoint","larghezza in cui cambia il layout"],["responsive","che si adatta allo schermo"],["design token","variabile di stile condivisa"],["component","elemento riutilizzabile"],["variant","variante di un componente"],["auto layout","impaginazione automatica in Figma"],["padding","spazio interno"],["margin","spazio esterno"],["alignment","allineamento"],["legibility","leggibilità delle lettere"],["readability","facilità di lettura del testo"],["microcopy","piccoli testi dell'interfaccia"],["tone of voice","stile di comunicazione"],["dark pattern","trucco che inganna l'utente"],["error state","schermata di errore"],["loading state","stato di caricamento"],["edge case","caso limite"],["happy path","percorso senza errori"],["friction","attrito, difficoltà"],["conversion rate","tasso di conversione"],["retention","fidelizzazione"],["churn","abbandono dei clienti"],["funnel","imbuto di conversione"],["insight","scoperta utile"],["benchmark","termine di paragone"],["KPI","indicatore di risultato"],["MVP","prodotto minimo funzionante"],["scope","perimetro del progetto"],["deliverable","materiale da consegnare"],["stakeholder","persona coinvolta nel progetto"],["roadmap","piano dei rilasci"],["backlog","lista delle attività da fare"],["sprint","ciclo di lavoro di 1-2 settimane"],["retrospective","riunione per migliorare il processo"],["kickoff","riunione di avvio"],["brief","documento con gli obiettivi"],["handoff","passaggio agli sviluppatori"],["feedback loop","ciclo di riscontri"],["iteration","nuova versione migliorata"],["trade-off","compromesso"]];
@@ -1291,7 +1293,7 @@ m1l2:[
  ()=>{const s=pick(P3),v=verb(),t=pick(HAB);return {t:"fix",p:`${S0(s)} ${v.b} ${v.o} ${t}.`,a:[`${S0(s)} ${v.s} ${v.o} ${t}.`],x:`Una persona sola → *${v.s}*.`}},
  ()=>{const s=pick(PEOPLE),v=verb();const pl=isPl(s);return {t:"choice",p:`${S0(s)} ___ ${v.o} ${pick(HAB)}.`,o:[v.b,v.s],a:pl?0:1,x:pl?"Plurale, *I* o *you* → niente S.":"Singolare → +S."}},
  ()=>{const s=pick(P3),v=verb();return {t:"order",p:"Metti in ordine la frase.",w:words(`${S0(s)} ${v.s} ${v.o} ${pick(HAB)}.`),x:`*${s}* → *${v.s}*.`}},
- ()=>{const s=pick(P3),v=verb();return {t:"dict",say:`${S0(s)} ${v.s} ${v.o} ${pick(HAB)}.`,x:"Ascolta la S finale del verbo."}}],
+ ()=>{const s=pick(P3),v=verb();return mc(`${S0(s)} ___ ${v.o} ${pick(HAB)}.`,v.s,[v.b,v.ing],`Una persona sola → *${v.s}*.`)}],
 m1l3:[
  ()=>{const s=pick(NOTI),v=verb();return {t:"choice",p:`___ ${s} ${v.b} ${v.o} ${pick(HAB)}?`,o:["Do","Does","Is"],a:isPl(s)?0:1,x:isPl(s)?"Plurale → *Do*.":"Singolare → *Does*."}},
  ()=>{const s=pick(PEOPLE),v=verb(),d=DO(s);return {t:"gap",p:`${S0(s)} ___ (not / ${v.b}) ${v.o} ${pick(HAB)}.`,a:[`${d}n't ${v.b}`,`${d} not ${v.b}`],x:`*${d}n't* + verbo nudo.`}},
@@ -1303,7 +1305,7 @@ m1l4:[
  ()=>{const s=pick(PEOPLE),v=verb(),now=Math.random()<.5,t=now?pick(NOW):pick(HAB);return {t:"choice",p:`${S0(s)} ___ ${v.o} ${t}.`,o:[PRES(s,v),`${BE(s)} ${v.ing}`],a:now?1:0,x:now?`*${t}* → BE + -ing.`:`*${t}* = abitudine → presente semplice.`}},
  ()=>{const s=pick(PEOPLE),v=verb(),f=pick(["always","usually","often","never"]);return {t:"fix",p:`${S0(s)} ${PRES(s,v)} ${f} ${v.o}.`,a:[`${S0(s)} ${f} ${PRES(s,v)} ${v.o}.`],x:"L'avverbio va prima del verbo."}},
  ()=>{const s=pick(PEOPLE);return {t:"order",p:"Metti in ordine la frase.",w:words(`${S0(s)} ${BE(s)} ${pick(["always","usually","often","never"])} ${pick(BECOMP)}.`),x:"Con BE l'avverbio va dopo."}},
- ()=>{const s=pick(PEOPLE),v=verb();return {t:"dict",say:`${S0(s)} ${BE(s)} ${v.ing} ${v.o} ${pick(NOW)}.`}},
+ ()=>{const s=pick(PEOPLE),v=verb();return {t:"order",p:"Metti in ordine la frase.",w:words(`${S0(s)} ${BE(s)} ${v.ing} ${v.o} ${pick(NOW)}.`),x:"BE + -ing per ciò che succede ora."}},
  ()=>{const F=[["always","100%"],["usually","90%"],["often","70%"],["sometimes","50%"],["rarely","10%"],["never","0%"]];const c=pick(F);return mc(`Quale avverbio significa circa ${c[1]}?`,c[0],rshuffle(F.filter(x=>x!==c)).slice(0,2).map(x=>x[0]),`*${c[0]}* ≈ ${c[1]}.`)},
  ()=>{const s=pick(PEOPLE),v=verb(),f=pick(["usually","often","always","never"]);return {t:"order",p:"Metti in ordine (avverbio tra ausiliare e verbo).",w:words(`${S0(s)} ${DO(s)}n't ${f} ${v.b} ${v.o}.`),x:"Con l'ausiliare l'avverbio va tra ausiliare e verbo."}},
  ()=>{const v=pick(VB.filter(x=>/[^aeiou][aeiou][ptnbgm]$/.test(x[0])||(x[0].endsWith("e")&&!x[0].endsWith("ee"))));const m=mkv(v);return {t:"gap",p:`-ing di *${m.b}*: ___`,a:[m.ing],x:m.b.endsWith("e")?"La e finale cade.":"Raddoppio della consonante dopo vocale breve accentata."}}],
@@ -1319,7 +1321,7 @@ m2l2:[
  ()=>{const s=pick(PEOPLE),v=verb();return {t:"order",p:"Metti in ordine la domanda.",w:words(`Did ${s} ${v.b} ${v.o} ${pick(PAST)}?`),x:"*Did* → chi → verbo nudo."}},
  ()=>{const s=pick(PEOPLE),v=verbIrr();return {t:"fix",p:`${S0(s)} didn't ${v.p} ${v.o}.`,a:[`${S0(s)} didn't ${v.b} ${v.o}.`],x:`Il passato una volta sola: *didn't ${v.b}*.`}},
  ()=>{const s=pick(PEOPLE),v=verbIrr();return {t:"fix",p:`Did ${s} ${v.p} ${v.o}?`,a:[`Did ${s} ${v.b} ${v.o}?`],x:`*Did* + *${v.b}*.`}},
- ()=>{const s=pick(NOTI),v=verb();return {t:"dict",say:`Why did ${s} ${v.b} ${v.o} ${pick(PAST)}?`}}],
+ ()=>{const s=pick(NOTI),v=verb();return {t:"fix",p:`Why ${s} ${v.p} ${v.o}?`,a:[`Why did ${s} ${v.b} ${v.o}?`],x:"Domanda al passato: *did* + verbo nudo."}}],
 m2l3:[
  ()=>{const s=pick(PEOPLE),v=verb(),i=pick(INTR);return {t:"gap",p:`${S0(s)} ___ (${v.b}) ${v.o} when ${i[0]} ${i[1]}.`,a:[`${WAS(s)} ${v.ing}`],x:`Azione in corso: *${WAS(s)}* + -ing.`}},
  ()=>{const s=pick(PEOPLE),v=verb(),i=pick(INTR);return mc(`${S0(s)} ${WAS(s)} ${v.ing} ${v.o} when ${i[0]} ___.`,i[1],[i[2]],"L'azione breve che interrompe va al passato semplice.")},
@@ -1339,7 +1341,7 @@ m3l1:[
  ()=>{const s=pick(PEOPLE),v=verb();return {t:"gap",p:`${S0(s)} ___ (not / ${v.b}) ${v.o} ${pick(FUT)}.`,a:[`won't ${v.b}`,`will not ${v.b}`],x:"*will not* → *won't*."}},
  ()=>{const s=pick(PEOPLE),v=verb(),t=pick(FUT);return {t:"fix",p:`${S0(s)} will to ${v.b} ${v.o} ${t}.`,a:[`${S0(s)} will ${v.b} ${v.o} ${t}.`],x:"Dopo *will* niente *to*."}},
  ()=>{const s=pick(PEOPLE),v=verb();return {t:"order",p:"Metti in ordine la frase.",w:words(`${S0(s)} ${BE(s)} going to ${v.b} ${v.o} ${pick(FUT)}.`),x:"Piano: BE + *going to* + verbo nudo."}},
- ()=>{const v=verb();return {t:"dict",say:`I'll ${v.b} ${v.o} ${pick(FUT)}.`}}],
+ ()=>{const v=verb();return {t:"order",p:"Metti in ordine la promessa.",w:words(`I'll ${v.b} ${v.o} ${pick(FUT)}.`),x:"*will* + verbo nudo."}}],
 m3l2:[
  ()=>{const s=pick(PEOPLE),v=verb();return {t:"gap",p:`By ${pick(DL)}, ${s} ___ (${v.b}) ${v.o}.`,a:[`will have ${v.pp}`],x:"*By* + scadenza → *will have* + participio."}},
  ()=>{const s=pick(PEOPLE),v=verb();return {t:"gap",p:`This time tomorrow, ${s} ___ (${v.b}) ${v.o}.`,a:[`will be ${v.ing}`],x:"In corso in quel momento → *will be* + -ing."}},
@@ -1394,23 +1396,23 @@ m5l1:[
  ()=>{return {t:"order",p:"Metti in ordine il feedback.",w:words(`I wonder if we could make ${pick(ELEM)} a bit ${pick(COMP1)}.`),x:"*I wonder if…* ammorbidisce la critica."}},
  ()=>{const a=pick(["dark","busy","small","long","heavy"]);return {t:"fix",p:`In my opinion is too ${a}.`,a:[`In my opinion, it's too ${a}.`],x:"Il soggetto non si omette: *it's*."}},
  ()=>{const e=pick(ELEM),a=pick(["small","dark","long","busy","heavy"]);return mc("Ammorbidisci la critica:",`${cap(e)} is maybe a bit ${a}.`,[`${cap(e)} is ${a}.`,`${cap(e)} is the most ${a}.`],"*maybe a bit* rende la critica gentile.")},
- ()=>({t:"shadow",say:`I like ${pick(ELEM)}, but I wonder if it could be a bit ${pick(COMP1)}.`,it:"Mi piace, ma mi chiedo se potrebbe essere un po' più…"})],
+ ()=>({t:"order",p:"Metti in ordine il feedback gentile.",w:words(`I like ${pick(ELEM)}, but I wonder if it could be a bit ${pick(COMP1)}.`),x:"Positivo → *but* → *I wonder if*."})],
 m5l2:[
  ()=>{const v=verb();return {t:"order",p:"Interrompi con garbo.",w:words(`Sorry to interrupt, but can we ${v.b} ${v.o} first?`),x:"*Sorry to interrupt, but…*"}},
- ()=>{const v=verb();return {t:"dict",say:`Just to make sure I understand: you want us to ${v.b} ${v.o}?`}},
+ ()=>{const v=verb();return {t:"order",p:"Chiedi conferma di aver capito.",w:words(`Just to make sure I understand: you want us to ${v.b} ${v.o}?`),x:"*Just to make sure I understand…*"}},
  ()=>({t:"gap",p:`What do you ___ by “${pick(BUZZ)}”?`,a:["mean"],x:"*What do you mean by…?*"}),
  ()=>{const v=verb();return {t:"fix",p:`Can you repeat me how to ${v.b} ${v.o}?`,a:[`Can you repeat how to ${v.b} ${v.o}?`,`Could you repeat how to ${v.b} ${v.o}?`],x:"*repeat* non vuole *me*."}},
  ()=>({t:"order",p:"Chiedi cosa intende.",w:words(`What do you mean by “${pick(BUZZ)}”?`),x:"*What do you mean by…?*"}),
  ()=>({t:"order",p:"Chiedi un chiarimento.",w:words(`Just to clarify, do you mean ${pick(THINGS)}?`),x:"*Just to clarify…*"}),
  ()=>({t:"gap",p:`Just to ___, do you mean ${pick(THINGS)}?`,a:["clarify"],x:"*Just to clarify* = giusto per chiarire."}),
  ()=>({t:"gap",p:`Sorry to ___, but can I ask about ${pick(THINGS)}?`,a:["interrupt"],x:"*Sorry to interrupt, but…*"}),
- ()=>({t:"dict",say:`Sorry, could you repeat ${pick(["the last part","the deadline","the name of the file","the budget","the next step"])}?`}),
+ ()=>({t:"gap",p:`Sorry, could you ___ ${pick(["the last part","the deadline","the name of the file","the budget","the next step"])}?`,a:["repeat"],x:"*Could you repeat…?* = puoi ripetere…?"}),
  ()=>{const c=pick(FORMS);return mc(c[0],c[1],c[2],"Formula pronta da imparare intera.")}],
 m5l3:[
  ()=>{const v=verb();return {t:"order",p:"Sei d'accordo, ma con una condizione.",w:words(`I agree, but let's ${v.b} ${v.o} first.`),x:"*I agree, but…*"}},
  ()=>{const v=verb();return mc(`I ___ with you, but let's ${v.b} ${v.o} first.`,"agree",["am agree","agreed"],"*agree* è un verbo.")},
  ()=>{const v=verb();return {t:"fix",p:`I'm agree, but let's ${v.b} ${v.o} first.`,a:[`I agree, but let's ${v.b} ${v.o} first.`],x:"Niente *am* prima di *agree*."}},
- ()=>{const v=verb();return {t:"shadow",say:`That's a good point. I agree, but let's ${v.b} ${v.o} first.`,it:"Ottima osservazione. Sono d'accordo, ma prima…"}},
+ ()=>{const v=verb();return mc("Disaccordo gentile:",`That's a good point, but let's ${v.b} ${v.o} first.`,[`No, we ${v.b} ${v.o} first.`,`You're wrong, ${v.b} ${v.o} first.`],"Riconosci il punto, poi *but*.")},
  ()=>{const c=pick(REQ);return mc("Qual è la risposta più professionale?",c[1],c[2],"Riconosci → *but* → motivazione da UX.",{ctx:`**Cliente:** “${c[0]}”`})},
  ()=>({t:"gap",p:`I ___ your point, but ${pick(REASONS)}.`,a:["see"],x:"*I see your point* = capisco il tuo punto."}),
  ()=>({t:"gap",p:`I ___ with you, but ${pick(REASONS)}.`,a:["agree"],x:"*agree* è un verbo."}),
@@ -1424,25 +1426,32 @@ m5l4:[
  ()=>({t:"gap",p:`To ___ up, we keep ${pick(KEEP)}.`,a:["sum"],x:"*To sum up* = riassumendo."}),
  ()=>({t:"gap",p:`I'll ___ up by email with ${pick(["the notes","the next steps","the recording"])}.`,a:["follow"],x:"*follow up* = dare seguito."}),
  ()=>{const v=verb(),d=pick(DAYS);return mc("Rispondi in modo chiaro:",`I'll ${v.b} ${v.o} and share it by ${d}.`,[`I ${v.b} ${v.o} and I share within ${d}.`,`${cap(v.o)} will be done maybe.`],"Chi + *will* + cosa + *by* + quando.",{ctx:"**PM:** “So, who's doing what?”"})},
- ()=>{const v=verb();return {t:"shadow",say:`To sum up, we keep ${pick(KEEP)}. I'll ${v.b} ${v.o} by ${pick(DAYS)}.`,it:"Riassumendo, teniamo… Io mi occupo di… entro…"}}],
+ ()=>({t:"order",p:"Riassumi la decisione.",w:words(`To sum up, we keep ${pick(KEEP)}.`),x:"*To sum up* apre il riassunto."})],
 m6l1:[
  ()=>{const w=rshuffle(STRESS).slice(0,3);const f=w.filter(x=>x[2]===0);const nf=w.filter(x=>x[2]!==0);if(f.length!==1)return null;return mc("In quale parola l'accento cade sulla prima sillaba?",f[0][0],nf.map(x=>x[0]),`*${f[0][1].map((x,i)=>i===0?x.toUpperCase():x).join("-")}*.`)},
- ()=>{const n=pick(NV);const sy=NV2[n[0]];return {t:"stress",say:(n[2]?"to ":"the ")+n[0],s:sy,a:n[2],x:`${n[1]} → *${sy.map((x,i)=>i===n[2]?x.toUpperCase():x).join("-")}*. Nome: accento sulla prima, verbo: sulla seconda.`,hint:n[1]}},
+ ()=>{const n=pick(NV);const sy=NV2[n[0]];return {t:"stress",say:n[0],s:sy,a:n[2],x:`${n[1]} → *${sy.map((x,i)=>i===n[2]?x.toUpperCase():x).join("-")}*. Nome: accento sulla prima, verbo: sulla seconda.`,hint:n[1]}},
  ()=>{const w=pick(STRESS);return {t:"stress",say:w[0],s:w[1],a:w[2],x:`*${w[1].map((x,i)=>i===w[2]?x.toUpperCase():x).join("-")}*.`}}],
 m6l2:[
- ()=>{const p=pick(MPAIRS),j=rint(0,1);return {t:"listen",say:p[j],o:p,a:j,x:`*${p[j]}*.`}}],
+ ()=>{const p=pick(MPM),j=rint(0,1);return mc(`Quale parola significa “${p[j*2+1]}”?`,p[j*2],[p[(1-j)*2]],`*${p[0]}* = ${p[1]} · *${p[2]}* = ${p[3]}.`)},
+ ()=>{const ps=rshuffle(MPM).slice(0,2);const pairs=ps.flatMap(p=>[[p[0],p[1]],[p[2],p[3]]]);return {t:"match",p:"Abbina la parola al significato.",pairs,x:"Un solo suono cambia il significato."}},
+ ()=>{const p=pick(MPM.filter(x=>x[4]));return mc(p[4],p[0],[p[2]],`*${p[0]}* = ${p[1]}; *${p[2]}* = ${p[3]}.`)}],
 m6l3:[
- ()=>{const s=pick(PEOPLE),v=verb();return {t:"dict",say:pick([`${S0(s)} ${PRES(s,v)} ${v.o} ${pick(HAB)}.`,`Could you ${v.b} ${v.o} ${pick(FUT)}?`,`We need to ${v.b} ${v.o}.`,`Let's ${v.b} ${v.o} ${pick(FUT)}.`,`I'm going to ${v.b} ${v.o}.`,`Can you ${v.b} ${v.o} by ${pick(DAYS)}?`,`${S0(s)} ${v.p} ${v.o} ${pick(PAST)}.`])}}],
+ ()=>{const s=pick(PEOPLE),v=verb();return {t:"fix",p:`${S0(s)} ${BE(s)} gonna ${v.b} ${v.o}. (email di lavoro)`,a:[`${S0(s)} ${BE(s)} going to ${v.b} ${v.o}.`],x:"*gonna* = *going to*: si dice, non si scrive al lavoro."}},
+ ()=>{const v=verb();return {t:"fix",p:`I wanna ${v.b} ${v.o}. (email di lavoro)`,a:[`I want to ${v.b} ${v.o}.`,`I'd like to ${v.b} ${v.o}.`],x:"*wanna* = *want to*; in un'email meglio *I'd like to*."}},
+ ()=>{const v=verb(),t=pick(FUT);return {t:"fix",p:`We gotta ${v.b} ${v.o} ${t}. (email di lavoro)`,a:[`We have to ${v.b} ${v.o} ${t}.`,`We've got to ${v.b} ${v.o} ${t}.`,`We need to ${v.b} ${v.o} ${t}.`],x:"*gotta* = *have got to* = *have to*."}},
+ ()=>{const v=verb();return {t:"fix",p:`Lemme ${v.b} ${v.o}.`,a:[`Let me ${v.b} ${v.o}.`],x:"*lemme* = *let me*."}},
+ ()=>{const c=pick(SLANG);return mc(`*${c[0]}* significa:`,c[1],rshuffle(SLANG.filter(x=>x!==c)).slice(0,2).map(x=>x[1]),`*${c[0]}* = *${c[1]}*.`)},
+ ()=>{const c=pick(WEAK);return mc(`Nel parlato *${c[0]}* in *${c[1]}* suona come:`,c[2],c[3],`Forma debole: *${c[2]}*.`)}],
 m6l4:[
  ()=>{const vs=rshuffle(VB).slice(0,3).map(mkv);const [A,B,C]=vs;const bl=pick(BLOCK);const txt=`Hi everyone. Yesterday I ${A.p} ${A.o}. Today I'm going to ${B.b} ${B.o}. My only blocker is ${bl}.`;const k=rint(0,2);
-   if(k===0)return mc("Cosa ha fatto ieri?",cap(`${A.b} ${A.o}`),[cap(`${B.b} ${B.o}`),cap(`${C.b} ${C.o}`)],`*Yesterday I ${A.p} ${A.o}.*`,{ctxSay:txt});
-   if(k===1)return mc("Cosa farà oggi?",cap(`${B.b} ${B.o}`),[cap(`${A.b} ${A.o}`),cap(`${C.b} ${C.o}`)],`*Today I'm going to ${B.b} ${B.o}.*`,{ctxSay:txt});
-   return mc("Qual è il suo blocco?",cap(bl),[cap(pick(BLOCK.filter(x=>x!==bl))),"No blockers"],`*My only blocker is ${bl}.*`,{ctxSay:txt})},
+   if(k===0)return mc("Cosa ha fatto ieri?",cap(`${A.b} ${A.o}`),[cap(`${B.b} ${B.o}`),cap(`${C.b} ${C.o}`)],`*Yesterday I ${A.p} ${A.o}.*`,{ctx:`**Stand-up:** “${txt}”`});
+   if(k===1)return mc("Cosa farà oggi?",cap(`${B.b} ${B.o}`),[cap(`${A.b} ${A.o}`),cap(`${C.b} ${C.o}`)],`*Today I'm going to ${B.b} ${B.o}.*`,{ctx:`**Stand-up:** “${txt}”`});
+   return mc("Qual è il suo blocco?",cap(bl),[cap(pick(BLOCK.filter(x=>x!==bl))),"No blockers"],`*My only blocker is ${bl}.*`,{ctx:`**Stand-up:** “${txt}”`})},
  ()=>{const m=rint(5,8),n=rint(2,m-1),t=pick(TASK),e=pick(ELF),f=pick(FIXN);const nums=["zero","one","two","three","four","five","six","seven","eight"];const txt=`Quick update from me. The usability test went well: ${nums[n]} out of ${nums[m]} users completed the ${t}. But nobody found ${e}. So next week we're going to ${f}.`;const k=rint(0,2);
-   if(k===0)return mc("Quanti utenti hanno completato il compito?",`${cap(nums[n])} out of ${nums[m]}`,[`${cap(nums[m])} out of ${nums[m]}`,`${cap(nums[Math.max(1,n-1)])} out of ${nums[m]}`],`*${nums[n]} out of ${nums[m]}* = ${n} su ${m}.`,{ctxSay:txt});
-   if(k===1)return mc("Quale problema è emerso?",`Nobody found ${e}`,rshuffle(ELF.filter(x=>x!==e)).slice(0,2).map(x=>`Nobody found ${x}`),`*Nobody found ${e}.*`,{ctxSay:txt});
-   return mc("Cosa faranno la settimana prossima?",cap(f),rshuffle(FIXN.filter(x=>x!==f)).slice(0,2).map(cap),`*Next week we're going to ${f}.*`,{ctxSay:txt})},
- ()=>{const A=verb(),B=verb();return {t:"shadow",say:`Yesterday I ${A.p} ${A.o}. Today I'm going to ${B.b} ${B.o}. No blockers.`,it:"Ieri ho… Oggi farò… Nessun blocco."}}]
+   if(k===0)return mc("Quanti utenti hanno completato il compito?",`${cap(nums[n])} out of ${nums[m]}`,[`${cap(nums[m])} out of ${nums[m]}`,`${cap(nums[Math.max(1,n-1)])} out of ${nums[m]}`],`*${nums[n]} out of ${nums[m]}* = ${n} su ${m}.`,{ctx:`**Stand-up:** “${txt}”`});
+   if(k===1)return mc("Quale problema è emerso?",`Nobody found ${e}`,rshuffle(ELF.filter(x=>x!==e)).slice(0,2).map(x=>`Nobody found ${x}`),`*Nobody found ${e}.*`,{ctx:`**Stand-up:** “${txt}”`});
+   return mc("Cosa faranno la settimana prossima?",cap(f),rshuffle(FIXN.filter(x=>x!==f)).slice(0,2).map(cap),`*Next week we're going to ${f}.*`,{ctx:`**Stand-up:** “${txt}”`})},
+ ()=>{const A=verb(),B=verb();return {t:"order",block:true,p:"Metti in ordine lo stand-up.",w:["Hi everyone, quick update from me.",`Yesterday I ${A.p} ${A.o}.`,`Today I'm going to ${B.b} ${B.o}.`,"No blockers on my side."],x:"Saluto → ieri → oggi → blocchi."}}]
 };
 function genFor(l){if(l.final)return l.mod.lessons.filter(x=>!x.final).flatMap(x=>GEN[x.id]||[]);return GEN[l.id]||[]}
 
@@ -1452,13 +1461,17 @@ const CLOUD = {url:"https://fihlarmslnphjsncfqyq.supabase.co", anonKey:"sb_publi
 const LSK_USERS="uxenglish.users", LSK_SESSION="uxenglish.session", LSK_DATA="uxenglish.v2:", LSK_OLD="uxenglish.v1";
 const IV = [0,1,3,7,14,30];
 const RUN_LEN = 8;
-function blank(){return {les:{},seenQ:{},srs:{},stats:{ok:0,n:0},xp:0,days:{},splat:0,voice:"en-US",rate:0.92,goal:50,freezes:0,frozen:{},best:0,fzAt:0,_t:0}}
+/* Esercizi che dipendono dalla voce sintetica: esclusi dal corso */
+const AUDIO_ONLY=q=>!q||q.t==="listen"||q.t==="dict"||q.t==="shadow"||!!q.ctxSay;
+function blank(){return {les:{},seenQ:{},srs:{},stats:{ok:0,n:0},xp:0,days:{},splat:0,voice:"en-US",rate:0.5,goal:50,freezes:0,frozen:{},best:0,fzAt:0,_t:0}}
 let USER=null, S=blank(), SB=null, pushT=null;
 function lsGet(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function lsDel(k){try{localStorage.removeItem(k)}catch(e){}}
 function migrateOld(){const o=lsGet(LSK_OLD);if(!o||lsGet("uxenglish.migrated"))return {};lsSet("uxenglish.migrated",1);const k={};["xp","days","splat","voice","rate","goal","freezes","frozen","best","fzAt"].forEach(x=>{if(o[x]!=null)k[x]=o[x]});return k}
-function loadUser(){const v=lsGet(LSK_DATA+USER.uid);S=Object.assign(blank(),v&&typeof v==="object"?v:migrateOld());S.stats=S.stats||{ok:0,n:0}}
+function loadUser(){const v=lsGet(LSK_DATA+USER.uid);S=Object.assign(blank(),v&&typeof v==="object"?v:migrateOld());S.stats=S.stats||{ok:0,n:0};fixData()}
+/* voce a 0.5x e via le sessioni con esercizi audio */
+function fixData(){if(!S.v05){S.rate=0.5;S.v05=1}Object.keys(S.srs).forEach(k=>{if(AUDIO_ONLY(S.srs[k].q))delete S.srs[k]});Object.values(S.les).forEach(x=>{if(x.run&&!x.run.complete&&x.run.items.some(it=>AUDIO_ONLY(it.q)))x.run=null})}
 function save(){S._t=Date.now();if(USER)lsSet(LSK_DATA+USER.uid,S);cloudPush()}
 
 function hex(buf){return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("")}
@@ -1542,7 +1555,7 @@ async function cloudPull(){
   try{
     const {data,error}=await SB.from("progress").select("data").eq("user_id",USER.uid).maybeSingle();
     if(error)throw error;
-    if(data&&data.data&&(data.data._t||0)>(S._t||0)){S=Object.assign(blank(),data.data);S.stats=S.stats||{ok:0,n:0};lsSet(LSK_DATA+USER.uid,S);setSync("ok")}
+    if(data&&data.data&&(data.data._t||0)>(S._t||0)){S=Object.assign(blank(),data.data);S.stats=S.stats||{ok:0,n:0};fixData();lsSet(LSK_DATA+USER.uid,S);setSync("ok")}
     else await cloudWrite();
   }catch(e){setSync("err",String(e.message||e))}
 }
@@ -1687,8 +1700,8 @@ m5l3:["*agree* è un verbo, non un aggettivo: *I agree*, come *I like*. Per ques
 m5l4:["Chiudere con riassunto, prossimi passi e responsabili evita malintesi dopo la call.","*by* = entro una scadenza; *until* = per tutto il tempo fino a un momento; *within* va con una durata (*within two days*), non con un giorno."],
 m6l1:["In inglese le sillabe senza accento si riducono quasi a un suono neutro: con l'accento sbagliato la parola diventa difficile da riconoscere.","Molte parole hanno l'accento su una sillaba diversa dall'italiano (*PROtotype, deVELoper*): conviene impararle ascoltando."],
 m6l2:["L'italiano ha 7 suoni vocalici, l'inglese circa 12: per questo *ship / sheep* ci sembrano uguali.","Allenare l'orecchio aiuta anche la pronuncia: si produce bene solo ciò che si sente bene."],
-m6l3:["Nel parlato le parole piccole (*to, the, and, can*) si riducono a forme deboli: il dettato insegna a riconoscerle.","Scrivere ciò che senti obbliga a fare attenzione a ogni parola, non solo al senso generale."],
-m6l4:["Nell'ascolto reale non serve capire tutto: cerca le informazioni chiave (chi, cosa, quando).","Leggere la domanda prima di ascoltare dice al cervello cosa cercare: è il *pre-listening*."]
+m6l3:["Nel parlato le parole piccole (*to, the, and, can*) si riducono a forme deboli: conoscerle ti fa capire i colleghi madrelingua.","*gonna, wanna, gotta* si dicono ma non si scrivono al lavoro: riconoscerli sì, usarli nelle email no."],
+m6l4:["Negli aggiornamenti di lavoro non serve capire tutto: cerca le informazioni chiave (chi, cosa, quando).","Leggere prima la domanda dice al cervello cosa cercare nel testo: è il *pre-reading*."]
 };
 /* Approfondimento: elenchi completi, ortografia, pronuncia, casi particolari */
 const DEEP={
@@ -1874,11 +1887,11 @@ function buildItems(l,n,genOnly){
   const seen=new Set(S.seenQ[l.id]||[]);const out=[];const ids=new Set();
   const add=(id,q)=>{out.push({id,lid:l.id,q});ids.add(id)};
   const qid=q=>l.id+"~"+hash(JSON.stringify(q)).toString(36);
-  if(!genOnly)l.q.forEach(q=>{const id=qid(q);if(out.length<(l.final?6:n)&&!seen.has(id)&&!ids.has(id))add(id,q)});
+  if(!genOnly)l.q.forEach(q=>{const id=qid(q);if(!AUDIO_ONLY(q)&&out.length<(l.final?6:n)&&!seen.has(id)&&!ids.has(id))add(id,q)});
   const gens=genFor(l);const order=rshuffle(gens.map((_,i)=>i));let k=0,tries=0;
   while(out.length<n&&gens.length&&tries<500){
     tries++;let q=null;try{q=gens[order[k++%order.length]]()}catch(e){q=null}
-    if(!q||(genOnly&&q.t==="shadow"))continue;
+    if(AUDIO_ONLY(q))continue;
     const id=qid(q);
     if(ids.has(id)||(seen.has(id)&&tries<420))continue;
     add(id,q);
@@ -1915,7 +1928,7 @@ function startMix(){
   startSession("mix",rshuffle(items),"Mix del giorno");
 }
 function curItem(){const st=RUN.steps[RUN.pos];return st&&st.k==="q"?RUN.items[st.i]:null}
-function autoSpeak(){const it=RUN&&curItem();if(it&&(it.q.t==="listen"||it.q.t==="stress"))setTimeout(()=>speak(it.q.say),350)}
+function autoSpeak(){}
 function finishBonus(){
   if(RUN.bonusDone)return;RUN.bonusDone=true;
   if(RUN.kind==="lesson"){const st=S.les[RUN.id];const r=st.run;const vals=Object.values(r.ans);
@@ -2374,7 +2387,7 @@ function renderSum(){
 /* ---------- IMPOSTAZIONI E METODO ---------- */
 function renderMethod(){
   const t=totals();
-  const loop=[["L","Look","Un trick breve: regola, formula a colori, trappola.","var(--blue)"],["O","Operate","8 esercizi per sessione in 11 formati diversi.","var(--green)"],["O","Out loud","Ascolti la voce inglese e ripeti ad alta voce.","var(--orange)"],["P","Park","Ogni errore torna nel Ripasso al momento giusto.","var(--purple)"]];
+  const loop=[["L","Look","Un trick breve: regola, formula a colori, trappola.","var(--blue)"],["O","Operate","8 esercizi per sessione in 8 formati diversi.","var(--green)"],["O","Out loud","Leggi ad alta voce le frasi giuste: la bocca impara insieme agli occhi.","var(--orange)"],["P","Park","Ogni errore torna nel Ripasso al momento giusto.","var(--purple)"]];
   const tech=[["Frasi sempre nuove","Ogni sessione genera esercizi che non hai ancora visto: ricominciare non ripete niente.",IC.shuffle,"var(--teal)"],
    ["Pre-test","Il primo esercizio arriva prima della teoria. Provare a indovinare prepara la memoria a ricevere la regola.",IC.bulb,"var(--warn)"],
    ["Ripetizione dilazionata","Gli errori tornano dopo 1, 3, 7, 14 e 30 giorni (scatole di Leitner), proprio quando stai per dimenticarli.",IC.refresh,"var(--purple)"],
@@ -2382,7 +2395,7 @@ function renderMethod(){
    ["Interleaving","Il Mix del giorno alterna argomenti diversi, come succede in una conversazione vera.",IC.shuffle,"var(--teal)"],
    ["Dual coding","Formule a colori e mockup dei componenti: parola e immagine insieme si ricordano meglio.",IC.grid,"var(--blue)"],
    ["Chunking","Le frasi da riunione si imparano come blocchi interi, pronti da usare.",IC.chat,"var(--pink)"],
-   ["Shadowing","Ripeti sopra la voce madrelingua per copiare ritmo, accento e intonazione.",IC.wave,"var(--orange)"]];
+   ["Lettura ad alta voce","Dopo ogni risposta giusta rileggi la frase a voce alta: fissa la struttura anche nella memoria motoria.",IC.wave,"var(--orange)"]];
   const guest=!USER||USER.mode==="guest";
   return `${navBar({})}
   <div class="lt"><p class="eyebrow" style="color:var(--blue)">Impostazioni</p><h1>${guest?"Il tuo corso":esc(USER.name)}</h1>${guest?"":`<p class="lead">${esc(USER.email)}</p>`}</div>
@@ -2405,10 +2418,10 @@ function renderMethod(){
   <p class="sech">Voce</p>
   <div class="group">
     <div class="row"><span class="num" style="background:var(--blue)">${IC.spk}</span><span class="rt">Accento</span><span class="minseg"><button data-voice="en-US" aria-pressed="${S.voice==="en-US"}">US</button><button data-voice="en-GB" aria-pressed="${S.voice==="en-GB"}">UK</button></span></div>
-    <div class="row"><span class="num" style="background:var(--teal)">${IC.wave}</span><span class="rt">Velocità</span><span class="minseg">${[[0.8,"Lenta"],[0.92,"Normale"],[1.05,"Veloce"]].map(([r,x])=>`<button data-rate="${r}" data-setrate="1" aria-pressed="${S.rate===r}">${x}</button>`).join("")}</span></div>
+    <div class="row"><span class="num" style="background:var(--teal)">${IC.wave}</span><span class="rt">Velocità</span><span class="minseg">${[[0.5,"0.5x"],[0.7,"0.7x"],[0.9,"0.9x"]].map(([r,x])=>`<button data-rate="${r}" data-setrate="1" aria-pressed="${S.rate===r}">${x}</button>`).join("")}</span></div>
     <button class="row" data-say="Hi! This is how I sound. Let's practise some English for design."><span class="num" style="background:var(--green)">${IC.play}</span><span class="rt">Prova la voce</span>${IC.chevR}</button>
   </div>
-  <p class="secf">La voce è quella del tuo dispositivo. Su iPhone puoi scaricare voci migliori in Impostazioni › Accessibilità › Contenuto letto ad alta voce › Voci.</p>
+  <p class="secf">La voce serve solo per sentire una parola o una frase quando vuoi: nessun esercizio dipende dall'audio. La voce è quella del tuo dispositivo. Su iPhone puoi scaricare voci migliori in Impostazioni › Accessibilità › Contenuto letto ad alta voce › Voci.</p>
   <p class="sech">Il metodo LOOP · 70% pratica, 30% teoria</p>
   <div class="loop">${loop.map(([L,b,s,c])=>`<div style="--c:${c}"><span class="L">${L}</span><b>${b}</b><span>${s}</span></div>`).join("")}</div>
   <div class="group" style="padding:14px 16px;margin-top:12px;font-size:15px;line-height:1.5">+10 XP per risposta giusta · combo dalla 3ª giusta di fila (+2, +4… fino a +10) · +10 lezione completata · +10 lezione perfetta. Un giorno conta per la serie quando fai almeno 10 XP.</div>

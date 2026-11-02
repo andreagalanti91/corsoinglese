@@ -13,15 +13,15 @@ Basato sulla *Activity Guide for Teaching English as a Foreign Language* (TEFL F
 | Roadmap e piani | will / going to, will have, if / when, modali | The Future |
 | Il lessico UI | componenti, phrasal verbs, falsi amici, comparativi | Vocabulary, Splat, matching |
 | Design critique e meeting | opinioni, interrompere, accordo, chiudere | Speaking, role play, debates |
-| Pronuncia e ascolto | word stress, minimal pairs, dettato, stand-up | Phonology, Listening |
+| Pronuncia e parlato | word stress, minimal pairs, parlato veloce, stand-up da leggere | Phonology, Reading |
 
 ## Metodo LOOP (70% pratica · 30% teoria)
 - **Look**: un trick breve (regola, formula a colori, trappola per italiani)
-- **Operate**: 7-10 esercizi in 11 formati (scegli, completa, riordina, correggi, traduci, abbina, riconosci il componente, accento, coppie minime, dettato, shadowing)
-- **Out loud**: sintesi vocale inglese (US/UK) per ascoltare e ripetere
+- **Operate**: 8 esercizi a sessione in 8 formati (scegli, completa, riordina, correggi, traduci, abbina, riconosci il componente, accento), nessuno dipende dall'audio
+- **Out loud**: rileggere ad alta voce; la voce sintetica (0.5x di default) è solo un aiuto facoltativo
 - **Park**: gli errori entrano nel Ripasso dilazionato (1, 3, 7, 14, 30 giorni)
 
-Tecniche: pre-test, richiamo attivo, ripetizione dilazionata, interleaving (Mix del giorno), dual coding, chunking, shadowing.
+Tecniche: pre-test, richiamo attivo, ripetizione dilazionata, interleaving (Mix del giorno), dual coding, chunking, lettura ad alta voce.
 
 ## Struttura
 - `src/corso.html`: sorgente (contenuti + app)
