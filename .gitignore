@@ -1,0 +1,3 @@
+# screenshot dei test locali
+*.png
+!brand/**/*.png
