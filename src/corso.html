@@ -475,6 +475,37 @@ details.tk .formula{margin:12px -14px 0;padding:0 14px}
 
 .qit{display:flex;gap:8px;align-items:flex-start;margin-top:10px;padding:9px 12px;border-radius:12px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--stroke);font-size:15px;line-height:1.4;color:var(--label2)}
 .qit b{flex:none;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:var(--c,var(--blue));background:color-mix(in srgb,var(--c,var(--blue)) 14%,transparent);border-radius:5px;padding:2px 5px;margin-top:2px}
+/* ---------- STUDIA ---------- */
+.chg{font-size:13px;font-weight:750;color:var(--label);margin:14px 4px 8px}
+.chgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.chcard{--c:var(--blue);display:flex;flex-direction:column;gap:4px;text-align:left;padding:14px;border-radius:18px;background:radial-gradient(120% 120% at 0% 100%,color-mix(in srgb,var(--c) 24%,transparent),transparent 60%),var(--card);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 22%,var(--stroke));transition:transform .15s}
+.chcard:active{transform:scale(.97)}
+.chk{font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.05em;color:var(--c)}
+.chn{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:-.015em;line-height:1.2}
+.chb{height:5px;border-radius:3px;background:var(--glass2);overflow:hidden;margin-top:6px}
+.chb i{display:block;height:100%;background:var(--c);border-radius:3px}
+.chm{font-size:12px;color:var(--label2);font-variant-numeric:tabular-nums}
+.chhero{margin-top:14px;padding:18px;border-radius:24px;background:radial-gradient(120% 120% at 100% 0%,color-mix(in srgb,var(--c) 28%,transparent),transparent 55%),var(--card);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 26%,var(--stroke))}
+.chhero h1{font-family:var(--display);font-size:clamp(28px,7.5vw,36px);font-weight:750;letter-spacing:-.03em;line-height:1.1;margin-top:4px}
+.chstat{font-size:13px;color:var(--label2);margin-top:8px}
+.tl{margin-top:14px}
+.tl svg{width:100%;max-width:420px;height:auto;display:block}
+.tl span{display:block;font-size:13px;font-weight:650;color:var(--c);margin-top:2px}
+.chnav{position:sticky;top:calc(56px + env(safe-area-inset-top,0px));z-index:15;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 0;margin-top:6px;background:linear-gradient(var(--bg) 70%,transparent)}
+.chnav::-webkit-scrollbar{display:none}
+.chip2{flex:none;padding:7px 13px;border-radius:999px;font-size:14px;font-weight:650;color:var(--label);background:var(--glass2);box-shadow:inset 0 0 0 1px var(--stroke2)}
+.trick.chap{margin-top:4px}
+.trick.chap .th-h{scroll-margin-top:120px}
+.usecard{margin-top:10px;border-radius:16px;padding:12px 14px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--stroke)}
+.uh{display:flex;gap:10px;align-items:flex-start;font-weight:700;font-size:16px;line-height:1.3}
+.uh b{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;color:#fff;background:var(--c)}
+.pdfq{margin-top:8px;padding:8px 12px;border-left:3px solid var(--c);border-radius:4px 10px 10px 4px;background:color-mix(in srgb,var(--c) 8%,transparent);font-size:15px;font-style:italic}
+.pdfq span{display:block;font-style:normal;font-size:10.5px;font-weight:750;text-transform:uppercase;letter-spacing:.06em;color:var(--c);margin-bottom:2px}
+.uex{display:block;width:100%;text-align:left;margin-top:8px;font-size:16px}
+.uex span{display:block;font-weight:600}
+.uex em{display:block;font-size:14px;color:var(--label2);font-style:normal;margin-top:2px}
+.why{font-size:13.5px;color:var(--label2)}
+.btn .i3{width:26px;height:26px;flex:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
 /* ---------- TEORIA ---------- */
 .dp{margin-top:10px;border-radius:16px;padding:12px 14px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--stroke)}
 .dp-h{font-weight:700;font-size:16px;letter-spacing:-.01em}
@@ -1541,7 +1572,7 @@ const IV = [0,1,3,7,14,30];
 const RUN_LEN = 8;
 /* Esercizi che dipendono dalla voce sintetica: esclusi dal corso */
 const AUDIO_ONLY=q=>!q||q.t==="listen"||q.t==="dict"||q.t==="shadow"||!!q.ctxSay;
-function blank(){return {les:{},seenQ:{},srs:{},stats:{ok:0,n:0},xp:0,days:{},splat:0,voice:"en-US",rate:0.5,goal:50,freezes:0,frozen:{},best:0,fzAt:0,_t:0}}
+function blank(){return {les:{},ch:{},seenQ:{},srs:{},stats:{ok:0,n:0},xp:0,days:{},splat:0,voice:"en-US",rate:0.5,goal:50,freezes:0,frozen:{},best:0,fzAt:0,_t:0}}
 let USER=null, S=blank(), SB=null, pushT=null;
 function lsGet(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
@@ -1549,7 +1580,7 @@ function lsDel(k){try{localStorage.removeItem(k)}catch(e){}}
 function migrateOld(){const o=lsGet(LSK_OLD);if(!o||lsGet("uxenglish.migrated"))return {};lsSet("uxenglish.migrated",1);const k={};["xp","days","splat","voice","rate","goal","freezes","frozen","best","fzAt"].forEach(x=>{if(o[x]!=null)k[x]=o[x]});return k}
 function loadUser(){const v=lsGet(LSK_DATA+USER.uid);S=Object.assign(blank(),v&&typeof v==="object"?v:migrateOld());S.stats=S.stats||{ok:0,n:0};fixData()}
 /* voce a 0.5x e via le sessioni con esercizi audio */
-function fixData(){if(!S.v05){S.rate=0.5;S.v05=1}Object.keys(S.srs).forEach(k=>{if(AUDIO_ONLY(S.srs[k].q))delete S.srs[k]});Object.values(S.les).forEach(x=>{if(x.run&&!x.run.complete&&x.run.items.some(it=>AUDIO_ONLY(it.q)))x.run=null})}
+function fixData(){S.ch=S.ch||{};if(!S.v05){S.rate=0.5;S.v05=1}Object.keys(S.srs).forEach(k=>{if(AUDIO_ONLY(S.srs[k].q))delete S.srs[k]});Object.values(S.les).forEach(x=>{if(x.run&&!x.run.complete&&x.run.items.some(it=>AUDIO_ONLY(it.q)))x.run=null})}
 function save(){S._t=Date.now();if(USER)lsSet(LSK_DATA+USER.uid,S);cloudPush()}
 
 function hex(buf){return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("")}
@@ -1915,6 +1946,372 @@ const STIT={
 "m6l4|6":"Ciao a tutti, un aggiornamento veloce. Ieri ho finito i wireframe. Oggi li testerò con due utenti. Nessun blocco da parte mia.",
 "m6l5|4":"ship = nave · sheep = pecora","m6l5|5":"component = componente","m6l5|6":"Sposterò il campo sopra il totale.","m6l5|7":"live = vivere · leave = andare via"};
 
+/* =====================================================================
+   STUDIA: i 12 tempi della Activity Guide (forma, usi, esempi della guida)
+   più i capitoli su aggettivi/avverbi, confronti, discussioni e pronuncia.
+   ===================================================================== */
+const CH=[
+{id:"ps",g:"Presente",en:"Present Simple",it:"Presente semplice",c:"orange",tl:"habit",
+ intro:"Il tempo delle **abitudini**, dei **fatti sempre veri** e degli **orari**. Ricorda la **S** con *he / she / it*.",
+ aff:{f:[["Chi","blue"],["verbo (+S con he/she/it)","orange"],["Resto","green"]],r:[["I / you / we / they","work","from home."],["He / she / it","works","from home."]]},
+ neg:{f:[["Chi","blue"],["don't / doesn't","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["I","don't","live","in London."],["The train","doesn't","leave","at 3 pm."]]},
+ q:{f:[["Do / Does","purple"],["Chi","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["Does","the train","leave","at 3 pm?"],["Do","you","live","in Chiang Mai?"]]},
+ short:"*Yes, I do · No, she doesn't.*",
+ uses:[{h:"Fatti, generalizzazioni e verità universali",pdf:"Water boils at 100 degrees Celsius.",ux:"Users scan a page before they read it.",it:"Gli utenti scorrono una pagina prima di leggerla.",ex:[["Dark text on a white background is easy to read.","Il testo scuro su sfondo bianco è facile da leggere."],["Most users don't read the terms.","La maggior parte degli utenti non legge i termini."],["Good contrast helps everyone.","Un buon contrasto aiuta tutti."]]},
+  {h:"Abitudini e routine",pdf:"He leaves for school every morning at 6 am.",ux:"We review the designs every Monday.",it:"Rivediamo i design ogni lunedì.",ex:[["I check my emails every morning.","Controllo le email ogni mattina."],["The team ships every two weeks.","Il team rilascia ogni due settimane."],["She usually works from home on Fridays.","Di solito il venerdì lavora da casa."]]},
+  {h:"Situazioni stabili, che diamo per certe",pdf:"I live in Chiang Mai.",ux:"I work as a product designer.",it:"Lavoro come product designer.",ex:[["Our studio is in Florence.","Il nostro studio è a Firenze."],["Marco leads the design team.","Marco guida il team di design."],["We use Figma for everything.","Usiamo Figma per tutto."]]},
+  {h:"Orari e programmi fissi",pdf:"The train leaves at 3 pm.",ux:"The sprint review starts at 10.",it:"La sprint review inizia alle 10.",ex:[["The workshop begins at 9 tomorrow.","Il workshop inizia domani alle 9."],["The release goes live on Tuesday.","Il rilascio va online martedì."],["The conference ends on Friday.","La conferenza finisce venerdì."]]}],
+ signal:["always","usually","often","sometimes","never","every day","on Mondays","twice a week"],
+ errors:[["She work from home.","She works from home.","Con he/she/it serve la S."],["Does she works?","Does she work?","Con does il verbo resta nudo."],["I not use Sketch.","I don't use Sketch.","La negativa vuole don't + verbo."]],
+ vs:[{h:"Present Simple o Present Continuous?",t:"*I ==work== from home* (sempre, è la mia situazione) · *I'm ==working== from home this week* (solo per ora)."}],
+ act:"Dalla guida (*Hobbies, routines, preferences*): scrivi 5 frasi sulla tua giornata di lavoro con un avverbio di frequenza diverso in ognuna."},
+{id:"pc",g:"Presente",en:"Present Continuous",it:"Presente progressivo",c:"orange",tl:"now",
+ intro:"Il tempo di ciò che **succede adesso**, in **questo periodo** o è **già fissato** a breve: *BE + verbo-ing*.",
+ aff:{f:[["Chi","blue"],["am / is / are","orange"],["verbo-ing","pink"],["Resto","green"]],r:[["Jack","is","talking","with friends."],["We","'re","redesigning","the app."]]},
+ neg:{f:[["Chi","blue"],["am / is / are + not","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["Thailand","isn't","getting","wealthier."],["I","'m not","using","Figma today."]]},
+ q:{f:[["Am / Is / Are","orange"],["Chi","blue"],["verbo-ing","pink"],["Resto","green"]],r:[["Are","you","going","away next week?"],["Is","she","sharing","her screen?"]]},
+ short:"*Yes, I am · No, she isn't.*",
+ uses:[{h:"Azioni in corso adesso",pdf:"Jack is talking with friends.",ux:"I'm sharing my screen now.",it:"Sto condividendo lo schermo adesso.",ex:[["Look, the build is failing right now.","Guarda, la build sta fallendo proprio adesso."],["Sorry, I'm presenting at the moment.","Scusa, sto presentando in questo momento."],["Laura is talking to the client now.","Laura sta parlando con il cliente adesso."]]},
+  {h:"Situazioni temporanee",pdf:"Jack is working as a waiter in the summer holidays.",ux:"This sprint we're working on dark mode.",it:"In questo sprint stiamo lavorando alla modalità scura.",ex:[["I'm working from Milan this month.","Questo mese lavoro da Milano."],["We're testing a new onboarding these days.","In questi giorni stiamo testando un nuovo onboarding."],["Marco is covering for Giulia this week.","Questa settimana Marco sostituisce Giulia."]]},
+  {h:"Piani e appuntamenti futuri già fissati",pdf:"We are going to Vietnam next week.",ux:"I'm meeting the client on Friday.",it:"Venerdì incontro il cliente.",ex:[["We're presenting to the board on Monday.","Lunedì presentiamo al consiglio."],["She's flying to London tomorrow.","Domani vola a Londra."],["I'm having lunch with the PM at one.","All'una pranzo con il PM."]]},
+  {h:"Tendenze e cambiamenti",pdf:"Thailand is getting wealthier each year.",ux:"Mobile traffic is growing every month.",it:"Il traffico mobile cresce ogni mese.",ex:[["Our conversion rate is improving.","Il nostro tasso di conversione sta migliorando."],["Users are getting used to dark mode.","Gli utenti si stanno abituando alla modalità scura."],["The app is getting slower.","L'app sta diventando più lenta."]]},
+  {h:"Irritazioni (con always)",pdf:"Jack is always speaking negatively.",ux:"The client is always changing the brief!",it:"Il cliente cambia sempre il brief!",ex:[["He's always interrupting me in meetings.","Mi interrompe sempre nelle riunioni."],["You're always forgetting the password!","Dimentichi sempre la password!"],["The build is always breaking on Fridays.","La build si rompe sempre di venerdì."]]}],
+ signal:["now","right now","at the moment","today","this week","this sprint","currently","Look!"],
+ errors:[["I working on it.","I'm working on it.","Serve BE prima del verbo-ing."],["I'm knowing the answer.","I know the answer.","know è un verbo di stato: niente -ing."],["Are you go to the meeting?","Are you going to the meeting?","Dopo BE serve -ing."]],
+ vs:[{h:"Present Continuous o Present Simple?",t:"*She ==is working== remotely this month* (temporaneo) · *She ==works== remotely* (stabile)."},{h:"Per il futuro",t:"Usa il present continuous per gli appuntamenti con altre persone: *We==’re meeting== the client at 3.*"}],
+ act:"Dalla guida (*Make a list of what you are wearing / Spot the difference*): descrivi in 5 frasi cosa sta succedendo adesso intorno a te e nel tuo progetto."},
+{id:"pp",g:"Presente",en:"Present Perfect",it:"Present perfect",c:"orange",tl:"bridge",
+ intro:"Il **ponte tra passato e presente**: qualcosa è successo prima, ma conta **adesso**. *have / has + participio*.",
+ aff:{f:[["Chi","blue"],["have / has","purple"],["participio","orange"],["Resto","green"]],r:[["I","have","eaten","my dinner."],["He","has","finished","his shift."]]},
+ neg:{f:[["Chi","blue"],["haven't / hasn't","purple"],["participio","orange"],["Resto","green"]],r:[["He","hasn't","worked","for 2 years."],["We","haven't","finished","yet."]]},
+ q:{f:[["Have / Has","purple"],["Chi","blue"],["participio","orange"],["Resto","green"]],r:[["Have","you","eaten","dinner yet?"],["Has","she","sent","the file?"]]},
+ short:"*Yes, I have · No, she hasn't.*",
+ uses:[{h:"Azioni avvenute in un momento non specificato",pdf:"I have eaten my dinner.",ux:"I've worked with banks and startups.",it:"Ho lavorato con banche e startup.",ex:[["Have you ever used Framer?","Hai mai usato Framer?"],["We've run more than 50 usability tests.","Abbiamo fatto più di 50 test di usabilità."],["She has designed three design systems.","Ha progettato tre design system."]]},
+  {h:"Azioni passate con effetto sul presente",pdf:"He has finished his shift.",ux:"We've finished the prototype: you can test it.",it:"Abbiamo finito il prototipo: puoi testarlo.",ex:[["I've lost the link. Can you send it again?","Ho perso il link. Puoi rimandarlo?"],["The client has approved the design.","Il cliente ha approvato il design."],["Someone has broken the build.","Qualcuno ha rotto la build."]]},
+  {h:"Azioni iniziate nel passato che continuano",pdf:"He has worked as a teacher for 10 years.",ux:"I've been a designer since 2013.",it:"Faccio il designer dal 2013.",ex:[["We've used Figma since 2019.","Usiamo Figma dal 2019."],["Marco has led the team for two years.","Marco guida il team da due anni."],["I've known the client for ages.","Conosco il cliente da una vita."]]}],
+ signal:["ever","never","already","yet","just","so far","for","since"],
+ errors:[["I have finished it yesterday.","I finished it yesterday.","Con una data precisa serve il passato semplice."],["I work here since 2013.","I've worked here since 2013.","Con since/for l'inglese non usa il presente."],["Have you finished yet it?","Have you finished it yet?","yet va in fondo."]],
+ vs:[{h:"Present Perfect o Past Simple?",t:"*I==’ve lost== the file* (ora non ce l'ho) · *I ==lost== the file yesterday* (fatto chiuso, con data)."},{h:"For o since",t:"*for* + durata (*for two years*) · *since* + punto di partenza (*since 2019*)."}],
+ act:"Dalla guida (*Experiences and achievements*): scrivi 5 esperienze o risultati della tua carriera senza data (*I've worked…, I've designed…*)."},
+{id:"ppc",g:"Presente",en:"Present Perfect Continuous",it:"Present perfect progressivo",c:"orange",tl:"bridgeing",
+ intro:"Un'attività che **parte dal passato e arriva fino ad adesso**, quando conta **la durata**: *have / has been + verbo-ing*.",
+ aff:{f:[["Chi","blue"],["have / has been","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["He","has been","writing","a book for 2 years."],["I","'ve been","waiting","for an hour."]]},
+ neg:{f:[["Chi","blue"],["haven't / hasn't been","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["He","hasn't been","waiting","for an hour."],["We","haven't been","working","on it."]]},
+ q:{f:[["Have / Has","purple"],["Chi","blue"],["been + verbo-ing","pink"],["Resto","green"]],r:[["Have","you","been living","here long?"],["How long","have you","been working","on this?"]]},
+ short:"*Yes, I have · No, he hasn't.*",
+ uses:[{h:"Attività iniziate nel passato che continuano ora",pdf:"He has been writing a book for 2 years.",ux:"We've been working on the redesign since March.",it:"Lavoriamo al redesign da marzo.",ex:[["I've been learning English for six months.","Studio inglese da sei mesi."],["They've been testing the app all week.","Testano l'app da tutta la settimana."],["She's been leading the project since January.","Guida il progetto da gennaio."]]},
+  {h:"Attività appena finite (se ne vedono gli effetti)",pdf:"I have been waiting for you for about an hour.",ux:"Sorry, I've been fixing a bug: I didn't see your message.",it:"Scusa, stavo sistemando un bug: non ho visto il messaggio.",ex:[["I'm tired: I've been designing all day.","Sono stanco: ho progettato tutto il giorno."],["Your eyes are red. Have you been looking at the screen all night?","Hai gli occhi rossi. Hai guardato lo schermo tutta la notte?"],["The floor is wet: it's been raining.","Il pavimento è bagnato: ha piovuto."]]},
+  {h:"Situazioni temporanee",pdf:"We have been living in Penang for a month.",ux:"I've been working from Milan for two weeks.",it:"Lavoro da Milano da due settimane.",ex:[["We've been using a temporary logo since the launch.","Usiamo un logo provvisorio dal lancio."],["He's been staying in London for a few days.","Sta a Londra da qualche giorno."],["I've been covering for Giulia this month.","Questo mese sostituisco Giulia."]]}],
+ signal:["for","since","all day","all week","lately","recently","How long…?"],
+ errors:[["I'm working here since 2013.","I've been working here since 2013.","Con since/for: have been + -ing."],["I've been knowing him for years.","I've known him for years.","know è di stato: present perfect semplice."],["How long are you learning English?","How long have you been learning English?","Domanda sulla durata fino a ora."]],
+ vs:[{h:"Present Perfect Continuous o semplice?",t:"*I==’ve been writing== the copy all morning* (l'attività, la durata) · *I==’ve written== three pages* (il risultato, quante)."}],
+ act:"Dalla guida (*recent changes*): descrivi 3 cambiamenti recenti nel tuo lavoro con *have been + -ing* e la loro durata."},
+{id:"pas",g:"Passato",en:"Past Simple",it:"Passato semplice",c:"indigo",tl:"dot",
+ intro:"Azioni **finite** in un momento **preciso** del passato. Verbi regolari in *-ed*, irregolari in seconda colonna; domande e negative con *did*.",
+ aff:{f:[["Chi","blue"],["verbo-ed / irregolare","orange"],["Resto","green"]],r:[["We","ate","dinner an hour ago."],["We","lived","in Penang last year."]]},
+ neg:{f:[["Chi","blue"],["didn't","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["He","didn't","learn","any Thai."],["We","didn't","change","the logo."]]},
+ q:{f:[["Did","purple"],["Chi","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["Did","you","work","there long?"],["Did","the client","like","it?"]]},
+ short:"*Yes, I did · No, they didn't.*",
+ uses:[{h:"Eventi passati ormai conclusi",pdf:"We ate dinner about an hour ago.",ux:"We launched the app in 2022.",it:"Abbiamo lanciato l'app nel 2022.",ex:[["I sent the file yesterday.","Ho mandato il file ieri."],["The meeting ended at 5.","La riunione è finita alle 5."],["She left the company last year.","Ha lasciato l'azienda l'anno scorso."]]},
+  {h:"Situazioni passate (non più vere)",pdf:"We lived in Penang last year.",ux:"I worked for an agency before I went freelance.",it:"Lavoravo per un'agenzia prima di diventare freelance.",ex:[["We used Sketch until 2019.","Abbiamo usato Sketch fino al 2019."],["The old site had ten menus.","Il vecchio sito aveva dieci menu."],["He was the only designer in the team.","Era l'unico designer del team."]]},
+  {h:"Una serie di azioni in sequenza",pdf:"He boarded the plane and sat in Business Class.",ux:"We interviewed users, found the problem and redesigned the form.",it:"Abbiamo intervistato gli utenti, trovato il problema e riprogettato il form.",ex:[["I opened Figma, duplicated the frame and changed the colors.","Ho aperto Figma, duplicato il frame e cambiato i colori."],["She logged in, clicked the button and saw the error.","Ha fatto l'accesso, cliccato il bottone e visto l'errore."],["We tested, iterated and shipped.","Abbiamo testato, iterato e rilasciato."]]}],
+ signal:["yesterday","last week","last month","ago","in 2023","on Monday","when…?"],
+ errors:[["Did you sent it?","Did you send it?","Con did il verbo è nudo."],["I didn't went.","I didn't go.","Il passato si mette una volta sola."],["We finded the bug.","We found the bug.","find è irregolare: found."]],
+ vs:[{h:"Past Simple o Present Perfect?",t:"*We ==launched== in May* (data precisa) · *We==’ve launched== the app* (conta il risultato adesso)."},{h:"Past Simple o Past Continuous?",t:"*I ==presented== the work* (azione intera) · *I ==was presenting== when…* (azione in corso, interrotta)."}],
+ act:"Dalla guida (*What did you do last summer?*): racconta in 6 frasi l'ultimo progetto che hai chiuso, in ordine cronologico."},
+{id:"pac",g:"Passato",en:"Past Continuous",it:"Passato progressivo",c:"indigo",tl:"spanpast",
+ intro:"Un'azione **in corso** in un momento del passato, spesso **interrotta** da un'altra: *was / were + verbo-ing*.",
+ aff:{f:[["Chi","blue"],["was / were","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["I","was","having","a sleep when the phone rang."],["I","was","cleaning","the kitchen."]]},
+ neg:{f:[["Chi","blue"],["wasn't / weren't","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["He","wasn't","working","on his project."],["They","weren't","listening.","—"]]},
+ q:{f:[["Was / Were","purple"],["Chi","blue"],["verbo-ing","pink"],["Resto","green"]],r:[["Were","you","working","at 6?"],["Was","she","presenting","when it crashed?"]]},
+ short:"*Yes, I was · No, they weren't.*",
+ uses:[{h:"Durata nel passato (sfondo interrotto)",pdf:"I was having a sleep when the telephone rang.",ux:"I was presenting when the Wi-Fi died.",it:"Stavo presentando quando è saltato il Wi-Fi.",ex:[["We were testing the app when it crashed.","Stavamo testando l'app quando si è bloccata."],["She was typing when the power went off.","Stava scrivendo quando è andata via la corrente."],["I was having lunch when the client called.","Stavo pranzando quando il cliente ha chiamato."]]},
+  {h:"Azioni in corso nello stesso momento",pdf:"I was cleaning the kitchen while my wife was washing the car.",ux:"I was designing while she was writing the copy.",it:"Io progettavo mentre lei scriveva i testi.",ex:[["The devs were coding while we were testing.","Gli sviluppatori programmavano mentre noi testavamo."],["Marco was talking while everyone was taking notes.","Marco parlava mentre tutti prendevano appunti."],["While I was waiting, I was reading the brief.","Mentre aspettavo, leggevo il brief."]]},
+  {h:"Irritazione (con always)",pdf:"She was always talking negatively about people.",ux:"The old PM was always changing priorities.",it:"Il vecchio PM cambiava sempre le priorità.",ex:[["He was always arriving late to the stand-up.","Arrivava sempre tardi allo stand-up."],["The app was always crashing on Android.","L'app andava sempre in crash su Android."],["They were always asking for one more revision.","Chiedevano sempre un'altra revisione."]]},
+  {h:"Domande e richieste gentili",pdf:"I was wondering whether you could help me.",ux:"I was wondering if you could review my file.",it:"Mi chiedevo se potessi rivedere il mio file.",ex:[["I was hoping we could move the meeting.","Speravo che potessimo spostare la riunione."],["We were thinking of a shorter onboarding.","Pensavamo a un onboarding più corto."],["I was wondering if you had a minute.","Mi chiedevo se avessi un minuto."]]}],
+ signal:["when","while","at 6 pm yesterday","all morning","always"],
+ errors:[["I was work when you called.","I was working when you called.","Dopo was serve -ing."],["While I presented, the Wi-Fi was dying.","While I was presenting, the Wi-Fi died.","L'azione lunga in -ing, quella breve al passato semplice."],["We was testing.","We were testing.","we/you/they → were."]],
+ vs:[{h:"When o while",t:"*when* + azione breve (*when the phone rang*) · *while* + azione lunga (*while I was working*)."}],
+ act:"Dalla guida (*Be a detective*): scrivi un alibi: cosa stavi facendo ieri alle 9, alle 13 e alle 18?"},
+{id:"pap",g:"Passato",en:"Past Perfect",it:"Trapassato prossimo",c:"indigo",tl:"before",
+ intro:"Il **passato del passato**: un'azione successa **prima** di un'altra azione passata. *had + participio*, uguale per tutte le persone.",
+ aff:{f:[["Chi","blue"],["had","purple"],["participio","orange"],["Resto","green"]],r:[["I","had","finished","my work before I went running."],["The client","had","approved","the design."]]},
+ neg:{f:[["Chi","blue"],["hadn't","purple"],["participio","orange"],["Resto","green"]],r:[["I","hadn't","read","anything before the test."],["We","hadn't","seen","the data."]]},
+ q:{f:[["Had","purple"],["Chi","blue"],["participio","orange"],["Resto","green"]],r:[["Had","she","ever swum","before the competition?"],["Had","you","sent","it before the call?"]]},
+ short:"*Yes, I had · No, she hadn't.*",
+ uses:[{h:"Azione completata prima di un'altra azione passata",pdf:"I had finished my work before I went running.",ux:"The client had approved the design before the meeting.",it:"Il cliente aveva approvato il design prima della riunione.",ex:[["When I arrived, the demo had already started.","Quando sono arrivato, la demo era già iniziata."],["We had fixed the bug before the release.","Avevamo sistemato il bug prima del rilascio."],["She had left before I could ask.","Era andata via prima che potessi chiedere."]]},
+  {h:"Discorso indiretto",pdf:"He asked me whether I had run the marathon last year.",ux:"The PM asked if I had sent the specs.",it:"Il PM ha chiesto se avessi mandato le specifiche.",ex:[["She said she had finished the wireframes.","Ha detto di aver finito i wireframe."],["They told us they had tested it.","Ci hanno detto di averlo testato."],["He explained that he had lost the file.","Ha spiegato di aver perso il file."]]},
+  {h:"Rimpianti sul passato (wish)",pdf:"I wished I had eaten more before the test.",ux:"I wish we had tested it with real users.",it:"Vorrei che l'avessimo testato con utenti reali.",ex:[["I wish I had saved the file.","Vorrei aver salvato il file."],["She wished she had asked more questions.","Avrebbe voluto fare più domande."],["We wish we had started earlier.","Vorremmo aver iniziato prima."]]},
+  {h:"Periodo ipotetico del terzo tipo",pdf:"If Jack had worked harder he would have passed the exam.",ux:"If we had tested earlier, we would have found the bug.",it:"Se avessimo testato prima, avremmo trovato il bug.",ex:[["If you had asked, I would have helped.","Se avessi chiesto, ti avrei aiutato."],["If the client had replied, we would have started.","Se il cliente avesse risposto, avremmo iniziato."],["If I had known, I would have come.","Se l'avessi saputo, sarei venuto."]]}],
+ signal:["before","after","already","by the time","when","just"],
+ errors:[["When I arrived, the meeting already started.","When I arrived, the meeting had already started.","Ciò che è successo prima va al past perfect."],["I had went home.","I had gone home.","Dopo had serve il participio."],["If we would have tested…","If we had tested…","Dopo if niente would."]],
+ vs:[{h:"Past Perfect o Past Simple?",t:"*When I arrived, they ==left==* (sono usciti quando sono arrivato) · *When I arrived, they ==had left==* (erano già usciti)."}],
+ act:"Dalla guida (*Story*): racconta perché un progetto è finito in ritardo partendo dalla fine e usando *had* per le cause."},
+{id:"papc",g:"Passato",en:"Past Perfect Continuous",it:"Trapassato progressivo",c:"indigo",tl:"beforeing",
+ intro:"Un'attività **durata a lungo** fino a un momento del passato: *had been + verbo-ing*. Spiega la **causa** di una situazione passata.",
+ aff:{f:[["Chi","blue"],["had been","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["They","had been","waiting","for an hour before the bus arrived."],["It","had been","raining.","—"]]},
+ neg:{f:[["Chi","blue"],["hadn't been","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["They","hadn't been","waiting","long."],["We","hadn't been","testing","enough."]]},
+ q:{f:[["Had","purple"],["Chi","blue"],["been + verbo-ing","pink"],["Resto","green"]],r:[["Had","you","been waiting","long?"],["How long","had they","been working","on it?"]]},
+ short:"*Yes, I had · No, they hadn't.*",
+ uses:[{h:"Durata di un'azione fino a un momento del passato",pdf:"They had been waiting for nearly an hour before the bus arrived.",ux:"We had been testing for two hours before the app crashed.",it:"Testavamo da due ore quando l'app si è bloccata.",ex:[["She had been working there for ten years when she left.","Lavorava lì da dieci anni quando se n'è andata."],["I had been waiting for 20 minutes when the call started.","Aspettavo da 20 minuti quando la call è iniziata."],["They had been designing for weeks before the launch.","Progettavano da settimane prima del lancio."]]},
+  {h:"La causa di una situazione passata",pdf:"The road was slippery because it had been raining.",ux:"I was tired because I had been designing all day.",it:"Ero stanco perché avevo progettato tutto il giorno.",ex:[["The team was stressed because they had been working late.","Il team era stressato perché aveva lavorato fino a tardi."],["My eyes hurt because I had been looking at the screen.","Mi facevano male gli occhi perché avevo guardato lo schermo."],["The client was angry because he had been waiting.","Il cliente era arrabbiato perché aspettava."]]},
+  {h:"Periodo ipotetico del terzo tipo",pdf:"If I had been waiting in the right place I would have caught the right bus.",ux:"If we had been tracking the data, we would have seen the drop.",it:"Se avessimo monitorato i dati, avremmo visto il calo.",ex:[["If I had been listening, I would have understood.","Se avessi ascoltato, avrei capito."],["If they had been testing, they would have found it.","Se avessero testato, l'avrebbero trovato."],["If she had been paying attention, she would have noticed.","Se fosse stata attenta, se ne sarebbe accorta."]]},
+  {h:"Discorso indiretto",pdf:"He said that he had been waiting for ages before she arrived.",ux:"She said she had been working on the file all night.",it:"Ha detto che aveva lavorato al file tutta la notte.",ex:[["He told me he had been looking for the link.","Mi ha detto che stava cercando il link."],["They said they had been testing since 9.","Hanno detto che testavano dalle 9."],["She explained she had been waiting for feedback.","Ha spiegato che aspettava un feedback."]]}],
+ signal:["for","since","before","when","all day","How long…?"],
+ errors:[["We had been test for hours.","We had been testing for hours.","Dopo been serve -ing."],["I had been knowing him.","I had known him.","know è di stato: niente -ing."],["They have been waiting before the bus arrived.","They had been waiting before the bus arrived.","Nel passato serve had."]],
+ vs:[{h:"Past Perfect Continuous o semplice?",t:"*I ==had been writing== for hours* (l'attività, la durata) · *I ==had written== two pages* (il risultato)."}],
+ act:"Dalla guida (*Sponsored walk*): spiega perché eri stanco l'ultima volta dopo una consegna: *I was tired because I had been…*"},
+{id:"fs",g:"Futuro",en:"Future Simple",it:"Futuro semplice",c:"purple",tl:"future",
+ intro:"*will* + verbo nudo: **promesse**, **decisioni prese ora**, **previsioni**. Nella pratica si usa soprattutto per decidere sul momento o promettere.",
+ aff:{f:[["Chi","blue"],["will","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["I","will","cook","you lunch tomorrow."],["It","'ll","rain","later."]]},
+ neg:{f:[["Chi","blue"],["won't","purple"],["verbo nudo","orange"],["Resto","green"]],r:[["He","won't","run","if he hasn't trained."],["It","won't","take","long."]]},
+ q:{f:[["Will","purple"],["Chi","blue"],["verbo nudo","orange"],["Resto","green"]],r:[["Will","he","run","today?"],["Will","you","join","the call?"]]},
+ short:"*Yes, I will · No, I won't.*",
+ uses:[{h:"Promesse",pdf:"I promise I will cook you lunch tomorrow.",ux:"I'll send you the file by tonight, I promise.",it:"Ti mando il file entro stasera, promesso.",ex:[["I'll fix it before the demo.","Lo sistemo prima della demo."],["We'll keep you updated.","Vi terremo aggiornati."],["I won't forget, don't worry.","Non me ne dimenticherò, tranquillo."]]},
+  {h:"Decisioni non pianificate, prese ora",pdf:"I will close the door, it's getting cold.",ux:"OK, I'll share my screen.",it:"OK, condivido lo schermo.",ex:[["I'll have the cheeseburger.","Prendo il cheeseburger."],["Good idea, I'll call the client now.","Buona idea, chiamo subito il cliente."],["Wait, I'll check the specs.","Aspetta, controllo le specifiche."]]},
+  {h:"Previsioni",pdf:"It will rain later if it stays this hot.",ux:"I think users will love the new flow.",it:"Penso che agli utenti piacerà il nuovo flusso.",ex:[["The new version will probably be faster.","La nuova versione sarà probabilmente più veloce."],["I'm sure the client will ask for changes.","Sono sicuro che il cliente chiederà modifiche."],["Dark mode will be popular.","La modalità scura sarà popolare."]]},
+  {h:"Abitudini prevedibili",pdf:"He will always move his eyebrow if he has something to hide.",ux:"Marco will always ask for one more round of feedback.",it:"Marco chiederà sempre un altro giro di feedback.",ex:[["She'll always check the contrast first.","Controlla sempre il contrasto per prima cosa."],["The client will always want the logo bigger.","Il cliente vorrà sempre il logo più grande."],["Users will click the first button they see.","Gli utenti cliccheranno il primo bottone che vedono."]]}],
+ signal:["tomorrow","next week","soon","later","I think…","probably","I promise"],
+ errors:[["I will to send it.","I'll send it.","Dopo will niente to."],["When I will finish, I call you.","When I finish, I'll call you.","Dopo when/if il presente."],["She wills come.","She will come.","will non prende la S."]],
+ vs:[{h:"Will o going to?",t:"*will* = decisione presa ora o previsione · *going to* = piano già deciso (*We==’re going to== redesign the app*)."}],
+ act:"Dalla guida (*predictions about famous people*): scrivi 5 previsioni sul design nel 2030 (*Interfaces will…*)."},
+{id:"fc",g:"Futuro",en:"Future Continuous",it:"Futuro progressivo",c:"purple",tl:"spanfuture",
+ intro:"Un'azione che sarà **in corso** in un momento preciso del futuro: *will be + verbo-ing*. Utile anche per **chiedere dei piani** con gentilezza.",
+ aff:{f:[["Chi","blue"],["will be","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["In one hour I","will be","running","through the rice paddies."],["At 10 I","'ll be","presenting.","—"]]},
+ neg:{f:[["Chi","blue"],["won't be","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["She","won't be","getting up","early tomorrow."],["I","won't be","working","on Friday."]]},
+ q:{f:[["Will","purple"],["Chi","blue"],["be + verbo-ing","pink"],["Resto","green"]],r:[["Will","she","be coming","to the party?"],["Will","you","be joining","the call?"]]},
+ short:"*Yes, I will · No, she won't.*",
+ uses:[{h:"Azioni in corso in un momento futuro",pdf:"In one hour I will be running through the rice paddies.",ux:"At 10 tomorrow I'll be presenting to the client.",it:"Domani alle 10 starò presentando al cliente.",ex:[["This time next week we'll be launching the beta.","La settimana prossima a quest'ora lanceremo la beta."],["Don't call at 3: I'll be interviewing a user.","Non chiamare alle 3: starò intervistando un utente."],["Tomorrow afternoon she'll be working from home.","Domani pomeriggio lavorerà da casa."]]},
+  {h:"Ipotesi sul futuro",pdf:"I bet she will be having a baby very soon.",ux:"I bet they'll be asking for a dark mode soon.",it:"Scommetto che presto chiederanno una modalità scura.",ex:[["They'll be wondering where we are.","Si staranno chiedendo dove siamo."],["The devs will be waiting for the specs.","Gli sviluppatori staranno aspettando le specifiche."],["Users will be expecting faster pages.","Gli utenti si aspetteranno pagine più veloci."]]},
+  {h:"Chiedere dei piani con gentilezza",pdf:"Will she be coming to the party next week?",ux:"Will you be joining the review on Friday?",it:"Parteciperai alla review di venerdì?",ex:[["Will you be using the meeting room?","Userai la sala riunioni?"],["Will the client be attending the demo?","Il cliente parteciperà alla demo?"],["Will you be needing the slides?","Ti serviranno le slide?"]]}],
+ signal:["at 10 tomorrow","this time next week","in one hour","all day tomorrow","I bet"],
+ errors:[["At 10 I will present.","At 10 I'll be presenting.","Azione in corso in quel momento: will be + -ing."],["I will be work.","I will be working.","Dopo will be serve -ing."],["Will you joining?","Will you be joining?","Manca be."]],
+ vs:[{h:"Future Continuous o Future Simple?",t:"*At 10 I==’ll be presenting==* (in corso in quel momento) · *I==’ll present== at 10* (l'azione inizia alle 10)."}],
+ act:"Dalla guida (*diary with bookings*): guarda il tuo calendario di domani e scrivi cosa starai facendo alle 9, alle 12 e alle 16."},
+{id:"fp",g:"Futuro",en:"Future Perfect",it:"Futuro anteriore",c:"purple",tl:"deadline",
+ intro:"Un'azione che sarà **già conclusa entro** un momento del futuro: *will have + participio*. Il tempo delle **scadenze**.",
+ aff:{f:[["Chi","blue"],["will have","purple"],["participio","orange"],["Resto","green"]],r:[["Jack","will have","finished","all the food by then."],["By Friday I","'ll have","sent","the specs."]]},
+ neg:{f:[["Chi","blue"],["won't have","purple"],["participio","orange"],["Resto","green"]],r:[["Jack","will not have","learnt","anything."],["We","won't have","finished","by Monday."]]},
+ q:{f:[["Will","purple"],["Chi","blue"],["have + participio","orange"],["Resto","green"]],r:[["Will","he","have eaten","all the pizza?"],["Will","you","have finished","by Friday?"]]},
+ short:"*Yes, I will · No, we won't.*",
+ uses:[{h:"Azione completata prima di un momento futuro",pdf:"Jack will have finished all the food by the time everyone has arrived.",ux:"By Friday we'll have tested the new flow.",it:"Entro venerdì avremo testato il nuovo flusso.",ex:[["By the end of the sprint I'll have fixed all the bugs.","Entro la fine dello sprint avrò sistemato tutti i bug."],["By June they'll have launched the new site.","Entro giugno avranno lanciato il nuovo sito."],["The client will have seen it by tomorrow.","Il cliente l'avrà visto entro domani."]]},
+  {h:"Durata fino a un momento futuro",pdf:"Jack will have lived in Chiang Mai for 5 years in 2015.",ux:"In March I'll have worked here for ten years.",it:"A marzo lavorerò qui da dieci anni.",ex:[["By next year we'll have used Figma for six years.","L'anno prossimo useremo Figma da sei anni."],["In May she'll have led the team for two years.","A maggio guiderà il team da due anni."],["By 2030 I'll have taught UX for a decade.","Nel 2030 insegnerò UX da dieci anni."]]}],
+ signal:["by Friday","by the end of…","by the time","by then","in 2030"],
+ errors:[["By Friday I will finish.","By Friday I'll have finished.","Con by + scadenza: will have + participio."],["We will have launch.","We will have launched.","Dopo have serve il participio."],["By the time you will arrive…","By the time you arrive…","Dopo by the time il presente."]],
+ vs:[{h:"Future Perfect o Future Simple?",t:"*I==’ll finish== on Friday* (finisco venerdì) · *I==’ll have finished== by Friday* (entro venerdì sarà fatto)."}],
+ act:"Dalla guida (*goals and targets*): scrivi 5 obiettivi di carriera con una scadenza (*By next year I'll have…*)."},
+{id:"fpc",g:"Futuro",en:"Future Perfect Continuous",it:"Futuro anteriore progressivo",c:"purple",tl:"deadlineing",
+ intro:"Quanto **sarà durata** un'attività fino a un momento futuro: *will have been + verbo-ing*. Spiega anche la **causa** di una situazione futura.",
+ aff:{f:[["Chi","blue"],["will have been","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["By next year, Bob and Kathy","will have been","living","together for 50 years."],["In ten minutes you","'ll have been","driving","for 12 hours."]]},
+ neg:{f:[["Chi","blue"],["won't have been","purple"],["verbo-ing","pink"],["Resto","green"]],r:[["He","won't have been","driving","for that long."],["We","won't have been","working","on it for long."]]},
+ q:{f:[["Will","purple"],["Chi","blue"],["have been + verbo-ing","pink"],["Resto","green"]],r:[["Will","he","have been writing","for that many years?"],["How long","will you","have been working","here?"]]},
+ short:"*Yes, he will · No, we won't.*",
+ uses:[{h:"Durata fino a un momento del futuro",pdf:"By next year, Bob and Kathy will have been living together for 50 years.",ux:"In June I'll have been working on this app for two years.",it:"A giugno lavorerò a quest'app da due anni.",ex:[["By 5 pm we'll have been testing for eight hours.","Alle 17 avremo testato per otto ore."],["Next month she'll have been leading the team for a year.","Il mese prossimo guiderà il team da un anno."],["By Friday they'll have been waiting for a week.","Venerdì avranno aspettato una settimana."]]},
+  {h:"La causa di una situazione futura",pdf:"In ten minutes you will have been driving for 12 hours, your eyes are looking tired.",ux:"You'll be tired: by then you'll have been presenting all day.",it:"Sarai stanco: a quel punto avrai presentato tutto il giorno.",ex:[["They'll be stressed: they'll have been working all weekend.","Saranno stressati: avranno lavorato tutto il weekend."],["The client will be impatient: he'll have been waiting for days.","Il cliente sarà impaziente: avrà aspettato giorni."],["We'll need a break: we'll have been testing since 8.","Avremo bisogno di una pausa: testeremo dalle 8."]]}],
+ signal:["by…","for","in ten minutes","by next year","How long…?"],
+ errors:[["By June I will work here for two years.","By June I'll have been working here for two years.","Durata fino a un momento futuro."],["We will have been test.","We will have been testing.","Dopo been serve -ing."],["Will you have been work…?","Will you have been working…?","Serve -ing."]],
+ vs:[{h:"Future Perfect Continuous o semplice?",t:"*By 5 we==’ll have been testing== for hours* (la durata) · *By 5 we==’ll have tested== ten users* (il risultato)."}],
+ act:"Dalla guida (*goals and targets*): calcola da quanto tempo lavorerai nel design tra un anno e scrivilo con *will have been working*."},
+{id:"adv",g:"Altri capitoli",en:"Aggettivi e avverbi",it:"Adjectives and adverbs",c:"teal",tl:"",
+ intro:"L'**aggettivo** descrive un nome (*a ==clear== layout*), l'**avverbio** descrive un verbo, un aggettivo o un altro avverbio (*users read ==quickly==*). È la base del *Gap fill* e dell'*Adjective/Adverb game* della guida.",
+ aff:{f:[["Aggettivo","blue"],["Nome","green"]],r:[["a clean","layout"],["an intuitive","flow"]]},
+ neg:{f:[["Verbo","orange"],["Avverbio","pink"]],r:[["loads","quickly"],["reads","easily"]]},
+ q:{f:[["Avverbio","pink"],["Aggettivo","blue"]],r:[["really","clear"],["slightly","bigger"]]},
+ short:"Nelle schede: *aggettivo + nome* · *verbo + avverbio* · *avverbio + aggettivo*.",
+ uses:[{h:"L'aggettivo va prima del nome e non cambia mai",pdf:"a man is climbing up a mountain",ux:"two simple screens",it:"due schermate semplici",ex:[["We need a bold headline.","Ci serve un titolo deciso."],["It's a consistent icon set.","È un set di icone coerente."],["They're long forms.","Sono form lunghi."]]},
+  {h:"L'avverbio di modo descrive come si fa qualcosa",pdf:"Speed date: tell each other as many adjectives and adverbs as possible.",ux:"The page loads quickly.",it:"La pagina si carica velocemente.",ex:[["She checks the contrast carefully.","Controlla il contrasto con attenzione."],["Users scroll fast on mobile.","Gli utenti scorrono velocemente su mobile."],["The team works well together.","Il team lavora bene insieme."]]},
+  {h:"L'avverbio rafforza un aggettivo",pdf:"Use descriptive words to make a text richer.",ux:"The new flow is really intuitive.",it:"Il nuovo flusso è davvero intuitivo.",ex:[["The text is slightly too small.","Il testo è leggermente troppo piccolo."],["It's extremely easy to use.","È estremamente facile da usare."],["The colors are quite strong.","I colori sono piuttosto forti."]]}],
+ deep:[{h:"Come si forma l'avverbio",t:[["Regola","Esempi"],["aggettivo + ly","quick → quickly · clear → clearly"],["-y → -ily","easy → easily · happy → happily"],["-le → -ly","simple → simply · possible → possibly"],["-ic → -ically","automatic → automatically · basic → basically"],["irregolari","good → well · fast → fast · hard → hard · late → late"]]},
+  {h:"Dove va l'avverbio",p:"Dopo il verbo e il suo oggetto: *She checks ==the contrast== carefully* (mai *She checks carefully the contrast*). Prima dell'aggettivo che rafforza: *==really== clear*."}],
+ signal:["really","very","quite","slightly","extremely","well","fast"],
+ errors:[["The app works good.","The app works well.","good è aggettivo; l'avverbio è well."],["Two simples screens.","Two simple screens.","L'aggettivo non prende la S."],["She checks carefully the contrast.","She checks the contrast carefully.","L'avverbio va dopo l'oggetto."]],
+ vs:[{h:"Hard o hardly?",t:"*She works ==hard==* (lavora sodo) · *She ==hardly== works* (non lavora quasi mai). Lo stesso per *late / lately*."}],
+ act:"Dalla guida (*Adjective/Adverb game*): scrivi il tuo nome in verticale e per ogni lettera trova un aggettivo o un avverbio da design review."},
+{id:"cmp",g:"Altri capitoli",en:"Comparativi e superlativi",it:"Comparatives and superlatives",c:"teal",tl:"",
+ intro:"Confrontare due proposte (*clearer than*) o sceglierne una fra tante (*the clearest*). Nella guida si allenano con la pubblicità e gli slogan.",
+ aff:{f:[["A","blue"],["is","orange"],["-er / more …","pink"],["than B","green"]],r:[["Option B","is","cleaner","than option A."],["This flow","is","more intuitive","than the old one."]]},
+ neg:{f:[["A","blue"],["isn't as","purple"],["aggettivo","pink"],["as B","green"]],r:[["Option A","isn't as","clear","as option B."]]},
+ q:{f:[["Is","orange"],["A","blue"],["-er / more …","pink"],["than B?","green"]],r:[["Is","option B","clearer","than option A?"]]},
+ short:"Superlativo: *the cleanest · the most intuitive*.",
+ uses:[{h:"Comparativo di maggioranza",pdf:"Find some advertising and create your own slogans.",ux:"Version 2 is faster than version 1.",it:"La versione 2 è più veloce della versione 1.",ex:[["The new icons are clearer than the old ones.","Le nuove icone sono più chiare di quelle vecchie."],["This layout is more balanced.","Questo layout è più equilibrato."],["The dark theme is easier on the eyes.","Il tema scuro affatica meno gli occhi."]]},
+  {h:"Superlativo",pdf:"Comparatives and superlatives with adverts.",ux:"This is the most accessible version so far.",it:"Questa è la versione più accessibile finora.",ex:[["It's the cleanest design in the set.","È il design più pulito del gruppo."],["That's the best option.","È l'opzione migliore."],["The checkout is the worst step.","Il checkout è il passaggio peggiore."]]},
+  {h:"Uguaglianza",pdf:"Compare and contrast: Samsung and Apple.",ux:"The new flow is as fast as the old one.",it:"Il nuovo flusso è veloce quanto quello vecchio.",ex:[["Option A isn't as clear as option B.","L'opzione A non è chiara quanto l'opzione B."],["The mobile app is as good as the website.","L'app mobile è valida quanto il sito."],["It's not as simple as it looks.","Non è così semplice come sembra."]]}],
+ signal:["than","the most","the -est","as … as","much","slightly"],
+ errors:[["more clear of","clearer than","Aggettivo corto: -er; il paragone vuole than."],["the most good","the best","good è irregolare."],["more easy","easier","-y → -ier."]],
+ vs:[{h:"Much / slightly + comparativo",t:"*==much== clearer* (molto più chiaro) · *==slightly== bigger* (leggermente più grande)."}],
+ act:"Dalla guida (*Comparatives and superlatives*): scegli due app che usi ogni giorno e scrivi 5 confronti tra le loro interfacce."},
+{id:"disc",g:"Altri capitoli",en:"Discussioni e opinioni",it:"Speaking: discussions",c:"pink",tl:"",
+ intro:"Le strutture della sezione *Speaking* della guida: **esprimere un'opinione**, **interrompere**, **chiudere una discussione** e dare gradi di certezza con *might, may, could*.",
+ aff:{f:[["Apertura","purple"],["opinione","blue"]],r:[["I think","the hierarchy works."],["I believe","users need a shortcut."]]},
+ neg:{f:[["I don't think","purple"],["frase affermativa","blue"]],r:[["I don't think","the icon is clear."],["I don't believe","we need it."]]},
+ q:{f:[["Domanda","purple"],["argomento","blue"]],r:[["What do you think","about the new flow?"],["Do you agree","with option B?"]]},
+ short:"Certezza: *will* (sicuro) · *might / may / could* (forse).",
+ uses:[{h:"Esprimere un'opinione",pdf:"I believe, I think, and the negatives as well.",ux:"I think the onboarding is too long.",it:"Penso che l'onboarding sia troppo lungo.",ex:[["In my opinion, the CTA is too small.","Secondo me la CTA è troppo piccola."],["I believe we should test it first.","Credo che dovremmo prima testarlo."],["I don't think users will notice.","Non penso che gli utenti se ne accorgeranno."]]},
+  {h:"Grado di certezza con i modali",pdf:"Modal verbs show the degree of certainty: might, may or could.",ux:"It might confuse new users.",it:"Potrebbe confondere i nuovi utenti.",ex:[["The change may slow down the page.","La modifica potrebbe rallentare la pagina."],["It could work better on mobile.","Potrebbe funzionare meglio su mobile."],["This will definitely help.","Questo aiuterà di sicuro."]]},
+  {h:"Interrompere",pdf:"Could I stop you there? · Excuse me?",ux:"Sorry to interrupt, but can I ask a question?",it:"Scusa se interrompo, ma posso fare una domanda?",ex:[["Could I stop you there for a second?","Posso fermarti un attimo?"],["Excuse me, can I add something?","Scusa, posso aggiungere una cosa?"],["Sorry, can I jump in?","Scusa, posso intervenire?"]]},
+  {h:"Chiudere la discussione",pdf:"In summary · In conclusion",ux:"In summary, we keep version B.",it:"Riassumendo, teniamo la versione B.",ex:[["In conclusion, the test was a success.","In conclusione, il test è stato un successo."],["To sum up, we need more data.","Riassumendo, ci servono più dati."],["So, the next step is a prototype.","Quindi il prossimo passo è un prototipo."]]}],
+ signal:["I think","I believe","in my opinion","might","may","could","in summary","in conclusion"],
+ errors:[["I think it doesn't work.","I don't think it works.","Si nega think."],["I'm agree.","I agree.","agree è un verbo."],["In my opinion is too dark.","In my opinion, it's too dark.","Serve il soggetto."]],
+ vs:[{h:"Debates (la guida)",t:"Un gruppo argomenta *a favore* (*The main advantage is…*), l'altro *contro* (*On the other hand…*). Allenati scrivendo un pro e un contro per ogni proposta."}],
+ act:"Dalla guida (*Debates*): scegli un tema (es. *Should every app have a dark mode?*) e scrivi 3 frasi a favore e 3 contro."},
+{id:"pron",g:"Altri capitoli",en:"Pronuncia",it:"Phonology",c:"blue",tl:"",
+ intro:"La sezione *Phonology* della guida: **coppie minime** (parole che cambiano per un solo suono), **omofoni** (parole che suonano uguali ma si scrivono diversamente) e **accento** delle parole.",
+ aff:{f:[["Coppia minima","blue"],["suono diverso","pink"]],r:[["ship · sheep","/ɪ/ · /iː/"],["cat · cut","/æ/ · /ʌ/"],["uncle · ankle","/ʌ/ · /æ/"]]},
+ neg:{f:[["Omofoni","blue"],["significati","green"]],r:[["write · right","scrivere · giusto"],["here · hear","qui · sentire"],["by · buy","da / entro · comprare"]]},
+ q:{f:[["Parola","blue"],["accento","pink"]],r:[["PROtotype","1ª sillaba"],["deVELoper","2ª sillaba"],["usaBIlity","3ª sillaba"]]},
+ short:"Le tre schede qui sopra: coppie minime · omofoni · accento.",
+ uses:[{h:"Coppie minime",pdf:"Cat and cut, sheep and ship, but and bat, uncle and ankle.",ux:"We need to fix this bug (not bag).",it:"Dobbiamo sistemare questo bug (non borsa).",ex:[["I have to leave at 6 (not live).","Devo andare via alle 6 (non vivere)."],["Please fill in the form (not feel).","Compila il modulo (non sentire)."],["The calendar is full (not fool).","Il calendario è pieno (non sciocco)."]]},
+  {h:"Omofoni",pdf:"Homophones game: two words sound the same but have different meanings.",ux:"Write the right label.",it:"Scrivi l'etichetta giusta.",ex:[["I can't hear you, come here.","Non ti sento, vieni qui."],["Their files are there.","I loro file sono lì."],["I'll buy it by Friday.","Lo compro entro venerdì."]]},
+  {h:"Accento delle parole",pdf:"Write the syllables on the board and show where the stress should be.",ux:"PROtotype, deVELoper, usaBIlity.",it:"Prototipo, sviluppatore, usabilità.",ex:[["deSIGN","design"],["INterface","interfaccia"],["ANalytics → anaLYTics","analisi dei dati"]]}],
+ deep:[{h:"Gli omofoni più utili al lavoro",t:[["Parole","Significati"],["write · right","scrivere · giusto, destra"],["here · hear","qui · sentire"],["there · their · they're","lì · loro · loro sono"],["by · buy · bye","da, entro · comprare · ciao"],["two · to · too","due · a · anche, troppo"],["week · weak","settimana · debole"],["know · no","sapere · no"],["new · knew","nuovo · sapeva"],["mail · male","posta · maschio"],["wait · weight","aspettare · peso"],["its · it's","suo · è"]]}],
+ signal:["/ɪ/ /iː/","/æ/ /ʌ/","/ʊ/ /uː/","th","h"],
+ errors:[["Their is a bug.","There is a bug.","there = c'è; their = loro."],["Your welcome.","You're welcome.","you're = you are."],["Its ready.","It's ready.","it's = it is."]],
+ vs:[{h:"Phonemic chart",t:"La guida consiglia la tabella fonetica: impara i simboli delle vocali che confondi di più, ad esempio /ɪ/ (*ship*) e /iː/ (*sheep*)."}],
+ act:"Dalla guida (*Minimal pairs bingo*): scrivi 6 coppie minime che ti confondono e una frase di lavoro per ciascuna parola."}
+];
+const CHMAP={};CH.forEach(c=>CHMAP[c.id]=c);
+CH.forEach(c=>{TH["ch-"+c.id]={aff:c.aff,neg:c.neg,q:c.q}});
+const TL={habit:"Ripetuto nel tempo",now:"In corso adesso",bridge:"Dal passato, conta ora",bridgeing:"Dal passato fino a ora (durata)",dot:"Un punto nel passato",spanpast:"In corso in un momento passato",before:"Prima di un altro passato",beforeing:"Durata prima di un altro passato",future:"Un punto nel futuro",spanfuture:"In corso in un momento futuro",deadline:"Concluso entro una scadenza",deadlineing:"Durata fino a una scadenza"};
+
+/* =====================================================================
+   STUDIA: esercizi generati dalla teoria di ogni capitolo
+   ===================================================================== */
+const ING_T=["pc","ppc","pac","papc","fc","fpc"];
+const TT={ps:{t:["every day","on Mondays","every sprint","twice a week","every morning"],it:"pres"},
+ pc:{t:["now","right now","at the moment","this week","today"],it:"prog"},
+ pp:{t:["this week","this year","so far","recently"],it:"past"},
+ ppc:{t:["for two hours","since this morning","for three days","since Monday"],it:"prog"},
+ pas:{t:["yesterday","last week","two days ago","last month","in 2023"],it:"past"},
+ pac:{t:["at 6 pm yesterday","all morning yesterday","when the client called"],it:"pprog"},
+ pap:{t:["before the demo","by the time the client called","before we launched"],it:"trap"},
+ papc:{t:["for two hours before the demo","all morning before the client called","for weeks before the launch"],it:"pprog"},
+ fs:{t:["tomorrow","next week","soon","after lunch"],it:"fut"},
+ fc:{t:["at 10 tomorrow","this time next week","all day tomorrow"],it:"fprog"},
+ fp:{t:["by Friday","by the end of the sprint","by next month"],it:"fperf"},
+ fpc:{t:["for three hours by noon","for a year by June","for two weeks by the launch"],it:"fprog"}};
+Object.assign(TIT,{"so far":"finora","recently":"di recente","this year":"quest'anno","for two hours":"da due ore","since this morning":"da stamattina","for three days":"da tre giorni","since Monday":"da lunedì","in 2023":"nel 2023","at 6 pm yesterday":"ieri alle 18","all morning yesterday":"ieri per tutta la mattina","when the client called":"quando il cliente ha chiamato","before the demo":"prima della demo","by the time the client called":"quando il cliente ha chiamato","before we launched":"prima del lancio","for two hours before the demo":"da due ore prima della demo","all morning before the client called":"da tutta la mattina quando il cliente ha chiamato","for weeks before the launch":"da settimane prima del lancio","soon":"presto","at 10 tomorrow":"domani alle 10","this time next week":"la settimana prossima a quest'ora","all day tomorrow":"domani tutto il giorno","by Friday":"entro venerdì","by the end of the sprint":"entro la fine dello sprint","by next month":"entro il mese prossimo","for three hours by noon":"da tre ore, a mezzogiorno","for a year by June":"da un anno, a giugno","for two weeks by the launch":"da due settimane, al momento del lancio"});
+const AVEVA=["avevo","avevi","aveva","avevamo","avevate","avevano"];
+const _vf=vf;
+vf=function(en,tense,p){if(tense==="trap")return AVEVA[p]+" "+vit(en).pp;return _vf(en,tense,p)};
+const DIST={ps:["pas","fs"],pc:["pas","pp"],pp:["ps","pas"],ppc:["pc","pac"],pas:["ps","fs"],pac:["pc","fc"],pap:["pp","fp"],papc:["ppc","fpc"],fs:["pas","pp"],fc:["pac","pc"],fp:["pap","pp"],fpc:["papc","ppc"]};
+function tVerb(T){for(let i=0;i<30;i++){const v=verb();if(ING_T.includes(T)&&["see","forget","lose"].includes(v.b))continue;return v}return verb()}
+/* parte verbale inglese per tempo e forma */
+function vp(s,v,T,mode){const be=BE(s),was=WAS(s),have=HAVE(s),d=DO(s);const beN=be==="am"?"'m not":be+"n't";
+  const A={ps:PRES(s,v),pc:`${be} ${v.ing}`,pp:`${have} ${v.pp}`,ppc:`${have} been ${v.ing}`,pas:v.p,pac:`${was} ${v.ing}`,pap:`had ${v.pp}`,papc:`had been ${v.ing}`,fs:`will ${v.b}`,fc:`will be ${v.ing}`,fp:`will have ${v.pp}`,fpc:`will have been ${v.ing}`};
+  const N={ps:`${d}n't ${v.b}`,pc:`${beN} ${v.ing}`,pp:`${have}n't ${v.pp}`,ppc:`${have}n't been ${v.ing}`,pas:`didn't ${v.b}`,pac:`${was}n't ${v.ing}`,pap:`hadn't ${v.pp}`,papc:`hadn't been ${v.ing}`,fs:`won't ${v.b}`,fc:`won't be ${v.ing}`,fp:`won't have ${v.pp}`,fpc:`won't have been ${v.ing}`};
+  return mode==="neg"?N[T]:A[T]}
+function qv(s,v,T){const be=BE(s),was=WAS(s),have=HAVE(s),d=DO(s);
+  const Q={ps:[d,v.b],pc:[be,v.ing],pp:[have,v.pp],ppc:[have,"been "+v.ing],pas:["did",v.b],pac:[was,v.ing],pap:["had",v.pp],papc:["had","been "+v.ing],fs:["will",v.b],fc:["will","be "+v.ing],fp:["will","have "+v.pp],fpc:["will","have been "+v.ing]}[T];
+  return `${cap(Q[0])} ${s} ${Q[1]}`}
+function enSent(s,v,T,mode,t){const tail=`${v.o}${t?" "+t:""}`;return mode==="q"?`${qv(s,v,T)} ${tail}?`:`${S0(s)} ${vp(s,v,T,mode)} ${tail}.`}
+function itSent(s,v,T,mode,t){return fin(cl(s,v.b,TT[T].it,v.o,t,mode==="neg"),mode==="q")}
+const auxShort={ps:x=>x.pl?"do":"does",pc:x=>x.I?"am":x.pl?"are":"is",pp:x=>x.pl?"have":"has",ppc:x=>x.pl?"have":"has",pas:()=>"did",pac:x=>x.I||!x.pl?"was":"were",pap:()=>"had",papc:()=>"had",fs:()=>"will",fc:()=>"will",fp:()=>"will",fpc:()=>"will"};
+function negAux(a){return a==="am"?"'m not":a==="will"?"won't":a+"n't"}
+const fdesc=f=>f.filter(x=>!/^(Chi|Resto)$/.test(x[0])).map(x=>x[0]).join(" + ");
+function tenseGens(ch){const T=ch.id;const pick3=()=>{const s=pick(PEOPLE),v=tVerb(T),t=pick(TT[T].t);return {s,v,t}};
+ const gs=[
+  ()=>{const {s,v,t}=pick3();return {t:"gap",p:`${S0(s)} ___ (${v.b}) ${v.o} ${t}.`,a:[vp(s,v,T,"aff")],x:`*${ch.en}*: ${fdesc(ch.aff.f)}.`,it:itSent(s,v,T,"aff",t)}},
+  ()=>{const {s,v,t}=pick3();return {t:"gap",p:`${S0(s)} ___ (not / ${v.b}) ${v.o} ${t}.`,a:[vp(s,v,T,"neg")],x:`Negativa del *${ch.en}*: ${fdesc(ch.neg.f)}.`,it:itSent(s,v,T,"neg",t)}},
+  ()=>{const {s,v,t}=pick3();return {t:"fix",lab:"Trasforma in negativa",p:enSent(s,v,T,"aff",t),a:[enSent(s,v,T,"neg",t)],x:`Negativa: ${fdesc(ch.neg.f)}.`,it:itSent(s,v,T,"neg",t)}},
+  ()=>{const {s,v,t}=pick3();return {t:"fix",lab:"Trasforma in domanda",p:enSent(s,v,T,"aff",t),a:[enSent(s,v,T,"q",t)],x:`Domanda: ${fdesc(ch.q.f)}.`,it:itSent(s,v,T,"q",t)}},
+  ()=>{const {s,v,t}=pick3();const opts=[vp(s,v,T,"aff"),...DIST[T].map(D=>vp(s,v,D,"aff"))];return mc(`${S0(s)} ___ ${v.o} ${t}.`,opts[0],opts.slice(1),`*${t}* → *${ch.en}*.`,{it:itSent(s,v,T,"aff",t)})},
+  ()=>{const {s,v,t}=pick3();const m=pick(["aff","neg","q"]);const e=enSent(s,v,T,m,t);return {t:"order",p:`Metti in ordine (${ch.en}, ${m==="aff"?"affermativa":m==="neg"?"negativa":"domanda"}).`,w:words(e),x:fdesc(ch[m].f)+".",it:itSent(s,v,T,m,t)}},
+  ()=>{const s=pick(P3.filter(x=>x!=="the team").concat(["you","they","the devs","the designers"])),v=tVerb(T),t=pick(TT[T].t);const pl=isPl(s);const I=s==="you";const S=SIT[s]||[];const pron=I?"I":pl?"they":S[2]?"she":"he";const a=auxShort[T]({pl:I?true:pl,I});const yes=Math.random()<.5;const ans=`${pron} ${yes?a:negAux(a)}`;return {t:"gap",p:`${enSent(s,v,T,"q",t)} — ${yes?"Yes":"No"}, ___.`,a:[ans],x:`Risposta breve: ${ch.short.replace(/\*/g,"")}`,it:itSent(s,v,T,"q",t)+` ${yes?"Sì.":"No."}`}},
+  ()=>{const u=pick(ch.uses);const pool=[[u.ux,u.it],...(u.ex||[])];const ex=pick(pool);const others=rshuffle(ch.uses.filter(x=>x!==u)).slice(0,2).map(x=>x.h);if(!others.length)return null;return mc(`Quale uso del *${ch.en}* c'è in: “${ex[0]}”?`,u.h,others,`Uso: *${u.h}*.`,{it:ex[1]||u.it})}
+ ];
+ if(!["papc","fpc"].includes(T))gs.push(()=>{const {s,v,t}=pick3();const acc=[enSent(s,v,T,"aff",t)];if(T==="pp")acc.push(enSent(s,v,"pas","aff",t));return {t:"trans",p:itSent(s,v,T,"aff",t),a:acc,x:`*${ch.en}*: ${fdesc(ch.aff.f)}.`}});
+ return gs}
+/* capitoli extra */
+const ADVB=[["quick","quickly","veloce","velocemente"],["clear","clearly","chiaro","chiaramente"],["easy","easily","facile","facilmente"],["careful","carefully","attento","con attenzione"],["simple","simply","semplice","semplicemente"],["automatic","automatically","automatico","automaticamente"],["good","well","buono","bene"],["fast","fast","veloce","velocemente"],["slow","slowly","lento","lentamente"],["consistent","consistently","coerente","in modo coerente"],["smooth","smoothly","fluido","in modo fluido"],["quiet","quietly","silenzioso","in silenzio"]];
+const ADVN=[["layout","layout",0],["solution","soluzione",1],["process","processo",0],["interface","interfaccia",1],["flow","flusso",0],["animation","animazione",1]];
+const ADVS=[["The page loads ___.","La pagina si carica ___."],["The team works ___ together.","Il team lavora ___ insieme."],["The new menu opens ___.","Il nuovo menu si apre ___."],["Users find the button ___.","Gli utenti trovano il bottone ___."]];
+const adjAgr=(w,f)=>/o$/.test(w)?w.slice(0,-1)+(f?"a":"o"):w;
+const ADVGEN=[
+ ()=>{const s=pick(PEOPLE),v=verb(),a=pick(ADVB.filter(x=>!["automatic","simple","good","consistent"].includes(x[0])));return {t:"gap",p:`${S0(s)} ${PRES(s,v)} ${v.o} ___ (${a[0]}).`,a:[a[1]],x:a[0]===a[1]?`*${a[0]}* è uguale come avverbio.`:`Avverbio: *${a[0]} → ${a[1]}*.`,it:IT(s,v.b,"pres",v.o).replace(/\.$/," "+a[3]+".")}},
+ ()=>{const a=pick(ADVB),n=pick(ADVN);return mc(`It's a ___ ${n[0]}.`,a[0],[a[1]].filter(x=>x!==a[0]).concat(a[0]===a[1]?[a[0]+"ly"]:[]),"Prima di un nome serve l'aggettivo.",{it:`È ${n[2]?"una":"un"} ${n[1]} ${adjAgr(a[2],n[2])}.`})},
+ ()=>{const a=pick(ADVB.filter(x=>x[0]!==x[1])),c=pick(ADVS);return mc(c[0],a[1],[a[0]],"Per descrivere un verbo serve l'avverbio.",{it:c[1].replace("___",a[3])})},
+ ()=>{const a=pick(ADVB.filter(x=>x[0]!==x[1]));return {t:"gap",p:`Avverbio di *${a[0]}*: ___`,a:[a[1]],x:a[0]==="good"?"Irregolare: *good → well*.":a[0].endsWith("y")?"-y → -ily.":a[0].endsWith("le")?"-le → -ly.":a[0].endsWith("ic")?"-ic → -ically.":"aggettivo + ly.",it:`${a[0]} = ${a[2]} · ${a[1]} = ${a[3]}`}}];
+const DISCB=[["Per chiudere la discussione:","In summary, we keep version B.",["For finish, we keep version B.","In the end of all, we keep version B."],"Riassumendo, teniamo la versione B."],["Per concludere:","In conclusion, the test was a success.",["In conclusions, the test was a success.","For concluding, the test was a success."],"In conclusione, il test è stato un successo."],["Per interrompere con garbo:","Could I stop you there?",["Can I stop you here now?","Stop, please, I speak."],"Posso fermarti un attimo?"],["Non hai sentito bene:","Excuse me?",["Repeat me?","What you said?"],"Scusa, come?"],["Forse (poco sicuro):","It might confuse users.",["It will confuse users for sure.","It mights confuse users."],"Potrebbe confondere gli utenti."],["Sicuro:","This will definitely help.",["This might help maybe.","This could helps."],"Questo aiuterà di sicuro."],["Opinione:","I believe we should test it first.",["I'm believe we should test it first.","I believe we should to test it first."],"Credo che dovremmo prima testarlo."],["Chiedere un parere:","What do you think about the new flow?",["What you think about the new flow?","How do you think the new flow?"],"Cosa ne pensi del nuovo flusso?"]];
+const DISCGEN=[()=>{const c=pick(DISCB);return mc(c[0],c[1],c[2],"Formula della sezione *Speaking* della guida.",{it:c[3]})}];
+const HOMO=[["write","right","Please ___ your name here.",0,"Scrivi qui il tuo nome, per favore."],["write","right","That's the ___ answer.",1,"È la risposta giusta."],["here","hear","Can you ___ me?",1,"Mi senti?"],["here","hear","The file is ___.",0,"Il file è qui."],["there","their","___ is a bug in the menu.",0,"C'è un bug nel menu."],["there","their","Users lose ___ progress.",1,"Gli utenti perdono i loro progressi."],["by","buy","I'll send it ___ Friday.",0,"Lo mando entro venerdì."],["by","buy","We need to ___ new licenses.",1,"Dobbiamo comprare nuove licenze."],["two","too","The text is ___ small.",1,"Il testo è troppo piccolo."],["two","too","We have ___ options.",0,"Abbiamo due opzioni."],["week","weak","See you next ___.",0,"Ci vediamo la settimana prossima."],["week","weak","The contrast is ___.",1,"Il contrasto è debole."],["know","no","I don't ___ the answer.",0,"Non so la risposta."],["new","knew","We need a ___ logo.",0,"Ci serve un nuovo logo."],["new","knew","I ___ it was a bug.",1,"Sapevo che era un bug."],["wait","weight","Please ___ a moment.",0,"Aspetta un momento, per favore."],["wait","weight","Use a bolder font ___.",1,"Usa un peso del font più marcato."],["its","it's","___ ready to ship.",1,"È pronto per il rilascio."],["its","it's","The app saves ___ data.",0,"L'app salva i suoi dati."],["mail","male","Check your ___.",0,"Controlla la posta."]];
+const HOMOGEN=[()=>{const h=pick(HOMO);return mc(h[2],h[h[3]],[h[1-h[3]]],`Omofoni: *${h[0]}* e *${h[1]}* suonano uguali.`,{it:h[4]})}];
+function useGen(ch){return ()=>{const u=pick(ch.uses);const ex=pick([[u.ux,u.it],...(u.ex||[])]);const others=rshuffle(ch.uses.filter(x=>x!==u)).slice(0,2).map(x=>x.h);if(!others.length)return null;return mc(`Quale punto della teoria c'è in: “${ex[0]}”?`,u.h,others,`*${u.h}*.`,{it:ex[1]})}}
+function chGens(ch){
+  if(TT[ch.id])return tenseGens(ch);
+  const extra={adv:ADVGEN,cmp:GEN.m4l4,disc:GEN.m5l1.concat(GEN.m5l2.slice(0,4),DISCGEN,DISCGEN,DISCGEN),pron:GEN.m6l2.concat(GEN.m6l1,HOMOGEN,HOMOGEN,HOMOGEN)}[ch.id]||[];
+  return extra.concat([useGen(ch),useGen(ch)]);
+}
+function buildChap(ch,n){
+  const key="ch-"+ch.id;const seen=new Set(S.seenQ[key]||[]);const out=[];const ids=new Set();const gens=chGens(ch);const order=rshuffle(gens.map((_,i)=>i));let k=0,tries=0;
+  while(out.length<n&&tries<600){tries++;let q=null;try{q=gens[order[k++%order.length]]()}catch(e){q=null}if(AUDIO_ONLY(q))continue;
+    const id=key+"~"+hash(JSON.stringify(q,(kk,vv)=>kk==="it"?undefined:vv)).toString(36);if(ids.has(id)||(seen.has(id)&&tries<500))continue;out.push({id,lid:key,q});ids.add(id)}
+  S.seenQ[key]=[...seen,...ids];return out;
+}
+function startChap(id){const ch=CHMAP[id];const items=buildChap(ch,RUN_LEN);
+  RUN=newRunObj("chap",{id,title:ch.en,items,steps:items.map((_,i)=>({k:"q",i})).concat([{k:"sum"}]),c:COLORS[ch.c]});
+  save();V.sheet=null;V.screen="run";resetSel();render();window.scrollTo({top:0});}
+function chProg(id){return (S.ch||{})[id]||{runs:0,best:0}}
+/* linea del tempo del capitolo */
+function timeline(kind){
+  const X={past:40,now:150,fut:260};let m="";
+  const dot=(x,f)=>`<circle cx="${x}" cy="26" r="6" ${f?'fill="var(--c)"':'fill="var(--card-solid)" stroke="var(--c)" stroke-width="2.5"'}/>`;
+  const bar=(a,b)=>`<rect x="${a}" y="21" width="${b-a}" height="10" rx="5" fill="var(--c)" opacity=".85"/>`;
+  const line=x=>`<line x1="${x}" y1="12" x2="${x}" y2="40" stroke="var(--label2)" stroke-width="2" stroke-dasharray="3 3"/>`;
+  switch(kind){
+    case "habit":m=[50,90,130,170,210,250].map(x=>dot(x,1)).join("");break;
+    case "now":m=bar(125,175);break;
+    case "bridge":m=`<line x1="70" y1="26" x2="150" y2="26" stroke="var(--c)" stroke-width="3"/>`+dot(70,1)+dot(150,0);break;
+    case "bridgeing":m=bar(70,152)+dot(150,0);break;
+    case "dot":m=dot(85,1);break;
+    case "spanpast":m=bar(50,115)+`<path d="M86 14 l8 24 M94 14 l-8 24" stroke="var(--bad)" stroke-width="3"/>`;break;
+    case "before":m=dot(55,1)+dot(110,0);break;
+    case "beforeing":m=bar(30,104)+dot(110,0);break;
+    case "future":m=dot(220,1);break;
+    case "spanfuture":m=bar(195,250);break;
+    case "deadline":m=dot(205,1)+line(240);break;
+    case "deadlineing":m=bar(165,238)+line(242);break;
+    default:return "";
+  }
+  return `<div class="tl"><svg viewBox="0 0 300 58" role="img" aria-label="${esc(TL[kind]||"")}"><line x1="10" y1="26" x2="290" y2="26" stroke="var(--label3)" stroke-width="2"/>${line(150).replace('var(--label2)','var(--label)')}${m}<text x="${X.past}" y="54" font-size="10" fill="var(--label2)" text-anchor="middle">PASSATO</text><text x="${X.now}" y="54" font-size="10" fill="var(--label)" text-anchor="middle" font-weight="700">ORA</text><text x="${X.fut}" y="54" font-size="10" fill="var(--label2)" text-anchor="middle">FUTURO</text></svg><span>${esc(TL[kind]||"")}</span></div>`;
+}
+function chapBody(ch){
+  const k=V.thf||"aff";const sec=(id,h)=>`<p class="th-h" id="${id}">${h}</p>`;
+  return `<div class="trick chap" style="--c:${COLORS[ch.c]}" data-lid="ch-${ch.id}">
+    ${sec("cs-form","Come si forma")}
+    <div class="th-seg" role="tablist">${THF.map(([id,sym,lab])=>`<button type="button" role="tab" data-thf="${id}" aria-pressed="${k===id}"><b>${sym}</b>${TT[ch.id]||ch.id==="disc"?lab:["Schema 1","Schema 2","Schema 3"][THF.findIndex(x=>x[0]===id)]}</button>`).join("")}</div>
+    <div class="th-form">${thForm(TH["ch-"+ch.id],k)}</div>
+    <p class="th-short">${fmt(ch.short)}</p>
+    ${sec("cs-uses","Quando si usa")}
+    ${ch.uses.map((u,i)=>`<div class="usecard"><p class="uh"><b>${i+1}</b>${esc(u.h)}</p><p class="pdfq"><span>Dalla guida</span>${esc(u.pdf)}</p><button class="uex" data-say="${esc(u.ux)}"><span>${esc(u.ux)}</span><em>${esc(u.it)}</em></button></div>`).join("")}
+    ${sec("cs-sig","Parole spia")}
+    <div class="th-chips">${ch.signal.map(w=>`<button class="th-chip" data-say="${esc(w)}">${esc(w)}</button>`).join("")}</div>
+    ${ch.deep?ch.deep.map(deepBlock).join(""):""}
+    ${sec("cs-err","Errori tipici")}
+    ${ch.errors.map(e=>`<div class="trap"><span class="ti">${IC.x}</span><span><span class="wrong">${esc(e[0])}</span><span class="arrow">→</span><span class="right">${esc(e[1])}</span><br><span class="why">${fmt(e[2])}</span></span></div>`).join("")}
+    ${sec("cs-vs","Confronti")}
+    ${ch.vs.map(v=>`<div class="dp"><p class="dp-h">${esc(v.h)}</p><p class="dp-p">${fmt(v.t)}</p></div>`).join("")}
+    ${sec("cs-act","Esercizio dalla guida")}
+    <p class="extra">${fmt(ch.act)}</p>
+  </div>`;
+}
+function renderChap(){
+  const ch=CHMAP[V.ch];const p=chProg(ch.id);
+  const chips=[["cs-form","Forma"],["cs-uses","Usi"],["cs-sig","Parole spia"],["cs-err","Errori"],["cs-vs","Confronti"],["cs-act","Dalla guida"]];
+  return `${navBar({})}<div style="--c:${COLORS[ch.c]};padding-bottom:120px">
+   <div class="chhero"><p class="eyebrow">${esc(ch.g)} · ${esc(ch.it)}</p><h1>${esc(ch.en)}</h1><p class="lead">${fmt(ch.intro)}</p>${timeline(ch.tl)}
+    ${p.runs?`<p class="chstat">${p.runs} ${p.runs===1?"sessione":"sessioni"} · migliore ${p.best}%</p>`:""}</div>
+   <div class="chnav">${chips.map(([id,l])=>`<button class="chip2" data-jump="${id}">${l}</button>`).join("")}</div>
+   ${chapBody(ch)}</div>
+   <div class="dock" style="--c:${COLORS[ch.c]}"><div class="dock-in"><button class="btn" data-act="chapgo">${i3("splat")}Esercitati su questo capitolo · ${RUN_LEN} esercizi</button></div></div>`;
+}
+function renderStudy(q){
+  const groups=["Presente","Passato","Futuro","Altri capitoli"];
+  const match=c=>!q||(c.en+" "+c.it+" "+c.intro+" "+JSON.stringify(c.uses)+" "+c.signal.join(" ")).toLowerCase().includes(q);
+  const html=groups.map(g=>{const cs=CH.filter(c=>c.g===g&&match(c));if(!cs.length)return "";
+    return `<p class="chg">${g}</p><div class="chgrid">${cs.map(c=>{const p=chProg(c.id);return `<button class="chcard" style="--c:${COLORS[c.c]}" data-ch="${c.id}"><span class="chk">${esc(c.it)}</span><span class="chn">${esc(c.en)}</span><span class="chb"><i style="width:${p.best}%"></i></span><span class="chm">${p.runs?`${p.best}% · ${p.runs} ${p.runs===1?"sessione":"sessioni"}`:`${c.uses.length} usi · esercizi`}</span></button>`}).join("")}</div>`}).join("");
+  return html?`<p class="sech">Studia · dalla guida TEFL</p><p class="secf" style="padding-top:0">I 12 tempi verbali della guida e quattro capitoli su Writing, Speaking e Phonology: teoria completa ed esercizi costruiti sulla teoria.</p>${html}`:"";
+}
+
 const LES = {};
 MODS.forEach(m=>m.lessons.forEach((l,i)=>{l.mod=m;l.n=i+1;LES[l.id]=l;l.q.forEach((q,k)=>{if(!q.it&&STIT[l.id+"|"+k])q.it=STIT[l.id+"|"+k]})}));
 
@@ -1987,7 +2384,7 @@ function gain(x){
 }
 function totals(){let les=0,all=0,runs=0;MODS.forEach(m=>m.lessons.forEach(l=>{all++;const p=lProg(l);runs+=p.runs;if(p.runs>0)les++}));const st=S.stats||{ok:0,n:0};return {les,all,runs,acc:st.n?Math.round(st.ok/st.n*100):0,seen:Object.values(S.seenQ).reduce((a,x)=>a+x.length,0)}}
 function srsAdd(it){S.srs[it.id]={q:it.q,lid:it.lid,box:1,due:TODAY()}}
-function srsDue(){const t=TODAY();return Object.keys(S.srs).filter(k=>S.srs[k].due<=t&&LES[S.srs[k].lid]&&S.srs[k].q)}
+function srsDue(){const t=TODAY();return Object.keys(S.srs).filter(k=>{const x=S.srs[k];return x.due<=t&&x.q&&(LES[x.lid]||(x.lid.startsWith("ch-")&&CHMAP[x.lid.slice(3)]))})}
 function srsResult(id,ok){const it=S.srs[id];if(!it)return;it.box=ok?Math.min(5,it.box+1):1;it.due=addDays(TODAY(),ok?IV[it.box]:1)}
 function srsBoxes(){const b=[0,0,0,0,0];Object.values(S.srs).forEach(v=>b[Math.max(1,Math.min(5,v.box))-1]++);return b}
 
@@ -2042,11 +2439,11 @@ function finishBonus(){
   if(RUN.bonusDone)return;RUN.bonusDone=true;
   if(RUN.kind==="lesson"){const st=S.les[RUN.id];const r=st.run;const vals=Object.values(r.ans);
     if(vals.length>=r.items.length&&!r.complete){r.complete=true;st.runs++;const sc=Math.round(vals.filter(x=>x.ok).length/r.items.length*100);st.best=Math.max(st.best,sc);RUN.xp.done=10;if(vals.every(x=>x.ok))RUN.xp.perfect=10}}
-  else if(RUN.res.length){RUN.xp.done=5;if(RUN.res.every(r=>r.ok))RUN.xp.perfect=5}
+  else if(RUN.res.length){RUN.xp.done=5;if(RUN.res.every(r=>r.ok))RUN.xp.perfect=5;if(RUN.kind==="chap"){const c=S.ch[RUN.id]||(S.ch[RUN.id]={runs:0,best:0});c.runs++;c.best=Math.max(c.best,Math.round(RUN.res.filter(r=>r.ok).length/RUN.res.length*100))}}
   const b=RUN.xp.done+RUN.xp.perfect;if(b)gain(b);save();
 }
 function advance(){RUN.pos=Math.min(RUN.pos+1,RUN.steps.length-1);if(RUN.steps[RUN.pos].k==="sum")finishBonus();resetSel();render();window.scrollTo({top:0});autoSpeak()}
-function quitRun(){const r=RUN;RUN=null;if(r&&r.kind==="lesson")go({screen:"module",mod:LES[r.id].mod.id});else go({screen:"home",tab:"rev"})}
+function quitRun(){const r=RUN;RUN=null;if(r&&r.kind==="chap"){go({screen:"chap",ch:r.id});return}if(r&&r.kind==="lesson")go({screen:"module",mod:LES[r.id].mod.id});else go({screen:"home",tab:"rev"})}
 function go(patch){Object.assign(V,patch);sel=null;FB=null;CONF=null;stopGame();render();window.scrollTo({top:0})}
 function resetSel(){sel={j:null,text:"",picked:[],map:{},L:null,heard:false};FB=null}
 
@@ -2112,6 +2509,7 @@ function render(){
   else if(V.screen==="run")app.innerHTML=renderRun();
   else if(V.screen==="method")app.innerHTML=renderMethod();
   else if(V.screen==="splat")app.innerHTML=renderSplat();
+  else if(V.screen==="chap")app.innerHTML=renderChap();
   if(V.sheet==="reset")app.insertAdjacentHTML("beforeend",renderSheet());
   if(V.sheet==="theory")app.insertAdjacentHTML("beforeend",renderTheorySheet());
   syncTabbar();
@@ -2259,9 +2657,9 @@ function renderTricksTab(){
       <summary><span class="num">${l.n}</span><span class="rt" style="font-weight:600">${esc(l.h)}</span>${IC.chevR}</summary>
       <div class="tkb">${trickBody(l)}</div></details>`).join("");
   }).join("");
-  const gl=renderGlossary(q);
+  const gl=renderGlossary(q);const st=renderStudy(q);
   return `<label class="search">${IC.search}<input id="tq" type="search" placeholder="Cerca nella teoria o nel vocabolario" value="${esc(V.tq||"")}" autocomplete="off"></label>
-  <div id="tklist">${html+gl||`<p class="empty">Nessun risultato.</p>`}</div>`;
+  <div id="tklist">${st+(html?`<p class="sech">Trick delle lezioni</p>`+html:"")+gl||`<p class="empty">Nessun risultato.</p>`}</div>`;
 }
 
 /* ---------- MODULE ---------- */
@@ -2330,7 +2728,9 @@ function theoryLessons(){
   const it=RUN&&curItem();const l=it?LES[it.lid]:RUN&&RUN.id?LES[RUN.id]:null;if(!l)return [];
   return l.final?l.mod.lessons.filter(x=>!x.final):[l];
 }
+function chapOfRun(){const it=RUN&&curItem();const lid=it?it.lid:RUN&&RUN.kind==="chap"?"ch-"+RUN.id:"";return lid.startsWith("ch-")?CHMAP[lid.slice(3)]:null}
 function renderTheorySheet(){
+  const chT=chapOfRun();if(chT)return `<div class="sheet-bg tsheet-bg" data-act="closesheet"><div class="tsheet" role="dialog" aria-label="Teoria"><div class="tsheet-h"><span class="grab"></span><div><p class="eyebrow" style="color:var(--blue)">Teoria · ${esc(chT.it)}</p><p class="tsheet-t">${esc(chT.en)}</p></div><button class="circ" data-act="closesheet" aria-label="Chiudi">${IC.x}</button></div><div class="tsheet-b">${chapBody(chT)}</div></div></div>`;
   const ls=theoryLessons();
   const body=ls.length===1?trickBody(ls[0]):ls.map(l=>`<details class="tk" style="--c:${cv(l.mod)}"><summary><span class="num">${l.n}</span><span class="rt" style="font-weight:600">${esc(l.h)}</span>${IC.chevR}</summary><div class="tkb">${trickBody(l)}</div></details>`).join("");
   return `<div class="sheet-bg tsheet-bg" data-act="closesheet"><div class="tsheet" role="dialog" aria-label="Teoria">
@@ -2366,9 +2766,9 @@ function renderRun(){
   ${dock?`<div class="dock ${FB?(FB.ok?"ok":"ko"):""}" style="--c:${RUN.c}"><div class="dock-in">${dock}</div></div>`:""}`;
 }
 function renderQ(st){
-  const it=RUN.items[st.i];const l=LES[it.lid];const q=it.q;const done=!!FB;const seed=it.id;
+  const it=RUN.items[st.i];const l=LES[it.lid];const chI=it.lid.startsWith("ch-")?CHMAP[it.lid.slice(3)]:null;const q=it.q;const done=!!FB;const seed=it.id;
   if(!done&&!sel.init){sel.init=true;if(q.t==="fix")sel.text=q.p.replace(/\s*\(.*?\)\s*$/,"");if(q.t==="match")sel.L=0}
-  const label=TYPE_LABEL[q.t]+(RUN.kind!=="lesson"?" · "+l.mod.title:"");
+  const label=(q.lab||TYPE_LABEL[q.t])+(RUN.kind==="review"||RUN.kind==="mix"?" · "+(l?l.mod.title:chI?chI.en:""):"");
   let h=`<p class="qtype">${st.pre?`<span class="pre">Pre-test</span>`:""}${esc(label)}</p>`;
   if(st.pre&&!done)h+=`<p class="qhint">Prova a indovinare prima di studiare: anche un errore qui ti aiuta a ricordare la regola.</p>`;
   if(q.ctx)h+=`<div class="ctx">${fmt(q.ctx)}</div>`;
@@ -2388,8 +2788,8 @@ function renderQ(st){
       const parts=q.p.split("___");const cls=done?(FB.ok?"ok":"ko"):"";
       h+=`<p class="qp">${fmt(parts[0])}<input id="ans" class="${cls}" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Risposta" ${done?"disabled":""} value="${esc(sel.text)}">${fmt(parts[1]||"")}</p>${itl}`;break}
     case "fix":case "trans":{
-      h+=`<p class="qp">${q.t==="fix"?`<span style="text-decoration:underline wavy var(--bad);text-underline-offset:6px;text-decoration-thickness:1.5px">${fmt(q.p)}</span>`:fmt(q.p)}</p>${itl}
-      <textarea id="ans" class="${done?(FB.ok?"ok":"ko"):""}" placeholder="${q.t==="fix"?"Riscrivi la frase corretta":"Scrivi in inglese"}" autocapitalize="sentences" spellcheck="false" ${done?"disabled":""}>${esc(sel.text)}</textarea>`;break}
+      h+=`<p class="qp">${q.t==="fix"&&!q.lab?`<span style="text-decoration:underline wavy var(--bad);text-underline-offset:6px;text-decoration-thickness:1.5px">${fmt(q.p)}</span>`:fmt(q.p)}</p>${itl}
+      <textarea id="ans" class="${done?(FB.ok?"ok":"ko"):""}" placeholder="${q.lab?"Riscrivi la frase trasformata":q.t==="fix"?"Riscrivi la frase corretta":"Scrivi in inglese"}" autocapitalize="sentences" spellcheck="false" ${done?"disabled":""}>${esc(sel.text)}</textarea>`;break}
     case "dict":
       h+=`<p class="qp">Ascolta e scrivi la frase</p><div class="audio"><button class="play" data-say="${esc(q.say)}" aria-label="Ascolta">${IC.play}</button><span><span class="at" style="display:block">Ascolta</span><span class="as">Una volta per il senso, una per le parole</span></span><button class="slow" data-say="${esc(q.say)}" data-rate="0.65">Lento</button></div>
       <textarea id="ans" class="${done?(FB.ok?"ok":"ko"):""}" placeholder="Scrivi quello che senti" autocapitalize="sentences" spellcheck="false" ${done?"disabled":""}>${esc(sel.text)}</textarea>`;break;
@@ -2422,7 +2822,7 @@ function renderQ(st){
     let sol="";
     if(!FB.ok&&q.t!=="shadow")sol=`<p class="fsol">Soluzione: ${textual&&FB.given?diffMark(FB.correct,FB.given):`<strong>${esc(FB.correct)}</strong>`}</p>`;
     const sayTxt=sayFor(q);
-    const links=`${sayTxt?`<button class="pill" data-say="${esc(plain(sayTxt))}">${IC.spk}Ascolta</button>`:""}${!FB.ok&&textual&&q.t!=="gap"?`<button class="pill" data-act="override">${IC.check}Era giusta</button>`:""}${!FB.ok&&theoryLessons().length?`<button class="pill" data-act="theory">${IC.bulb}Rivedi la teoria</button>`:""}`;
+    const links=`${sayTxt?`<button class="pill" data-say="${esc(plain(sayTxt))}">${IC.spk}Ascolta</button>`:""}${!FB.ok&&textual&&q.t!=="gap"?`<button class="pill" data-act="override">${IC.check}Era giusta</button>`:""}${!FB.ok&&(chapOfRun()||theoryLessons().length)?`<button class="pill" data-act="theory">${IC.bulb}Rivedi la teoria</button>`:""}`;
     const xx=FB.pre&&!FB.ok?"Ora il trick ti spiega perché. "+(FB.x?plain(FB.x):""):FB.x;
     dock=`<div class="fb"><span class="fi">${FB.ok?IC.check:IC.x}</span><div><p class="ft">${title}${FB.xp?`<span class="xpchip">${IC.bolt}+${FB.xp} XP</span>`:""}</p>${sol}${xx?`<p class="fx">${fmt(xx)}</p>`:""}${links?`<div class="flinks">${links}</div>`:""}</div></div>
       <button class="btn" data-act="next">Continua</button>`;
@@ -2481,6 +2881,7 @@ function renderSum(){
   let btns="";
   if(RUN.kind==="lesson"){const l=LES[RUN.id];const idx=l.mod.lessons.indexOf(l);const nx=l.mod.lessons[idx+1]||(MODS[MODS.indexOf(l.mod)+1]||{lessons:[]}).lessons[0];
     btns=`${nx?`<button class="btn" data-lesson="${nx.id}">Prossima: ${esc(nx.h)}</button>`:""}<button class="btn ghost" data-act="redo">Nuova sessione con frasi nuove</button><button class="btn ghost" data-act="back">Torna al modulo</button>`}
+  else if(RUN.kind==="chap")btns=`<button class="btn" data-act="chapmore">Altri ${RUN_LEN} esercizi su ${esc(CHMAP[RUN.id].en)}</button><button class="btn ghost" data-act="back">Torna al capitolo</button>`;
   else btns=`<button class="btn" data-act="back">Fatto</button>`;
   return `<div class="summary"><span class="ringwrap">${ring(p2,"bigring",62,150)}<b>${Math.round(p2*100)}%</b></span>
   <h1>${head}</h1><p>${okc} giuste su ${tot}${errs?` · ${errs} ${RUN.kind==="review"?"da rivedere":"nel Ripasso"}`:""}</p>
@@ -2579,6 +2980,8 @@ document.addEventListener("click",e=>{
   if(d.tab){if(V.screen==="home"&&V.tab===d.tab){window.scrollTo({top:0,behavior:"smooth"});return}go({screen:"home",tab:d.tab});return}
   if(d.goal){S.goal=+d.goal;save();render();return}
   if(d.mod){go({screen:"module",mod:d.mod});return}
+  if(d.ch){V.thf="aff";go({screen:"chap",ch:d.ch});return}
+  if(d.jump){const el=document.getElementById(d.jump);if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-110,behavior:"smooth"});return}
   if(d.lesson){startLesson(d.lesson);return}
   if(d.splat!==undefined&&G&&G.on){const o=G.cur.opts[+d.splat];if(o===G.cur.it){G.score++;G.flash="ok"}else{G.miss++;G.flash="ko";toast(G.cur.it[0]+" = "+G.cur.it[1])}newRound();render();setTimeout(()=>{if(G)G.flash=null},360);return}
   if(V.screen==="run"&&!FB&&sel){
@@ -2599,11 +3002,14 @@ document.addEventListener("click",e=>{
     case "back":
       if(V.screen==="run")quitRun();
       else if(V.screen==="splat")go({screen:"home",tab:"rev"});
+      else if(V.screen==="chap")go({screen:"home",tab:"tricks"});
       else go({screen:"home"});break;
     case "askreset":V.sheet="reset";render();break;
     case "theory":V.sheet="theory";render();break;
+    case "chapgo":startChap(V.ch);break;
+    case "chapmore":startChap(RUN.id);break;
     case "closesheet":V.sheet=null;render();break;
-    case "doresetrun":V.sheet=null;if(RUN.kind==="lesson")startLesson(RUN.id,true);else if(RUN.kind==="review")startReview();else startMix();break;
+    case "doresetrun":V.sheet=null;if(RUN.kind==="chap")startChap(RUN.id);else if(RUN.kind==="lesson")startLesson(RUN.id,true);else if(RUN.kind==="review")startReview();else startMix();break;
     case "trick-ok":S.les[RUN.id].run.trick=true;save();advance();break;
     case "next":advance();break;
     case "verify":verify();break;

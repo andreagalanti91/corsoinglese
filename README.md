@@ -15,6 +15,9 @@ Basato sulla *Activity Guide for Teaching English as a Foreign Language* (TEFL F
 | Design critique e meeting | opinioni, interrompere, accordo, chiudere | Speaking, role play, debates |
 | Pronuncia e parlato | word stress, minimal pairs, parlato veloce, stand-up da leggere | Phonology, Reading |
 
+## Studia (dalla guida TEFL)
+Nella scheda **Teoria**: un capitolo per ognuno dei 12 tempi verbali della guida (Present, Past, Future × simple, continuous, perfect, perfect continuous) più Aggettivi e avverbi, Comparativi, Discussioni e Pronuncia. Ogni capitolo: linea del tempo, forma affermativa/negativa/domanda, usi con l'esempio della guida e uno di lavoro, parole spia, errori tipici, confronti ed esercizio dalla guida. *Esercitati su questo capitolo* genera esercizi sulla teoria del capitolo: forme, trasformazioni in negativa e domanda, scelta del tempo dalle parole spia, riconoscimento dell'uso, risposte brevi, riordino e traduzione.
+
 ## Metodo LOOP (70% pratica · 30% teoria)
 - **Look**: un trick breve (regola, formula a colori, trappola per italiani)
 - **Operate**: 8 esercizi a sessione in 8 formati (scegli, completa, riordina, correggi, traduci, abbina, riconosci il componente, accento), nessuno dipende dall'audio
