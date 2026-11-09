@@ -675,6 +675,22 @@ details.tk .formula{margin:12px -14px 0;padding:0 14px}
   .tabbar{bottom:24px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.dlg{margin:6px 0 4px;display:flex;flex-direction:column;gap:8px}
+.dlg-h{font-weight:700;font-size:17px;margin-top:10px} .dlg-c{color:var(--label2);font-size:14px;margin-top:-6px}
+.bub{max-width:88%;align-self:flex-start;align-items:flex-start;display:flex;flex-direction:column;gap:3px}
+.th-seg.two{grid-template-columns:1fr 1fr}
+.bub.me{align-self:flex-end;align-items:flex-end}
+.bub .who{font-size:12px;font-weight:600;color:var(--label2);padding:0 10px}
+.bub .bt{text-align:left;padding:10px 14px;border-radius:18px 18px 18px 6px;background:var(--glass2);display:flex;flex-direction:column;gap:3px;font-size:16px;line-height:1.35;color:var(--label)}
+.bub.me .bt{border-radius:18px 18px 6px 18px;background:color-mix(in srgb,var(--c) 22%,var(--card-solid))}
+.bub .bt em{font-size:13.5px;color:var(--label2);font-style:normal}
+.bub .tag{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.bub .why{font-size:13px;color:var(--label2);padding:0 6px;line-height:1.35}
+.dlg-n{font-size:13px;color:var(--label2);margin-top:8px}
+.dtog{margin:12px 0 4px}
+.dlgcard{display:flex;flex-direction:column;gap:4px;width:100%;text-align:left;padding:18px;margin-bottom:14px;border-radius:22px;background:radial-gradient(120% 140% at 0% 0%,color-mix(in srgb,var(--c) 30%,transparent),transparent 60%),var(--card);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 40%,transparent),var(--shadow);color:var(--label)}
+.dlgcard .chn{font-size:20px;font-weight:700} .dlgcard .chk{font-size:12px;font-weight:700;color:var(--c);text-transform:uppercase;letter-spacing:.04em} .dlgcard .chm{font-size:14px;color:var(--label2)}
+.dlg + .btn{margin-top:14px}
 </style>
 
 <div class="app" id="app"></div>
@@ -2250,7 +2266,7 @@ const HOMO=[["write","right","Please ___ your name here.",0,"Scrivi qui il tuo n
 const HOMOGEN=[()=>{const h=pick(HOMO);return mc(h[2],h[h[3]],[h[1-h[3]]],`Omofoni: *${h[0]}* e *${h[1]}* suonano uguali.`,{it:h[4]})}];
 function useGen(ch){return ()=>{const u=pick(ch.uses);const ex=pick([[u.ux,u.it],...(u.ex||[])]);const others=rshuffle(ch.uses.filter(x=>x!==u)).slice(0,2).map(x=>x.h);if(!others.length)return null;return mc(`Quale punto della teoria c'è in: “${ex[0]}”?`,u.h,others,`*${u.h}*.`,{it:ex[1]})}}
 function chGens(ch){
-  if(TT[ch.id])return tenseGens(ch);
+  if(TT[ch.id])return tenseGens(ch).concat(dlgGens(ch));
   const extra={adv:ADVGEN,cmp:GEN.m4l4,disc:GEN.m5l1.concat(GEN.m5l2.slice(0,4),DISCGEN,DISCGEN,DISCGEN),pron:GEN.m6l2.concat(GEN.m6l1,HOMOGEN,HOMOGEN,HOMOGEN)}[ch.id]||[];
   return extra.concat([useGen(ch),useGen(ch)]);
 }
@@ -2287,6 +2303,240 @@ function timeline(kind){
   }
   return `<div class="tl"><svg viewBox="0 0 300 58" role="img" aria-label="${esc(TL[kind]||"")}"><line x1="10" y1="26" x2="290" y2="26" stroke="var(--label3)" stroke-width="2"/>${line(150).replace('var(--label2)','var(--label)')}${m}<text x="${X.past}" y="54" font-size="10" fill="var(--label2)" text-anchor="middle">PASSATO</text><text x="${X.now}" y="54" font-size="10" fill="var(--label)" text-anchor="middle" font-weight="700">ORA</text><text x="${X.fut}" y="54" font-size="10" fill="var(--label2)" text-anchor="middle">FUTURO</text></svg><span>${esc(TL[kind]||"")}</span></div>`;
 }
+/* ---------------- conversazioni ---------------- */
+/* DLG: due dialoghi per tempo verbale (vita quotidiana + lavoro). Battuta = "Chi|inglese con ==verbo==|italiano" */
+const DLG={
+ps:[{k:"life",t:"La routine del mattino",ctx:"Due amici parlano delle loro abitudini.",l:[
+"Sara|What time ==do== you ==get up== on weekdays?|A che ora ti alzi nei giorni feriali?",
+"Luca|==I get up== at seven, but ==I don't eat== breakfast at home.|Mi alzo alle sette, ma non faccio colazione a casa.",
+"Sara|Really? Where ==do== you ==have== breakfast?|Davvero? Dove fai colazione?",
+"Luca|At a café near the office. It ==opens== at half past seven.|In un bar vicino all'ufficio. Apre alle sette e mezza.",
+"Sara|==Does== your sister ==go== with you?|Tua sorella viene con te?",
+"Luca|No, she ==works== from home.|No, lavora da casa."]},
+{k:"work",t:"Una nuova collega",ctx:"Primo giorno in ufficio: presentazioni.",l:[
+"Sara|So, what ==do== you ==do==?|Allora, di cosa ti occupi?",
+"Luca|I'm a UX designer. ==I design== the checkout flow.|Sono un UX designer. Progetto il flusso di checkout.",
+"Sara|==Do== you ==work== with the developers?|Lavori con gli sviluppatori?",
+"Luca|Yes, ==we have== a stand-up every morning at ten.|Sì, facciamo uno stand-up ogni mattina alle dieci.",
+"Sara|And who ==writes== the user stories?|E chi scrive le user story?",
+"Luca|Our PM. She ==doesn't design==, but she ==knows== our users very well.|La nostra PM. Non fa design, ma conosce molto bene i nostri utenti."]}],
+pc:[{k:"life",t:"Al telefono",ctx:"Una chiamata la sera: cosa stai facendo adesso?",l:[
+"Sara|Hi! What ==are== you ==doing==?|Ciao! Cosa stai facendo?",
+"Luca|==I'm cooking== dinner.|Sto cucinando la cena.",
+"Sara|==Is== it ==raining== there?|Lì sta piovendo?",
+"Luca|Yes, a lot. The kids ==are watching== a film.|Sì, tanto. I bambini stanno guardando un film.",
+"Sara|==I'm walking== home now and ==I'm not wearing== a coat!|Sto tornando a casa a piedi e non ho il cappotto!",
+"Luca|Call me when you arrive.|Chiamami quando arrivi."]},
+{k:"work",t:"In call",ctx:"Condivisione dello schermo durante una call.",l:[
+"Luca|Can you see my screen? ==I'm sharing== the prototype now.|Vedi il mio schermo? Sto condividendo il prototipo adesso.",
+"Sara|Yes. ==Are== you ==working== on the new onboarding?|Sì. Stai lavorando al nuovo onboarding?",
+"Luca|Yes, this sprint ==we're testing== three versions.|Sì, in questo sprint stiamo testando tre versioni.",
+"Sara|The devs ==aren't using== the old components anymore, right?|Gli sviluppatori non stanno più usando i vecchi componenti, giusto?",
+"Luca|Right. Wait, someone ==is calling== me. One second.|Giusto. Aspetta, qualcuno mi sta chiamando. Un secondo."]}],
+pp:[{k:"life",t:"Viaggi",ctx:"Esperienze di vita, senza dire quando.",l:[
+"Sara|==Have== you ever ==been== to Japan?|Sei mai stato in Giappone?",
+"Luca|No, I haven't. But ==I've visited== Korea twice.|No. Ma sono stato in Corea due volte.",
+"Sara|Nice! ==I've just booked== a trip to Lisbon.|Bello! Ho appena prenotato un viaggio a Lisbona.",
+"Luca|==Have== you ==found== a hotel yet?|Hai già trovato un hotel?",
+"Sara|Not yet. ==I've never planned== a trip so fast!|Non ancora. Non ho mai organizzato un viaggio così in fretta!"]},
+{k:"work",t:"Stato del progetto",ctx:"Il PM chiede a che punto è il lavoro.",l:[
+"Luca|==Have== you ==finished== the wireframes?|Hai finito i wireframe?",
+"Sara|Yes, ==I've just uploaded== them to Figma.|Sì, li ho appena caricati su Figma.",
+"Luca|Great. ==Has== the client ==seen== them?|Ottimo. Il cliente li ha visti?",
+"Sara|Not yet. ==I've sent== an email, but they ==haven't replied== yet.|Non ancora. Ho mandato un'email, ma non hanno ancora risposto.",
+"Luca|==We've worked== with them for two years. They're always slow!|Lavoriamo con loro da due anni. Sono sempre lenti!"]}],
+ppc:[{k:"life",t:"Stanchezza",ctx:"Attività che durano fino a adesso.",l:[
+"Sara|You look tired.|Sembri stanco.",
+"Luca|==I've been studying== for my exam all day.|Studio per l'esame da tutto il giorno.",
+"Sara|How long ==have== you ==been learning== Spanish?|Da quanto tempo studi spagnolo?",
+"Luca|For about a year. And ==it's been raining== all week, so I stay inside.|Da circa un anno. E piove da tutta la settimana, quindi resto in casa.",
+"Sara|==I've been running== every morning. You should try!|Ultimamente corro ogni mattina. Dovresti provare!"]},
+{k:"work",t:"Un bug infinito",ctx:"Lavoro iniziato nel passato e ancora in corso.",l:[
+"Luca|Your eyes are red!|Hai gli occhi rossi!",
+"Sara|==I've been fixing== this bug since nine.|Sto sistemando questo bug dalle nove.",
+"Luca|How long ==have== we ==been waiting== for the API?|Da quanto aspettiamo l'API?",
+"Sara|For three weeks. The devs ==have been working== on it every day.|Da tre settimane. Gli sviluppatori ci lavorano ogni giorno.",
+"Luca|OK, let's take a break.|OK, facciamo una pausa."]}],
+pas:[{k:"life",t:"Il weekend",ctx:"Racconto di azioni finite nel passato.",l:[
+"Sara|What ==did== you ==do== last weekend?|Cosa hai fatto lo scorso weekend?",
+"Luca|==I went== to the sea with my family.|Sono andato al mare con la mia famiglia.",
+"Sara|==Did== you ==swim==?|Hai nuotato?",
+"Luca|No, the water ==was== too cold. We ==ate== fish and ==walked== on the beach.|No, l'acqua era troppo fredda. Abbiamo mangiato pesce e passeggiato sulla spiaggia.",
+"Sara|==I didn't go== out. ==I watched== a series.|Io non sono uscita. Ho guardato una serie."]},
+{k:"work",t:"Il tuo ultimo progetto",ctx:"Colloquio di lavoro: racconti un caso studio.",l:[
+"Anna|Tell me about your last project.|Parlami del tuo ultimo progetto.",
+"Sara|Last year ==I redesigned== the checkout for an e-commerce app.|L'anno scorso ho riprogettato il checkout di un'app e-commerce.",
+"Anna|What ==did== you ==find== in the research?|Cosa hai scoperto nella ricerca?",
+"Sara|Users ==didn't understand== the shipping costs, so ==we ran== five tests.|Gli utenti non capivano i costi di spedizione, quindi abbiamo fatto cinque test.",
+"Anna|And the result?|E il risultato?",
+"Sara|Conversion ==went== up by 18%.|La conversione è salita del 18%."]}],
+pac:[{k:"life",t:"Dov'eri ieri sera?",ctx:"Azioni in corso a un'ora precisa del passato.",l:[
+"Sara|I called you yesterday at eight.|Ti ho chiamato ieri alle otto.",
+"Luca|Sorry, ==I was driving==.|Scusa, stavo guidando.",
+"Sara|And at ten?|E alle dieci?",
+"Luca|==I was having== dinner with friends. ==We were talking== a lot.|Stavo cenando con degli amici. Stavamo parlando tanto.",
+"Sara|==Were== you ==sleeping== when I texted?|Stavi dormendo quando ti ho scritto?",
+"Luca|No, ==I wasn't sleeping==. ==I was reading==.|No, non stavo dormendo. Stavo leggendo."]},
+{k:"work",t:"La demo",ctx:"Un'azione lunga interrotta da un imprevisto.",l:[
+"Luca|How did the demo go?|Com'è andata la demo?",
+"Sara|Badly! ==I was presenting== when the Wi-Fi went down.|Male! Stavo presentando quando è saltato il Wi-Fi.",
+"Luca|Oh no. ==Was== the client ==watching==?|Oh no. Il cliente stava guardando?",
+"Sara|Yes, and two devs ==were fixing== a bug live.|Sì, e due sviluppatori stavano sistemando un bug in diretta.",
+"Luca|What ==were== you ==showing== exactly?|Cosa stavi mostrando esattamente?",
+"Sara|The new dashboard.|La nuova dashboard."]}],
+pap:[{k:"life",t:"Il treno perso",ctx:"Una cosa successa prima di un altro momento passato.",l:[
+"Sara|Did you catch the train?|Hai preso il treno?",
+"Luca|No! When I arrived, it ==had already left==.|No! Quando sono arrivato, era già partito.",
+"Sara|Oh no. ==Had== you ==checked== the time?|Oh no. Avevi controllato l'orario?",
+"Luca|Yes, but ==I hadn't seen== the new timetable.|Sì, ma non avevo visto il nuovo orario.",
+"Sara|Before last month ==I had never taken== that train. It's always late!|Prima del mese scorso non avevo mai preso quel treno. È sempre in ritardo!"]},
+{k:"work",t:"Il rilascio sbagliato",ctx:"Ricostruire cosa era successo prima del problema.",l:[
+"Luca|Why did the client complain?|Perché il cliente si è lamentato?",
+"Sara|Because ==we had changed== the menu without telling them.|Perché avevamo cambiato il menu senza dirglielo.",
+"Luca|==Had== anyone ==tested== it?|Qualcuno l'aveva testato?",
+"Sara|No. The devs ==had released== it before the review.|No. Gli sviluppatori l'avevano rilasciato prima della review.",
+"Luca|So ==we hadn't followed== the process.|Quindi non avevamo seguito il processo."]}],
+papc:[{k:"life",t:"L'esame di guida",ctx:"Durata di un'azione prima di un momento passato.",l:[
+"Sara|You finally passed your driving test!|Finalmente hai passato l'esame di guida!",
+"Luca|Yes! ==I had been practising== for months.|Sì! Mi esercitavo da mesi.",
+"Sara|Were you nervous?|Eri nervoso?",
+"Luca|Very. ==It had been raining== all morning, and the roads were wet.|Molto. Pioveva da tutta la mattina e le strade erano bagnate.",
+"Sara|How long ==had== you ==been waiting== for the test date?|Da quanto aspettavi la data dell'esame?",
+"Luca|Six weeks.|Sei settimane."]},
+{k:"work",t:"Notte in ufficio",ctx:"Perché qualcuno era stanco: cosa faceva da tempo.",l:[
+"Luca|Why was Marco so tired at the meeting?|Perché Marco era così stanco alla riunione?",
+"Sara|==He had been working== on the pitch all night.|Aveva lavorato alla presentazione tutta la notte.",
+"Luca|Really? ==Had== he ==been sleeping== at the office?|Davvero? Dormiva in ufficio?",
+"Sara|Almost! The team ==had been waiting== for the final copy for days.|Quasi! Il team aspettava i testi definitivi da giorni."]}],
+fs:[{k:"life",t:"Fa freddo",ctx:"Decisioni prese al momento, promesse e previsioni.",l:[
+"Sara|It's cold in here.|Fa freddo qui.",
+"Luca|==I'll close== the window.|Chiudo la finestra.",
+"Sara|Thanks. Do you think it ==will snow== tomorrow?|Grazie. Pensi che domani nevicherà?",
+"Luca|Maybe. ==I won't go== to the gym if it snows.|Forse. Non andrò in palestra se nevica.",
+"Sara|Don't worry, ==I'll drive== you to work.|Non preoccuparti, ti accompagno io al lavoro.",
+"Luca|You're the best. ==I'll buy== you a coffee!|Sei il migliore. Ti offro un caffè!"]},
+{k:"work",t:"Il file per il cliente",ctx:"Offrirsi di fare qualcosa e fare previsioni.",l:[
+"Luca|The client wants the file today.|Il cliente vuole il file oggi.",
+"Sara|OK, ==I'll send== it after lunch.|OK, lo mando dopo pranzo.",
+"Luca|==Will== the new layout ==work== on mobile?|Il nuovo layout funzionerà su mobile?",
+"Sara|Yes, but it ==won't be== perfect on small screens.|Sì, ma non sarà perfetto sugli schermi piccoli.",
+"Luca|Don't worry, ==I'll talk== to the devs.|Non preoccuparti, parlo io con gli sviluppatori."]}],
+fc:[{k:"life",t:"Domani a quest'ora",ctx:"Azioni in corso in un momento del futuro.",l:[
+"Sara|Can I call you tomorrow at nine?|Posso chiamarti domani alle nove?",
+"Luca|No, ==I'll be flying== to Rome.|No, a quell'ora sarò in volo per Roma.",
+"Sara|Oh! And on Sunday?|Oh! E domenica?",
+"Luca|==I'll be visiting== my grandparents all day.|Starò dai miei nonni tutto il giorno.",
+"Sara|==Will== you ==be staying== with them?|Starai da loro?",
+"Luca|Yes, for a week.|Sì, per una settimana."]},
+{k:"work",t:"Non chiamarmi alle dieci",ctx:"Dire cosa starai facendo per organizzarsi.",l:[
+"Luca|Don't call me at ten tomorrow.|Non chiamarmi domani alle dieci.",
+"Sara|Why?|Perché?",
+"Luca|==I'll be running== a user interview.|Starò facendo un'intervista con un utente.",
+"Sara|OK. ==Will== you ==be working== from home on Friday?|OK. Venerdì lavorerai da casa?",
+"Luca|Yes. And this time next week ==we'll be presenting== to the board!|Sì. E la settimana prossima a quest'ora staremo presentando al consiglio!"]}],
+fp:[{k:"life",t:"Il trasloco",ctx:"Cose che saranno finite entro una scadenza.",l:[
+"Sara|When is the move?|Quando c'è il trasloco?",
+"Luca|On Saturday. By Friday ==I'll have packed== everything.|Sabato. Entro venerdì avrò impacchettato tutto.",
+"Sara|==Will== you ==have found== a sofa by then?|Per allora avrai trovato un divano?",
+"Luca|No, ==I won't have bought== new furniture yet.|No, non avrò ancora comprato i mobili nuovi.",
+"Sara|Don't worry. By next month ==you'll have finished== everything.|Tranquillo. Entro il mese prossimo avrai finito tutto."]},
+{k:"work",t:"Fine dello sprint",ctx:"Fare il punto su cosa sarà pronto.",l:[
+"Luca|Where will we be at the end of the sprint?|A che punto saremo alla fine dello sprint?",
+"Sara|By then ==we'll have tested== the new flow.|Per allora avremo testato il nuovo flusso.",
+"Luca|==Will== the devs ==have built== the components?|Gli sviluppatori avranno costruito i componenti?",
+"Sara|Most of them. But they ==won't have finished== the dark mode.|La maggior parte. Ma non avranno finito la modalità scura."]}],
+fpc:[{k:"life",t:"Dieci anni qui",ctx:"Quanto durerà un'azione fino a un momento futuro.",l:[
+"Sara|Next June ==you'll have been living== here for ten years!|A giugno prossimo vivrai qui da dieci anni!",
+"Luca|True. And ==I'll have been teaching== yoga for five.|Vero. E insegnerò yoga da cinque.",
+"Sara|Will you be tired at the end of the marathon?|Sarai stanco alla fine della maratona?",
+"Luca|Of course. ==I'll have been running== for four hours!|Certo. Avrò corso per quattro ore!"]},
+{k:"work",t:"Anniversario di lavoro",ctx:"Durata del lavoro misurata a una data futura.",l:[
+"Luca|In March ==I'll have been working== here for three years.|A marzo lavorerò qui da tre anni.",
+"Sara|Wow. And at the launch ==we'll have been testing== this app for six months.|Wow. E al lancio testeremo quest'app da sei mesi.",
+"Luca|==Will== you ==have been leading== the team for a year by then?|Per allora guiderai il team da un anno?",
+"Sara|Yes, exactly a year.|Sì, esattamente un anno."]}]};
+
+/* Conversazioni miste: "Chi|inglese|italiano|tempo|perché" (tempo vuoto = nessun tempo da riconoscere) */
+const MIXD=[
+{k:"life",t:"Rivedere un amico",ctx:"Incontri un amico che non vedi da tanto.",l:[
+"Sara|Hi Luca! I haven't seen you for ages!|Ciao Luca! Non ti vedo da secoli!|pp|Periodo che arriva fino a adesso (*for ages*) → **Present Perfect**.",
+"Luca|I know! I moved to Milan in May.|Lo so! Mi sono trasferito a Milano a maggio.|pas|Momento preciso e finito (*in May*) → **Past Simple**.",
+"Sara|Really? What do you do there?|Davvero? Cosa fai lì?|ps|Domanda sul lavoro, cosa stabile → **Present Simple**.",
+"Luca|I work in a bakery.|Lavoro in una panetteria.|ps|Situazione stabile → **Present Simple**.",
+"Luca|And at the moment I'm learning to make bread.|E in questo periodo sto imparando a fare il pane.|pc|Azione in corso in questo periodo (*at the moment*) → **Present Continuous**.",
+"Sara|Funny, I was thinking about you yesterday!|Che strano, ieri stavo pensando a te!|pac|Azione in corso in un momento passato → **Past Continuous**.",
+"Luca|Let's meet next week. I'll call you on Monday.|Vediamoci la settimana prossima. Ti chiamo lunedì.|fs|Promessa decisa adesso → **will** (Future Simple)."]},
+{k:"life",t:"Dal medico",ctx:"Racconti come stai e cosa è successo.",l:[
+"Doctor|How do you feel today?|Come ti senti oggi?|ps|*feel* descrive uno stato → **Present Simple**.",
+"Sara|Not great. I've had a headache since Monday.|Non benissimo. Ho mal di testa da lunedì.|pp|*since* + stato che continua → **Present Perfect** (in italiano usiamo il presente!).",
+"Doctor|Did you take anything?|Hai preso qualcosa?|pas|Azione finita, si parla di ieri → **Past Simple**.",
+"Sara|Yes, I took a pill last night.|Sì, ho preso una pastiglia ieri sera.|pas|*last night* = tempo finito → **Past Simple**.",
+"Sara|I've been working late every night.|Ultimamente lavoro fino a tardi tutte le sere.|ppc|Attività ripetuta fino a oggi, con effetti visibili → **Present Perfect Continuous**.",
+"Doctor|You need some rest. You'll feel better in two days.|Ti serve riposo. Tra due giorni starai meglio.|fs|Previsione → **will**."]},
+{k:"life",t:"Racconto di una vacanza",ctx:"Racconti una storia e poi i tuoi piani.",l:[
+"Luca|How was your holiday?|Com'è stata la vacanza?|pas|Vacanza finita → **Past Simple** (*was*).",
+"Sara|Amazing! We were walking in the mountains when we saw a bear!|Fantastica! Stavamo camminando in montagna quando abbiamo visto un orso!|pac|Azione lunga (*were walking*) interrotta da un'azione breve (*saw*) → **Past Continuous** + Past Simple.",
+"Luca|No way! Had you ever seen one before?|Non ci credo! Ne avevi mai visto uno prima?|pap|Esperienza *prima* di quel momento passato → **Past Perfect**.",
+"Sara|Never. And I'm going back in July: I've already booked the hotel.|Mai. E ci torno a luglio: ho già prenotato l'hotel.|pp|*already* + risultato ora (la prenotazione c'è) → **Present Perfect**. (*I'm going back* = programma fissato.)",
+"Luca|By August I'll have saved enough money for a trip too.|Entro agosto avrò messo da parte abbastanza soldi anche io per un viaggio.|fp|Entro una scadenza futura (*by August*) → **Future Perfect**."]},
+{k:"work",t:"Daily stand-up",ctx:"Ieri, oggi, blocchi: tre tempi in tre frasi.",l:[
+"Sara|Yesterday I finished the onboarding screens.|Ieri ho finito le schermate di onboarding.|pas|*yesterday* → **Past Simple**.",
+"Sara|Today I'm preparing the handoff for the devs.|Oggi preparo l'handoff per gli sviluppatori.|pc|Lavoro in corso oggi → **Present Continuous**.",
+"Luca|Have you received the final copy?|Hai ricevuto i testi definitivi?|pp|Conta il risultato ora, senza tempo preciso → **Present Perfect**.",
+"Sara|No, I've been waiting for it since Tuesday.|No, li aspetto da martedì.|ppc|Attesa iniziata martedì e ancora in corso → **Present Perfect Continuous**.",
+"Luca|OK, I'll write to marketing.|OK, scrivo io al marketing.|fs|Decisione presa al momento → **will**.",
+"Luca|We usually release on Fridays, so we have time.|Di solito rilasciamo il venerdì, quindi abbiamo tempo.|ps|Abitudine (*usually*) → **Present Simple**."]},
+{k:"work",t:"Colloquio di lavoro",ctx:"Passato, presente e futuro della tua carriera.",l:[
+"Anna|How long have you worked as a designer?|Da quanto tempo lavori come designer?|pp|*How long* + fino a ora → **Present Perfect**.",
+"Sara|I started in 2013, at a small agency.|Ho iniziato nel 2013, in una piccola agenzia.|pas|Anno preciso (*in 2013*) → **Past Simple**.",
+"Sara|Before that, I had studied graphic design in Florence.|Prima avevo studiato graphic design a Firenze.|pap|Ancora più indietro rispetto al 2013 → **Past Perfect**.",
+"Anna|What are you working on at the moment?|A cosa stai lavorando in questo periodo?|pc|*at the moment* → **Present Continuous**.",
+"Sara|A banking app. We test it with users every month.|Un'app bancaria. La testiamo con gli utenti ogni mese.|ps|Routine (*every month*) → **Present Simple**.",
+"Anna|Where do you see yourself in five years?|Dove ti vedi tra cinque anni?|ps|Domanda fissa con *see* (stato) → **Present Simple**.",
+"Sara|In five years I'll be leading a design team.|Tra cinque anni guiderò un team di design.|fc|Azione in corso in un momento futuro → **Future Continuous**."]},
+{k:"work",t:"Call con il cliente",ctx:"Feedback sul prototipo e prossimi passi.",l:[
+"Client|We saw the prototype yesterday.|Abbiamo visto il prototipo ieri.|pas|*yesterday* → **Past Simple**.",
+"Client|Honestly, we were expecting more colours.|Sinceramente ci aspettavamo più colori.|pac|Aspettativa che durava nel passato → **Past Continuous**.",
+"Sara|I understand. We chose a calm palette for accessibility.|Capisco. Abbiamo scelto una palette tranquilla per l'accessibilità.|pas|Scelta fatta e conclusa → **Past Simple**.",
+"Client|Can you change it by Friday?|Potete cambiarla entro venerdì?||",
+"Sara|Yes. By Friday we'll have updated the colours.|Sì. Entro venerdì avremo aggiornato i colori.|fp|*by Friday* = scadenza → **Future Perfect**.",
+"Sara|And this time next week we'll be testing it with real users.|E la settimana prossima a quest'ora la staremo testando con utenti reali.|fc|*this time next week* → **Future Continuous**.",
+"Client|Great. If users like it, we'll launch in May.|Ottimo. Se agli utenti piace, lanceremo a maggio.|fs|*If* + presente, poi **will** (Future Simple)."]}];
+
+const DLGK=[["life","Vita quotidiana"],["work","Lavoro"]];
+const dlgLine=s=>{const [sp,en,it,tn,why]=s.split("|");return {sp,en,it,tn,why}};
+function dlgView(d,showT){
+  const sps=[...new Set(d.l.map(s=>s.split("|")[0]))];
+  return `<div class="dlg"><p class="dlg-h">${esc(d.t)}</p><p class="dlg-c">${esc(d.ctx)}</p>${d.l.map(s=>{const L=dlgLine(s);const me=sps.indexOf(L.sp)%2===1;const ch=L.tn&&CHMAP[L.tn];
+    return `<div class="bub${me?" me":""}"><span class="who">${esc(L.sp)}</span><button class="bt" data-say="${esc(plain(L.en))}"><span>${fmt(L.en)}</span><em>${esc(L.it)}</em></button>${showT&&ch?`<span class="tag" style="--c:${COLORS[ch.c]}">${esc(ch.en)}</span><span class="why">${fmt(L.why)}</span>`:""}</div>`}).join("")}</div>`;
+}
+function chapDialogs(ch){const ds=DLG[ch.id];if(!ds)return "";const k=V.dk||"life";const d=ds.find(x=>x.k===k)||ds[0];
+  return `<p class="th-h" id="cs-dlg">Conversazioni</p><div class="th-seg two" role="tablist">${DLGK.map(([id,l])=>`<button type="button" role="tab" data-dk="${id}" aria-pressed="${k===id}">${l}</button>`).join("")}</div>${dlgView(d,false)}<p class="dlg-n">Le parti evidenziate sono il <b>${esc(ch.en)}</b>. Tocca una battuta per sentirla.</p>`}
+/* esercizi dai dialoghi del capitolo */
+function dlgGens(ch){const ds=DLG[ch.id];if(!ds)return [];const lines=ds.flatMap(d=>d.l.map(s=>Object.assign(dlgLine(s),{d})));
+  const one=lines.filter(L=>(L.en.match(/==/g)||[]).length===2);
+  const g=()=>{const L=pick(one);const seg=L.en.match(/==(.+?)==/)[1];return {t:"gap",p:`${L.sp}: ${plain(L.en.replace(/==.+?==/,"___"))}`,a:[seg,seg.replace(/'s been/,"has been")],x:`Dal dialogo “${L.d.t}”: *${seg}* (${ch.en}).`,it:L.it}};
+  const o=()=>{const L=pick(lines.filter(x=>x.en.includes("=="))),e=plain(L.en);return {t:"order",p:`Ricostruisci la battuta di ${L.sp} (dialogo “${L.d.t}”).`,w:words(e),x:`${ch.en}: *${plain(L.en.match(/==(.+?)==/)[1])}*.`,it:L.it}};
+  return one.length?[g,g,o]:[o];
+}
+/* esercizi dalle conversazioni miste */
+const TNAMES=["ps","pc","pp","ppc","pas","pac","pap","fs","fc","fp"];
+function buildDlg(i){const d=MIXD[i];const key="dlg-"+i;const out=[];
+  d.l.map(dlgLine).forEach((L,j)=>{if(!L.tn)return;const ch=CHMAP[L.tn];const wrong=rshuffle(TNAMES.filter(t=>t!==L.tn)).slice(0,2).map(t=>CHMAP[t].en);
+    const q=mc(`Quale tempo usa ${L.sp}? “${plain(L.en)}”`,ch.en,wrong,L.why,{it:L.it});if(q)out.push({id:key+"~"+j,lid:"ch-"+L.tn,q})});
+  return rshuffle(out);
+}
+function startDlg(i){const items=buildDlg(i);const d=MIXD[i];
+  RUN=newRunObj("dlg",{id:i,title:d.t,items,steps:items.map((_,k)=>({k:"q",i:k})).concat([{k:"sum"}]),c:COLORS.teal});
+  save();V.sheet=null;V.screen="run";resetSel();render();window.scrollTo({top:0});}
+function renderDlgs(){const k=V.dk||"life";const showT=V.dshow!==false;
+  const list=MIXD.map((d,i)=>[d,i]).filter(([d])=>d.k===k);
+  return `${navBar({})}<div style="--c:${COLORS.teal};padding-bottom:40px"><div class="chhero"><p class="eyebrow">Conversazioni miste</p><h1>Tempi che cambiano</h1><p class="lead">Nella vita reale si salta da un tempo all'altro. Ogni battuta ha il suo tempo e il <b>perché</b>. Prova a coprire le etichette e indovinare.</p></div>
+   <div class="th-seg two" role="tablist">${DLGK.map(([id,l])=>`<button type="button" role="tab" data-dk="${id}" aria-pressed="${k===id}">${l}</button>`).join("")}</div>
+   <button class="chip2 dtog" data-act="dshow">${showT?"Nascondi i tempi":"Mostra i tempi"}</button>
+   ${list.map(([d,i])=>`<div class="trick chap" style="--c:${COLORS.teal}">${dlgView(d,showT)}<button class="btn" data-dlg="${i}">${i3("splat")}Riconosci i tempi · ${d.l.filter(s=>s.split("|")[3]).length} domande</button></div>`).join("")}</div>`;
+}
+
 function chapBody(ch){
   const k=V.thf||"aff";const sec=(id,h)=>`<p class="th-h" id="${id}">${h}</p>`;
   return `<div class="trick chap" style="--c:${COLORS[ch.c]}" data-lid="ch-${ch.id}">
@@ -2294,6 +2544,7 @@ function chapBody(ch){
     <div class="th-seg" role="tablist">${THF.map(([id,sym,lab])=>`<button type="button" role="tab" data-thf="${id}" aria-pressed="${k===id}"><b>${sym}</b>${TT[ch.id]||ch.id==="disc"?lab:["Schema 1","Schema 2","Schema 3"][THF.findIndex(x=>x[0]===id)]}</button>`).join("")}</div>
     <div class="th-form">${thForm(TH["ch-"+ch.id],k)}</div>
     <p class="th-short">${fmt(ch.short)}</p>
+    ${chapDialogs(ch)}
     ${sec("cs-uses","Quando si usa")}
     ${ch.uses.map((u,i)=>`<div class="usecard"><p class="uh"><b>${i+1}</b>${esc(u.h)}</p><p class="pdfq"><span>Dalla guida</span>${esc(u.pdf)}</p><button class="uex" data-say="${esc(u.ux)}"><span>${esc(u.ux)}</span><em>${esc(u.it)}</em></button></div>`).join("")}
     ${sec("cs-sig","Parole spia")}
@@ -2309,7 +2560,7 @@ function chapBody(ch){
 }
 function renderChap(){
   const ch=CHMAP[V.ch];const p=chProg(ch.id);
-  const chips=[["cs-form","Forma"],["cs-uses","Usi"],["cs-sig","Parole spia"],["cs-err","Errori"],["cs-vs","Confronti"],["cs-act","Dalla guida"]];
+  const chips=[["cs-form","Forma"],...(DLG[ch.id]?[["cs-dlg","Dialoghi"]]:[]),["cs-uses","Usi"],["cs-sig","Parole spia"],["cs-err","Errori"],["cs-vs","Confronti"],["cs-act","Dalla guida"]];
   return `${navBar({})}<div style="--c:${COLORS[ch.c]};padding-bottom:120px">
    <div class="chhero"><p class="eyebrow">${esc(ch.g)} · ${esc(ch.it)}</p><h1>${esc(ch.en)}</h1><p class="lead">${fmt(ch.intro)}</p>${timeline(ch.tl)}
     ${p.runs?`<p class="chstat">${p.runs} ${p.runs===1?"sessione":"sessioni"} · migliore ${p.best}%</p>`:""}</div>
@@ -2322,7 +2573,8 @@ function renderStudy(q){
   const match=c=>!q||(c.en+" "+c.it+" "+c.intro+" "+JSON.stringify(c.uses)+" "+c.signal.join(" ")).toLowerCase().includes(q);
   const html=groups.map(g=>{const cs=CH.filter(c=>c.g===g&&match(c));if(!cs.length)return "";
     return `<p class="chg">${g}</p><div class="chgrid">${cs.map(c=>{const p=chProg(c.id);return `<button class="chcard" style="--c:${COLORS[c.c]}" data-ch="${c.id}"><span class="chk">${esc(c.it)}</span><span class="chn">${esc(c.en)}</span><span class="chb"><i style="width:${p.best}%"></i></span><span class="chm">${p.runs?`${p.best}% · ${p.runs} ${p.runs===1?"sessione":"sessioni"}`:`${c.uses.length} usi · esercizi`}</span></button>`}).join("")}</div>`}).join("");
-  return html?`<p class="sech">Studia · dalla guida TEFL</p><p class="secf" style="padding-top:0">I 12 tempi verbali della guida e quattro capitoli su Writing, Speaking e Phonology: teoria completa ed esercizi costruiti sulla teoria.</p>${html}`:"";
+  const dc=!q||"conversazioni dialoghi miste conversation".includes(q)?`<button class="dlgcard" data-act="dlgs" style="--c:${COLORS.teal}"><span class="chk">Conversazioni miste · vita e lavoro</span><span class="chn">Tempi che cambiano</span><span class="chm">${MIXD.length} dialoghi: riconosci quale tempo usa ogni battuta e perché</span></button>`:"";
+  return html||dc?`<p class="sech">Studia · dalla guida TEFL</p><p class="secf" style="padding-top:0">I 12 tempi verbali della guida, ognuno con due conversazioni (vita quotidiana e lavoro), e quattro capitoli su Writing, Speaking e Phonology.</p>${dc}${html}`:"";
 }
 
 const LES = {};
@@ -2456,7 +2708,7 @@ function finishBonus(){
   const b=RUN.xp.done+RUN.xp.perfect;if(b)gain(b);save();
 }
 function advance(){RUN.pos=Math.min(RUN.pos+1,RUN.steps.length-1);if(RUN.steps[RUN.pos].k==="sum")finishBonus();resetSel();render();window.scrollTo({top:0});autoSpeak()}
-function quitRun(){const r=RUN;RUN=null;if(r&&r.kind==="chap"){go({screen:"chap",ch:r.id});return}if(r&&r.kind==="lesson")go({screen:"module",mod:LES[r.id].mod.id});else go({screen:"home",tab:"rev"})}
+function quitRun(){const r=RUN;RUN=null;if(r&&r.kind==="dlg"){go({screen:"dlgs"});return}if(r&&r.kind==="chap"){go({screen:"chap",ch:r.id});return}if(r&&r.kind==="lesson")go({screen:"module",mod:LES[r.id].mod.id});else go({screen:"home",tab:"rev"})}
 function go(patch){Object.assign(V,patch);sel=null;FB=null;CONF=null;stopGame();render();window.scrollTo({top:0})}
 function resetSel(){sel={j:null,text:"",picked:[],map:{},L:null,heard:false};FB=null}
 
@@ -2524,6 +2776,7 @@ function render(){
   else if(V.screen==="splat")app.innerHTML=renderSplat();
   else if(V.screen==="chap")app.innerHTML=renderChap();
   else if(V.screen==="cards")app.innerHTML=renderCards();
+  else if(V.screen==="dlgs")app.innerHTML=renderDlgs();
   if(V.sheet==="reset")app.insertAdjacentHTML("beforeend",renderSheet());
   if(V.sheet==="theory")app.insertAdjacentHTML("beforeend",renderTheorySheet());
   syncTabbar();
@@ -2947,6 +3200,7 @@ function renderSum(){
   let btns="";
   if(RUN.kind==="lesson"){const l=LES[RUN.id];const idx=l.mod.lessons.indexOf(l);const nx=l.mod.lessons[idx+1]||(MODS[MODS.indexOf(l.mod)+1]||{lessons:[]}).lessons[0];
     btns=`${nx?`<button class="btn" data-lesson="${nx.id}">Prossima: ${esc(nx.h)}</button>`:""}<button class="btn ghost" data-act="redo">Nuova sessione con frasi nuove</button><button class="btn ghost" data-act="back">Torna al modulo</button>`}
+  else if(RUN.kind==="dlg")btns=`<button class="btn" data-act="redo">Rifai la conversazione</button><button class="btn ghost" data-act="back">Altre conversazioni</button>`;
   else if(RUN.kind==="chap")btns=`<button class="btn" data-act="chapmore">Altri ${RUN_LEN} esercizi su ${esc(CHMAP[RUN.id].en)}</button><button class="btn ghost" data-act="back">Torna al capitolo</button>`;
   else btns=`<button class="btn" data-act="back">Fatto</button>`;
   return `<div class="summary"><span class="ringwrap">${ring(p2,"bigring",62,150)}<b>${Math.round(p2*100)}%</b></span>
@@ -3046,6 +3300,8 @@ document.addEventListener("click",e=>{
   if(d.tab){if(V.screen==="home"&&V.tab===d.tab){window.scrollTo({top:0,behavior:"smooth"});return}go({screen:"home",tab:d.tab});return}
   if(d.goal){S.goal=+d.goal;save();render();return}
   if(d.mod){go({screen:"module",mod:d.mod});return}
+  if(d.dk){V.dk=d.dk;render();return}
+  if(d.dlg!==undefined){startDlg(+d.dlg);return}
   if(d.ch){V.thf="aff";go({screen:"chap",ch:d.ch});return}
   if(d.jump){const el=document.getElementById(d.jump);if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-110,behavior:"smooth"});return}
   if(d.lesson){startLesson(d.lesson);return}
@@ -3068,7 +3324,7 @@ document.addEventListener("click",e=>{
     case "back":
       if(V.screen==="run")quitRun();
       else if(V.screen==="splat")go({screen:"home",tab:"rev"});
-      else if(V.screen==="chap")go({screen:"home",tab:"tricks"});
+      else if(V.screen==="chap"||V.screen==="dlgs")go({screen:"home",tab:"tricks"});
       else if(V.screen==="cards"){CARDS=null;go({screen:"home",tab:"rev"})}
       else go({screen:"home"});break;
     case "askreset":V.sheet="reset";render();break;
@@ -3076,16 +3332,18 @@ document.addEventListener("click",e=>{
     case "chapgo":startChap(V.ch);break;
     case "chapmore":startChap(RUN.id);break;
     case "closesheet":V.sheet=null;render();break;
-    case "doresetrun":V.sheet=null;if(RUN.kind==="chap")startChap(RUN.id);else if(RUN.kind==="lesson")startLesson(RUN.id,true);else if(RUN.kind==="review")startReview();else startMix();break;
+    case "doresetrun":V.sheet=null;if(RUN.kind==="chap")startChap(RUN.id);else if(RUN.kind==="dlg")startDlg(RUN.id);else if(RUN.kind==="lesson")startLesson(RUN.id,true);else if(RUN.kind==="review")startReview();else startMix();break;
     case "trick-ok":S.les[RUN.id].run.trick=true;save();advance();break;
     case "next":advance();break;
     case "verify":verify();break;
     case "override":overrideOk();break;
-    case "redo":startLesson(RUN.id,true);break;
+    case "redo":if(RUN.kind==="dlg")startDlg(RUN.id);else startLesson(RUN.id,true);break;
     case "review":startReview();break;
     case "mix":startMix();break;
     case "splat":G=null;go({screen:"splat"});break;
     case "cards":startCards();break;
+    case "dlgs":go({screen:"dlgs"});break;
+    case "dshow":V.dshow=V.dshow===false;render();break;
     case "flip":if(CARDS&&!CARDS.show){CARDS.show=true;render()}break;
     case "cardyes":gradeCard(true);break;
     case "cardno":gradeCard(false);break;
