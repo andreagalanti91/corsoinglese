@@ -8,6 +8,7 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="apple-touch-icon" href="brand/app-icon-180.png">
 <meta name="apple-mobile-web-app-title" content="Ai Learning">
+<link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
 <title>Ai Learning</title>
@@ -487,6 +488,19 @@ details.tk .formula{margin:12px -14px 0;padding:0 14px}
 
 .qit{display:flex;gap:8px;align-items:flex-start;margin-top:10px;padding:9px 12px;border-radius:12px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--stroke);font-size:15px;line-height:1.4;color:var(--label2)}
 .qit b{flex:none;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:var(--c,var(--blue));background:color-mix(in srgb,var(--c,var(--blue)) 14%,transparent);border-radius:5px;padding:2px 5px;margin-top:2px}
+/* ---------- FLASHCARD ---------- */
+.fcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;min-height:300px;margin-top:22px;padding:28px 22px;border-radius:28px;text-align:center;background:radial-gradient(120% 120% at 50% 0%,color-mix(in srgb,var(--c) 22%,transparent),transparent 60%),var(--card);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 30%,var(--stroke)),var(--shadow);transition:transform .25s}
+.fcard:active{transform:scale(.98)}
+.fcard.flip{animation:flipin .35s cubic-bezier(.3,1.3,.5,1)}
+@keyframes flipin{from{transform:rotateX(70deg);opacity:.4}}
+.fq{font-size:12px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.ff{font-family:var(--display);font-size:clamp(28px,8vw,40px);font-weight:750;letter-spacing:-.03em;line-height:1.15;text-wrap:balance}
+.fb2{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}
+.fsep{width:60px;height:2px;border-radius:1px;background:var(--stroke2)}
+.fa{font-size:22px;font-weight:600;color:var(--label);text-wrap:balance}
+.fhint{font-size:14px;color:var(--label3)}
+.fcbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.plan .num .i3{width:20px;height:20px}
 /* ---------- STUDIA ---------- */
 .chg{font-size:13px;font-weight:750;color:var(--label);margin:14px 4px 8px}
 .chgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -1584,7 +1598,7 @@ const IV = [0,1,3,7,14,30];
 const RUN_LEN = 8;
 /* Esercizi che dipendono dalla voce sintetica: esclusi dal corso */
 const AUDIO_ONLY=q=>!q||q.t==="listen"||q.t==="dict"||q.t==="shadow"||!!q.ctxSay;
-function blank(){return {les:{},ch:{},seenQ:{},srs:{},stats:{ok:0,n:0},xp:0,days:{},splat:0,voice:"en-US",rate:0.5,goal:50,freezes:0,frozen:{},best:0,fzAt:0,_t:0}}
+function blank(){return {les:{},ch:{},fc:{},fcNew:{d:"",n:0},seenQ:{},srs:{},stats:{ok:0,n:0},xp:0,days:{},splat:0,voice:"en-US",rate:0.5,goal:50,freezes:0,frozen:{},best:0,fzAt:0,_t:0}}
 let USER=null, S=blank(), SB=null, pushT=null;
 function lsGet(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
@@ -1592,7 +1606,7 @@ function lsDel(k){try{localStorage.removeItem(k)}catch(e){}}
 function migrateOld(){const o=lsGet(LSK_OLD);if(!o||lsGet("uxenglish.migrated"))return {};lsSet("uxenglish.migrated",1);const k={};["xp","days","splat","voice","rate","goal","freezes","frozen","best","fzAt"].forEach(x=>{if(o[x]!=null)k[x]=o[x]});return k}
 function loadUser(){const v=lsGet(LSK_DATA+USER.uid);S=Object.assign(blank(),v&&typeof v==="object"?v:migrateOld());S.stats=S.stats||{ok:0,n:0};fixData()}
 /* voce a 0.5x e via le sessioni con esercizi audio */
-function fixData(){S.ch=S.ch||{};if(!S.v05){S.rate=0.5;S.v05=1}Object.keys(S.srs).forEach(k=>{if(AUDIO_ONLY(S.srs[k].q))delete S.srs[k]});Object.values(S.les).forEach(x=>{if(x.run&&!x.run.complete&&x.run.items.some(it=>AUDIO_ONLY(it.q)))x.run=null})}
+function fixData(){S.ch=S.ch||{};S.fc=S.fc||{};S.fcNew=S.fcNew||{d:"",n:0};if(!S.v05){S.rate=0.5;S.v05=1}Object.keys(S.srs).forEach(k=>{if(AUDIO_ONLY(S.srs[k].q))delete S.srs[k]});Object.values(S.les).forEach(x=>{if(x.run&&!x.run.complete&&x.run.items.some(it=>AUDIO_ONLY(it.q)))x.run=null})}
 function save(){S._t=Date.now();if(USER)lsSet(LSK_DATA+USER.uid,S);cloudPush()}
 
 function hex(buf){return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("")}
@@ -1697,7 +1711,7 @@ async function boot(){
       if(data.session){const u=data.session.user;const s=lsGet(LSK_SESSION)||{};USER={uid:u.id,name:s.uid===u.id&&s.name?s.name:nameOf(u,u.email),email:u.email,mode:"cloud"};lsSet(LSK_SESSION,USER);
         if(location.hash)history.replaceState(null,"",location.pathname);
         loadUser();V.screen="home";render();await cloudPull();applyFreezes();render();return}
-    }catch(e){V.auth={mode:"login",err:typeof e==="string"?e:""};V.screen="auth";render();return}
+    }catch(e){const s0=lsGet(LSK_SESSION);if(s0&&s0.mode==="cloud"&&s0.uid&&lsGet(LSK_DATA+s0.uid)){USER=s0;loadUser();applyFreezes();V.screen="home";render();setTimeout(()=>toast("Sei offline: i progressi si salvano quando torni online"),500);return}V.auth={mode:"login",err:typeof e==="string"?e:""};V.screen="auth";render();return}
     const s=lsGet(LSK_SESSION);if(s&&s.mode==="guest"){USER=s;loadUser();applyFreezes();V.screen="home";render();return}
     V.auth={mode:"login"};V.screen="auth";render();return;
   }
@@ -2522,6 +2536,7 @@ function render(){
   else if(V.screen==="method")app.innerHTML=renderMethod();
   else if(V.screen==="splat")app.innerHTML=renderSplat();
   else if(V.screen==="chap")app.innerHTML=renderChap();
+  else if(V.screen==="cards")app.innerHTML=renderCards();
   if(V.sheet==="reset")app.insertAdjacentHTML("beforeend",renderSheet());
   if(V.sheet==="theory")app.insertAdjacentHTML("beforeend",renderTheorySheet());
   syncTabbar();
@@ -2612,6 +2627,52 @@ function renderHome(){
   </section>
   <div class="hbody">${body}</div></div>`;
 }
+/* ---------- FLASHCARD DI VOCABOLARIO (ripetizione dilazionata) ---------- */
+let CARDS=null;
+const fcDeck=()=>[...GLOSS,...UIVOC,...PHRDEF].filter((x,i,a)=>a.findIndex(y=>y[0]===x[0])===i);
+function fcStats(){const all=fcDeck(),t=TODAY();let due=0,learned=0;all.forEach(w=>{const c=S.fc[w[0]];if(c){if(c.due<=t)due++;if(c.box>=3)learned++}});const newLeft=S.fcNew.d===t?Math.max(0,8-S.fcNew.n):8;return {total:all.length,due,learned,fresh:Math.min(newLeft,all.filter(w=>!S.fc[w[0]]).length)}}
+function startCards(){
+  const all=fcDeck(),t=TODAY();const due=rshuffle(all.filter(w=>S.fc[w[0]]&&S.fc[w[0]].due<=t)).slice(0,15);
+  const st=fcStats();const nw=rshuffle(all.filter(w=>!S.fc[w[0]])).slice(0,Math.min(st.fresh,15-due.length));
+  const deck=rshuffle(due.map(w=>({w,isNew:false})).concat(nw.map(w=>({w,isNew:true})))).map(c=>Object.assign(c,{dir:Math.random()<.5?"en":"it"}));
+  if(!deck.length){toast("Nessuna carta per oggi: torna domani");return}
+  CARDS={deck,pos:0,show:false,known:0,again:0};go({screen:"cards"});
+}
+function gradeCard(known){
+  const c0=CARDS.deck[CARDS.pos];const w=c0.w;const c=S.fc[w[0]]||{box:0};
+  if(known){c.box=Math.min(5,c.box+1);CARDS.known++;gain(2)}else{c.box=1;CARDS.again++}
+  c.due=addDays(TODAY(),known?[0,1,3,7,14,30][c.box]:1);S.fc[w[0]]=c;
+  if(c0.isNew){const t=TODAY();if(S.fcNew.d!==t)S.fcNew={d:t,n:0};S.fcNew.n++}
+  save();CARDS.pos++;CARDS.show=false;render();
+}
+function renderCards(){
+  const head=navBar({});const C=CARDS;
+  if(!C||C.pos>=C.deck.length){const st=fcStats();return `${head}<div style="--c:var(--teal)" class="summary"><span class="ringwrap">${ring(C&&C.deck.length?C.known/C.deck.length:0,"bigring",62,150)}<b>${C?C.known:0}</b></span><h1>Carte finite</h1><p>${C?C.known:0} sapute · ${C?C.again:0} da rivedere domani</p><p>${st.learned} parole imparate su ${st.total}</p><div class="btnrow"><button class="btn" data-act="back">Torna al ripasso</button></div></div>`}
+  const c=C.deck[C.pos];const en=c.w[0],it=c.w[1];const front=c.dir==="en"?en:it;
+  return `${head}<div style="--c:var(--teal);padding-bottom:180px">
+   <div class="pmeta"><span>Parole · carta ${C.pos+1} di ${C.deck.length}${c.isNew?" · nuova":""}</span></div>
+   <div class="bar"><i style="width:${C.pos/C.deck.length*100}%"></i></div>
+   <button class="fcard ${C.show?"flip":""}" data-act="flip" aria-label="Gira la carta">
+     <span class="fq">${c.dir==="en"?"Cosa significa?":"Come si dice in inglese?"}</span>
+     <span class="ff">${esc(front)}</span>
+     ${C.show?`<span class="fb2"><span class="fsep"></span><span class="fa">${esc(c.dir==="en"?it:en)}</span></span>`:`<span class="fhint">Pensa alla risposta, poi tocca la carta</span>`}
+   </button>
+   ${C.show?`<div style="display:flex;justify-content:center;margin-top:12px"><button class="pill" data-say="${esc(en)}">${IC.spk}Ascolta “${esc(en)}”</button></div>`:""}
+  </div>
+  <div class="dock" style="--c:var(--teal)"><div class="dock-in">${C.show?`<div class="fcbtns"><button class="btn danger" data-act="cardno">Da rivedere</button><button class="btn" style="--c:var(--good)" data-act="cardyes">La sapevo</button></div>`:`<button class="btn" data-act="flip">Mostra la risposta</button>`}</div></div>`;
+}
+/* ---------- IL PIANO DI OGGI ---------- */
+function todayPlan(){
+  const rows=[];
+  const tried=CH.filter(c=>chProg(c.id).runs);const weak=tried.filter(c=>chProg(c.id).best<85).sort((a,b)=>chProg(a.id).best-chProg(b.id).best);
+  const nextCh=weak[0]||CH.find(c=>!chProg(c.id).runs);
+  if(nextCh){const p=chProg(nextCh.id);rows.push(`<button class="row" data-ch="${nextCh.id}"><span class="num" style="background:${COLORS[nextCh.c]}">${i3("tab_tricks")}</span><span><span class="rt">Grammatica: ${esc(nextCh.en)}</span><span class="rs">${p.runs?`Da rinforzare · migliore ${p.best}%`:"Nuovo capitolo: teoria + 8 esercizi"}</span></span>${IC.chevR}</button>`)}
+  const due=srsDue().length;if(due)rows.push(`<button class="row" data-act="review"><span class="num" style="background:var(--purple)">${i3("tab_rev")}</span><span><span class="rt">Ripasso: ${due} ${due===1?"esercizio":"esercizi"}</span><span class="rs">Gli errori dei giorni scorsi</span></span>${IC.chevR}</button>`);
+  const f=fcStats();if(f.due+f.fresh)rows.push(`<button class="row" data-act="cards"><span class="num" style="background:var(--teal)">${i3("tab_mods")}</span><span><span class="rt">Parole: ${Math.min(15,f.due+f.fresh)} flashcard</span><span class="rs">${f.due?`${f.due} da ripassare`:""}${f.due&&f.fresh?" · ":""}${f.fresh?`${f.fresh} nuove`:""} · ${f.learned}/${f.total} imparate</span></span>${IC.chevR}</button>`);
+  const wl=[];MODS.forEach(m=>m.lessons.forEach(l=>{const x=S.les[l.id];if(x&&x.runs&&x.best<70)wl.push(l)}));wl.sort((a,b)=>S.les[a.id].best-S.les[b.id].best);
+  if(wl[0])rows.push(`<button class="row" data-lesson="${wl[0].id}"><span class="num" style="background:${cv(wl[0].mod)}">${i3(wl[0].mod.icon)}</span><span><span class="rt">Rifai: ${esc(wl[0].h)}</span><span class="rs">Migliore ${S.les[wl[0].id].best}% · frasi nuove</span></span>${IC.chevR}</button>`);
+  return rows.length?`<p class="sech">Il piano di oggi</p><div class="group plan">${rows.join("")}</div>`:"";
+}
 function renderMods(){
   const nl=nextLesson();
   const cards=MODS.map(m=>{
@@ -2634,7 +2695,7 @@ function renderMods(){
       <span class="nc-meta">${esc(nl.mod.title)} · lezione ${nl.n} di ${nl.mod.lessons.length} · ${RUN_LEN} esercizi · ${nl.min} min</span>
       <span class="nc-foot"><span class="nc-cta">${IC.play}${p.active?"Continua":"Inizia"}</span>${p.active?`<span class="nc-bar"><i style="width:${Math.round(p.done/p.len*100)}%"></i></span><span class="nc-meta">${p.done}/${p.len}</span>`:`<span class="nc-meta">Frasi sempre nuove</span>`}</span>
     </button>`}
-  return `${cont}<p class="sech">Moduli</p><div class="stack">${cards}</div>`;
+  return `${cont}${todayPlan()}<p class="sech">Moduli</p><div class="stack">${cards}</div>`;
 }
 function renderReviewTab(){
   const due=srsDue().length, b=srsBoxes(), max=Math.max(1,...b), tot=b.reduce((a,x)=>a+x,0);
@@ -2652,6 +2713,12 @@ function renderReviewTab(){
     <div class="fh"><span class="micon">${i3("mix")}</span><span><h2>Mix del giorno</h2><span class="fs">10 domande nuove da lezioni diverse</span></span></div>
     <p class="secf" style="padding:12px 0 0">Alternare argomenti diversi (<em>interleaving</em>) costringe il cervello a scegliere la regola giusta, come succede in una call vera.</p>
     <button class="btn" data-act="mix">Inizia il mix</button>
+  </div>
+  <div class="feature" style="--c:var(--teal)">
+    <div class="fh"><span class="micon">${i3("tab_mods")}</span><span><h2>Flashcard di vocabolario</h2><span class="fs">${fcStats().total} parole del design, nei due sensi</span></span></div>
+    <p class="fbig">${fcStats().learned}<small> imparate · ${fcStats().due} da ripassare oggi</small></p>
+    <p class="secf" style="padding:8px 0 0">Ogni giorno 8 parole nuove più quelle in scadenza. Se la sai, la carta torna dopo 3, 7, 14 e 30 giorni; se no, domani.</p>
+    <button class="btn" data-act="cards" ${fcStats().due+fcStats().fresh?"":"disabled"}>${fcStats().due+fcStats().fresh?"Studia le parole":"Fatto per oggi"}</button>
   </div>
   <div class="feature" style="--c:var(--orange)">
     <div class="fh"><span class="micon">${i3("splat")}</span><span><h2>Splat! 60 secondi</h2><span class="fs">Il gioco di vocabolario della guida, in versione veloce</span></span></div>
@@ -3015,6 +3082,7 @@ document.addEventListener("click",e=>{
       if(V.screen==="run")quitRun();
       else if(V.screen==="splat")go({screen:"home",tab:"rev"});
       else if(V.screen==="chap")go({screen:"home",tab:"tricks"});
+      else if(V.screen==="cards"){CARDS=null;go({screen:"home",tab:"rev"})}
       else go({screen:"home"});break;
     case "askreset":V.sheet="reset";render();break;
     case "theory":V.sheet="theory";render();break;
@@ -3030,6 +3098,10 @@ document.addEventListener("click",e=>{
     case "review":startReview();break;
     case "mix":startMix();break;
     case "splat":G=null;go({screen:"splat"});break;
+    case "cards":startCards();break;
+    case "flip":if(CARDS&&!CARDS.show){CARDS.show=true;render()}break;
+    case "cardyes":gradeCard(true);break;
+    case "cardno":gradeCard(false);break;
     case "gstart":stopGame();startGame();break;
     case "export":CONF=CONF==="export"?null:"export";render();break;
     case "import":CONF=CONF==="import"?null:"import";render();break;
@@ -3049,6 +3121,7 @@ document.addEventListener("input",e=>{
 });
 document.addEventListener("keydown",e=>{
   if(e.key==="Escape"&&V.sheet){V.sheet=null;render();return}
+  if(V.screen==="cards"&&CARDS&&CARDS.pos<CARDS.deck.length){if(e.key===" "&&!CARDS.show){e.preventDefault();CARDS.show=true;render();return}if(CARDS.show&&(e.key==="1"||e.key==="2")){gradeCard(e.key==="2");return}}
   if(V.screen==="run"&&!FB&&!V.sheet&&/^[1-9]$/.test(e.key)&&!/INPUT|TEXTAREA/.test(e.target.tagName)){const o=document.querySelector(`[data-opt="${+e.key-1}"]`);if(o){o.click();return}}
   if(V.screen==="splat"&&G&&G.on&&/^[1-6]$/.test(e.key)){const o=document.querySelector(`[data-splat="${+e.key-1}"]`);if(o){o.click();return}}
   if(e.key!=="Enter"||V.screen!=="run"||V.sheet||e.target.tagName==="BUTTON")return;
@@ -3060,6 +3133,8 @@ document.addEventListener("keydown",e=>{
 initTabbar();
 boot();
 </script>
+
+<script>if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(function(){});</script>
 
 </body>
 </html>

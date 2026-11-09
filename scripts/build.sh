@@ -8,8 +8,10 @@ cd "$(dirname "$0")/.."
   printf '<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n'
   printf '<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%%}[hidden]{display:none!important}</style>\n'
   printf '<link rel="apple-touch-icon" href="brand/app-icon-180.png">\n<meta name="apple-mobile-web-app-title" content="Ai Learning">\n'
+  printf '<link rel="manifest" href="manifest.webmanifest">\n'
   printf '</head>\n<body>\n'
   cat src/corso.html
+  printf '\n<script>if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(function(){});</script>\n'
   printf '\n</body>\n</html>\n'
 } > index.html
 echo "index.html generato ($(wc -c < index.html) byte)"
